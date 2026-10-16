@@ -4,7 +4,7 @@ import re
 
 from ..inst.parse import parse
 from ...utils.dataview import DataView
-from .._js import JS_WHITESPACE, js_str
+from .._js import JS_WHITESPACE
 from .directives import get_directive_to_run, is_conditional_directive
 from .expressions import evaluate_expressions_on_current_line, parse_expressions_on_current_line
 from .state import (

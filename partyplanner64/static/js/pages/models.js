@@ -162,8 +162,8 @@ function wire() {
         view[other] = true;
         $(`[data-view="${other}"]`, root).checked = true;
       }
-      if (input.dataset.view === 'camera' || input.dataset.view === 'normals') loadModel();
-      else rebuild();
+      // As the original: the model is made again with the new options.
+      loadModel(input.dataset.view === 'camera');
     });
   }
   for (const b of $$('[data-bg]', root)) {
@@ -172,6 +172,8 @@ function wire() {
       for (const o of $$('[data-bg]', root)) o.classList.toggle('active', o === b);
       if (scene) scene.background = new THREE.Color(view.bg);
       $('#mdlViewer', root).style.background = `#${b.dataset.bg}`;
+      // The wireframe is drawn in the background's inverse colour.
+      if (view.wireframe) loadModel();
     });
   }
   const settingToggle = (id, setting, after) => $(id, root).addEventListener('change', e => act(async () => {
@@ -184,7 +186,7 @@ function wire() {
   settingToggle('#mdlGlb', 'models.useGLB', () => syncSettings());
   $('#mdlGltf', root).addEventListener('click', () => exportModel(app.setting('models.useGLB') ? 'glb' : 'gltf'));
   $('#mdlObj', root).addEventListener('click', () => exportModel('obj'));
-  $('#mdlReset', root).addEventListener('click', () => fitCamera());
+  $('#mdlReset', root).addEventListener('click', () => placeCamera());
   $('#mdlPause', root).addEventListener('click', () => {
     paused = !paused;
     $('#mdlPause', root).textContent = paused ? 'Play' : 'Pause';
@@ -262,7 +264,7 @@ async function selectModel(m) {
   for (const li of $$('li[data-key]', $('#mdlList', root))) li.classList.toggle('active', li.dataset.key === key(m));
   $('#mdlName', root).textContent = `Model ${key(m)}`;
   await loadAnimList();
-  await loadModel();
+  await loadModel(true);
 }
 
 async function loadAnimList() {
@@ -280,10 +282,12 @@ async function loadAnimList() {
     : (limited ? `No animations in directory ${current.dir}; turn Limit Animations off to try others.` : 'No animations in this ROM.');
 }
 
-async function loadModel() {
+/** Gets the model from the server, made with the view's options. replaceCamera: place the camera again. */
+async function loadModel(replaceCamera) {
   if (!current) return;
   const seq = ++loadSeq;
-  const q = `textures=${view.textures ? 1 : 0}&wireframe=${view.wireframe ? 1 : 0}&normals=${view.normals ? 1 : 0}&camera=${view.camera ? 1 : 0}`;
+  const q = `textures=${view.textures ? 1 : 0}&wireframe=${view.wireframe ? 1 : 0}&normals=${view.normals ? 1 : 0}`
+    + `&camera=${view.camera ? 1 : 0}&bg=${view.bg.toString(16).padStart(6, '0')}`;
   const json = await act(() => api(`/api/models/${current.dir}/${current.file}?${q}`));
   if (seq !== loadSeq) return;
   sceneJson = json || null;
@@ -294,7 +298,7 @@ async function loadModel() {
     return;
   }
   if (anim) await loadAnimation(true);
-  rebuild(true);
+  rebuild(replaceCamera || !modelObj);
 }
 
 async function loadAnimation(noRebuild) {
@@ -344,100 +348,47 @@ function clearModel() {
   mixer = null;
   action = null;
   if (modelObj && scene) scene.remove(modelObj);
-  disposeObj(modelObj);
+  (model3d?.disposeObject || disposeObj)(modelObj);
   modelObj = null;
   $('#mdlLegend', root).hidden = true;
   $('#mdlPause', root).disabled = true;
 }
 
 /** Builds the three.js scene from sceneJson (and the animation). */
-function rebuild(refit) {
+function rebuild(replaceCamera) {
   if (!sceneJson || !model3d || !THREE) return;
   ensureRenderer();
   clearModel();
   if (!scene) scene = new THREE.Scene();
   scene.background = new THREE.Color(view.bg);
-  let built;
   try {
-    built = model3d.buildScene(sceneJson, {
-      showTextures: view.textures, showWireframe: view.wireframe, showVertexNormals: view.normals,
-      useFormCamera: view.camera, bgColor: view.bg,
-    });
+    modelObj = model3d.buildScene(sceneJson);
   } catch (e) {
     console.error(e);
     showEmpty('Model Unavailable', `Model ${key(current)} couldn't be drawn: ${e.message}`);
     return;
   }
-  modelObj = built?.isObject3D ? built : (built?.object || built?.scene || built?.root);
-  if (!modelObj) {
-    showEmpty('Model Unavailable', 'The model has nothing to draw.');
-    return;
-  }
-  applyViewOptions(modelObj);
   scene.add(modelObj);
-  if (!scene.children.some(c => c.isLight)) {
-    scene.add(new THREE.AmbientLight(0xffffff, 1));
-  }
   $('#mdlEmpty', root).hidden = true;
-  const formCamera = built?.camera || (built && !built.isObject3D ? null : null);
-  if (refit || formCamera) fitCamera(view.camera ? formCamera : null);
+  if (replaceCamera) placeCamera();
   applyAnimation();
   renderLegend();
   start();
 }
 
-/** Textures and wireframe, for whatever model3d didn't do itself. */
-function applyViewOptions(obj) {
-  obj.traverse(o => {
-    if (!o.isMesh) return;
-    const mats = Array.isArray(o.material) ? o.material : [o.material];
-    for (const m of mats) {
-      if (!m) continue;
-      if (!view.textures && m.map) {
-        m.userData.pp64Map = m.map;
-        m.map = null;
-        m.needsUpdate = true;
-      }
-      if (!view.textures) m.wireframe = true;
-    }
-  });
-  if (view.textures && view.wireframe) {
-    const lines = [];
-    obj.traverse(o => {
-      if (o.isMesh && o.geometry) {
-        const wire = new THREE.LineSegments(new THREE.WireframeGeometry(o.geometry),
-          new THREE.LineBasicMaterial({ color: 0x4c8dff, transparent: true, opacity: 0.6 }));
-        lines.push([o, wire]);
-      }
-    });
-    for (const [mesh, wire] of lines) mesh.add(wire);
-  }
-}
-
-function fitCamera(formCamera) {
-  if (!camera || !modelObj) return;
-  if (formCamera?.isCamera) {
-    camera.position.copy(formCamera.position);
-    camera.quaternion.copy(formCamera.quaternion);
-    if (formCamera.fov) camera.fov = formCamera.fov;
-    camera.near = formCamera.near || camera.near;
-    camera.far = formCamera.far || camera.far;
-    camera.updateProjectionMatrix();
-    controls.target.set(0, 0, 0);
-    controls.update();
-    return;
-  }
-  const box = new THREE.Box3().setFromObject(modelObj);
-  if (box.isEmpty()) return;
-  const size = box.getSize(new THREE.Vector3());
-  const center = box.getCenter(new THREE.Vector3());
-  const radius = Math.max(size.length() / 2, 1);
-  const dist = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2));
-  camera.near = Math.max(dist / 1000, 0.01);
-  camera.far = dist * 100;
-  camera.position.copy(center).add(new THREE.Vector3(0, radius * 0.35, dist));
+/** The camera the original made (the FORM's own with Camera on), looking at the model. */
+function placeCamera() {
+  if (!camera || !sceneJson) return;
+  const viewer = $('#mdlViewer', root);
+  const made = model3d.buildCamera(sceneJson, viewer.clientWidth || 1, viewer.clientHeight || 1);
+  camera.fov = made.fov;
+  camera.near = made.near;
+  camera.far = made.far;
+  camera.position.copy(made.position);
+  camera.quaternion.copy(made.quaternion);
   camera.updateProjectionMatrix();
-  controls.target.copy(center);
+  const look = sceneJson.camera?.look_at;
+  controls.target.set(look?.[0] || 0, look?.[1] || 0, look?.[2] || 0);
   controls.update();
 }
 
