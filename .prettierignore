@@ -1,9 +1,0 @@
-.vscode
-build
-electron
-node_modules
-
-symbols
-packages/lib/adapter/*.boardoverlay.ts
-packages/lib/lib
-packages/lib/symbols
