@@ -101,8 +101,8 @@ class FakeHVQFS:
     def update_metadata(self, dir, values):
         self.log.append(["hvqfs.updateMetadata", dir, json.loads(json.dumps(values))])
 
-    def write_background(self, dir, *args):
-        self.log.append(["hvqfs.writeBackground", dir])
+    def write_background(self, dir, img_data, width, height, metadata=None):
+        self.log.append(["hvqfs.writeBackground", dir, width, height, blob(img_data.data)])
 
     def get_directory_count(self):
         return 100
@@ -198,3 +198,17 @@ def install(monkeypatch, game_version):
     monkeypatch.setattr(romhandler, "get_game_version", lambda: game_version)
     monkeypatch.setattr(romhandler, "get_data_view", lambda *a: DataView(rom.rom_buffer))
     return rom
+
+
+def pattern(w, h, seed):
+    """A deterministic RGBA32 image (as gen_images.ts makes)."""
+    out = bytearray(w * h * 4)
+    i = 0
+    for y in range(h):
+        for x in range(w):
+            out[i] = (x * 3 + y + seed) & 0xFF
+            out[i + 1] = (x * y + seed * 5) & 0xFF
+            out[i + 2] = (x + y * 7) & 0xFF
+            out[i + 3] = 255
+            i += 4
+    return out
