@@ -217,6 +217,14 @@ class _Writer:
         return struct.pack("<4sII", b"glTF", 2, 12 + len(chunks)) + chunks
 
 
-def scene_to_gltf(scene, glb=False):
-    """Return a .gltf (JSON, buffers and images embedded as data URIs) or, with glb, a .glb file."""
-    return _Writer(scene, glb).write()
+def scene_to_gltf(scene, glb=False, binary=None):
+    """Return a .gltf (JSON, buffers and images embedded as data URIs) or, with glb, a .glb file.
+
+    Args:
+        scene: A scene description (form_to_scene).
+        glb: Write a GLB container (the "Use GLB container" setting).
+        binary: Another name for glb (GLTFExporter's option).
+    """
+    if binary is not None:
+        glb = binary
+    return _Writer(scene, bool(glb)).write()

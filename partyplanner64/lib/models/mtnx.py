@@ -28,6 +28,8 @@ class MTNX:
     def is_mtnx(view_or_buffer):
         if view_or_buffer is None:
             return False
+        if isinstance(view_or_buffer, memoryview):
+            view_or_buffer = bytes(view_or_buffer)
         view = view_or_buffer if isinstance(view_or_buffer, DataView) else DataView(view_or_buffer)
         if view.byte_length < 4:
             return False
@@ -35,6 +37,8 @@ class MTNX:
 
     @staticmethod
     def unpack(mtnx_view):
+        if isinstance(mtnx_view, memoryview):
+            mtnx_view = bytearray(mtnx_view)
         if not isinstance(mtnx_view, DataView):
             mtnx_view = DataView(mtnx_view)
 

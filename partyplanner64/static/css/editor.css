@@ -5,11 +5,12 @@
 .editor-page .card-head h2 .count { vertical-align: 1px; }
 
 /* ---------- boards card ---------- */
-.board-list { max-height: 196px; min-height: 40px; }
+.board-list { max-height: 214px; min-height: 40px; }
 .board-list li { gap: 8px; padding: 6px 10px; }
 .board-list .board-item-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .board-list .board-item-meta { font: 600 10.5px var(--mono); color: var(--muted); }
 .board-list li.active .board-item-meta { color: #b7d0ff; }
+.board-list .board-thumb { width: 32px; height: 24px; flex: none; border-radius: 4px; object-fit: cover; background: #000; border: 1px solid var(--border-strong); }
 .board-list .rom-icon { width: 16px; height: 16px; flex: none; image-rendering: pixelated; }
 .board-list .list-sep {
   cursor: default; font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted);

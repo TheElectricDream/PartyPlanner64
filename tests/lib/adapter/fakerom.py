@@ -71,7 +71,7 @@ class FakeScenes:
         self.log = log
 
     def get_info(self, i):
-        base = (0x80100000 + i * 0x1000) & 0xFFFFFFFF
+        base = 0x80100000
         return {
             "rom_start": 0x200000 + i * 0x40000, "rom_end": 0x200000 + i * 0x40000 + 0x30000,
             "ram_start": base, "code_start": base, "code_end": base + 0x20000,
@@ -212,3 +212,70 @@ def pattern(w, h, seed):
             out[i + 3] = 255
             i += 4
     return out
+
+
+def prefill(game_version, adapter, rom):
+    """Fill the fake ROM like the stock boards (as gen_load.ts does): a board def for
+    every board, and in each board's scene the values the board info points at and
+    an event table reached through a call to EventTableHydrate."""
+    from partyplanner64.lib.adapter import boarddef
+    from partyplanner64.lib.adapter.boardinfo import get_board_infos
+    from partyplanner64.lib.mips import parse as parse_inst
+    from partyplanner64.lib.symbols.symbols import get_symbol
+
+    game_id = GAME_IDS[game_version]
+    loop = {
+        "spaces": [{"type": t, "x": 10 * i, "y": 5 * i, "z": i}
+                   for i, t in enumerate([0, 1, 2, 1, 1, 2, 1, 1])],
+        "links": {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7, 7: 0},
+    }
+    jal = parse_inst("JAL %d" % get_symbol(game_id, "EventTableHydrate"))
+
+    def as_list(o):
+        return [] if o is None else (o if isinstance(o, list) else [o])
+
+    for j, info in enumerate(get_board_infos(game_id)):
+        rom.mainfs.write(adapter.board_def_directory, info["board_def_file"],
+                         boarddef.create(loop, [[0, 1, 2, 3, 4, 5, 6, 7]]))
+        if not isinstance(info.get("scene_index"), int):
+            continue
+        v = rom.scenes.get_data_view(info["scene_index"])
+        for n, k in enumerate(["koopa_space_inst", "bowser_space_inst", "goomba_space_inst",
+                               "boo_space_inst", "toad_space_inst"]):
+            if info.get(k):
+                v.set_uint16(info[k] + 2, n + 1)
+        for off in as_list(info.get("star_space_arr_offset")):
+            for i in range(info.get("star_space_count") or 0):
+                v.set_uint16(off + 2 * i, (i % 7) + 1)
+        for off in as_list(info.get("toad_space_arr_offset")):
+            for i in range(info.get("star_space_count") or 0):
+                v.set_uint16(off + 2 * i, (i % 5) + 2)
+        if info.get("boos_loop_fn_offset"):
+            v.set_uint16(info["boos_loop_fn_offset"] + 0x2A, 2)
+            v.set_int16(info["boos_readback_fn_offset"] + 0xD2, 0x1000)
+            v.set_uint16(0x1000, 5)
+            v.set_uint16(0x1002, 6)
+        for off in as_list(info.get("bank_arr_offset")):
+            for i in range(info.get("bank_count") or 0):
+                v.set_uint16(off + 2 * i, 7 + i)
+        for off in as_list(info.get("bank_coin_arr_offset")):
+            for i in range(info.get("bank_count") or 0):
+                v.set_uint16(off + 2 * i, 1 + i)
+        for off in as_list(info.get("item_shop_arr_offset")):
+            for i in range(info.get("item_shop_count") or 0):
+                v.set_uint16(off + 2 * i, 2 + i)
+        for off in as_list(info.get("boo_arr_offset")):
+            for i in range(info.get("boo_count") or 0):
+                v.set_uint16(off + 2 * i, 3 + i)
+        if info.get("audio_index_offset"):
+            v.set_uint16(info["audio_index_offset"], 0x12 + j)
+        v.set_uint32(0x100, 0x3C048010)  # LUI A0, 0x8010
+        v.set_uint32(0x104, jal)
+        v.set_uint32(0x108, 0x24840800)  # ADDIU A0, A0, 0x800
+        v.set_int16(0x800, 1)
+        v.set_uint32(0x804, 0x80100900)
+        v.set_int16(0x808, -1)
+        v.set_uint16(0x900, 1)
+        v.set_uint16(0x902, 1)
+        v.set_uint32(0x904, 0x80100A00)
+    del rom.log[:]

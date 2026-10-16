@@ -25,6 +25,8 @@ def _from_u32(u32):
 def _view(view_or_buffer):
     if isinstance(view_or_buffer, DataView):
         return view_or_buffer
+    if isinstance(view_or_buffer, memoryview):
+        view_or_buffer = bytearray(view_or_buffer)
     return DataView(view_or_buffer)
 
 
@@ -54,8 +56,9 @@ class FORM:
             length = form_view.get_uint32(cur_offset)
             cur_offset += 4
 
-            # (As the TypeScript, this slices the underlying buffer.)
-            entry = {"raw": bytearray(form_view.buffer[cur_offset:cur_offset + length])}
+            # (The TypeScript sliced the underlying buffer, ignoring the view's offset.)
+            start = form_view.byte_offset + cur_offset
+            entry = {"raw": bytearray(form_view.buffer[start:start + length])}
 
             parsed = FORM.parse_type(type_, entry["raw"])
             if parsed is not None:

@@ -160,16 +160,22 @@ def parse_game_midi(in_view, input_size):
                     if loop_count == 0xFF or loop_count == 0x00:
                         break
                     else:
+                        # The TypeScript jumped back even after the last repeat, so a song with a
+                        # counted loop never ended; stop jumping once the count is used up.
+                        loop_done = False
                         if refs.position in loop_ends_with_count:
                             count_left = loop_ends_with_count[refs.position]
                             if count_left == 0:
                                 del loop_ends_with_count[refs.position]
+                                loop_done = True
                             else:
                                 loop_ends_with_count[refs.position] = count_left - 1
                         else:
                             loop_ends_with_count[refs.position] = loop_count - 1
 
-                        if refs.alt_pattern is None:
+                        if loop_done:
+                            pass
+                        elif refs.alt_pattern is None:
                             refs.position = refs.position - offset_to_beginning_loop
                         else:
                             loop_ends_with_count.pop(refs.position, None)
@@ -352,17 +358,22 @@ def parse_game_midi(in_view, input_size):
                                 if refs.alt_pattern is None:
                                     refs.position = refs.position - offset_to_beginning_loop
                         else:
+                            # The TypeScript jumped back even after the last repeat, so a song with a
+                            # counted loop never ended; stop jumping once the count is used up.
+                            loop_done = False
                             if refs.position in loop_ends_with_count:
                                 count_left = loop_ends_with_count[refs.position]
-
                                 if count_left == 0:
                                     del loop_ends_with_count[refs.position]
+                                    loop_done = True
                                 else:
                                     loop_ends_with_count[refs.position] = count_left - 1
                             else:
                                 loop_ends_with_count[refs.position] = loop_count - 1
 
-                            if refs.alt_pattern is None:
+                            if loop_done:
+                                pass
+                            elif refs.alt_pattern is None:
                                 refs.position = refs.position - offset_to_beginning_loop
                             else:
                                 loop_ends_with_count.pop(refs.position, None)

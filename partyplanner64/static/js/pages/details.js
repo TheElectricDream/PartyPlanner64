@@ -1,7 +1,7 @@
 // The Details page: the board's name and description, difficulty, costumes, music, images,
 // backgrounds, the code that picks backgrounds and music, and statistics
 // (views/details.tsx, views/details/stats.tsx, views/basiccodeeditorview.tsx).
-import { $, $$, api, esc, act, toast, dialog, confirmDialog, promptDialog, pickFile, readDataURL, loadCss } from '../api.js';
+import { $, $$, api, esc, act, toast, confirmDialog, promptDialog, pickFile, readDataURL, loadCss } from '../api.js';
 import {
   Space, BoardType, BoardAudioType, CostumeType, EventCodeLanguage, IMG, ToolbarImages as TI, mainBgSize,
   GameNames,
@@ -19,6 +19,7 @@ let nameEd = null;
 let descEd = null;
 const codeCards = {};        // kind -> code card state
 let romSongs = null;         // { game, names: {index: name}, soundbankCount } from GET /api/audio
+let romSongsTried = '';
 
 // The images of each game (details.tsx _details_mp1 ...): [otherbg key, label, width, height].
 const IMAGES = {
@@ -229,7 +230,9 @@ async function loadRomSongs(game) {
 function renderMusic(b, ro) {
   const advanced = !!app.setting('ui.advanced');
   const romKey = app.state?.rom ? `${app.state.rom.gameVersion}:${app.state.rom.fileName}` : '';
-  if (romSongs === null && app.state?.rom?.gameVersion === b.game) {
+  const tryKey = `${romKey}:${b.game}`;
+  if (romSongs === null && app.state?.rom?.gameVersion === b.game && romSongsTried !== tryKey) {
+    romSongsTried = tryKey;
     loadRomSongs(b.game).then(() => { sigs.delete('music'); if (store.board) renderMusic(store.board, store.readonly); });
   }
   renderCard('music', [boardKey(), ro, advanced, b.game, b.audioType, b.audioIndex, b.audioData?.map(a => [a.name, a.soundbankIndex, !!a.data]),
@@ -727,6 +730,7 @@ export async function init(container, appRef) {
   app.on('state', () => { if (visible) render(); });
   app.on('rom', () => {
     romSongs = null;
+    romSongsTried = '';
     sigs.delete('music');
   });
   if (!store.board) {
@@ -750,4 +754,3 @@ export function hide() {
   visible = false;
 }
 
-export { dialog };
