@@ -117,12 +117,37 @@ export const store = {
     if ('canRedo' in res) this.canRedo = !!res.canRedo;
     if (res.board) {
       this.board = res.board;
-      // Drop selected spaces that no longer exist.
-      const n = this.board.spaces.length;
-      const sel = this.selected.filter(i => i < n && this.board.spaces[i]);
-      if (sel.length !== this.selected.length) this.setSelection(sel);
+      // Edits still being sent (a drag just released) stay visible until the server has them.
+      for (const [i, o] of this.overrides) {
+        const s = this.board.spaces[i];
+        if (s) Object.assign(s, o);
+      }
+      for (const s of this.optimistic) this.board.spaces.push(s);
+      // Drop selected spaces that no longer exist (once the last edit is in).
+      if (pending <= 1) {
+        const n = this.board.spaces.length;
+        const sel = this.selected.filter(i => i < n && this.board.spaces[i]);
+        if (sel.length !== this.selected.length) this.setSelection(sel);
+      }
       emit('board', this.board);
     }
+  },
+
+  /** Local position/rotation changes not yet sent: index -> {x, y} or {rotation}. */
+  overrides: new Map(),
+  /** Spaces added locally whose addSpace op is in flight. */
+  optimistic: [],
+
+  /** Changes a space locally (while dragging); it survives board updates until cleared. */
+  override(index, props) {
+    const s = this.board?.spaces[index];
+    if (!s) return;
+    Object.assign(s, props);
+    this.overrides.set(index, { ...(this.overrides.get(index) || {}), ...props });
+  },
+
+  get busy() {
+    return pending > 0;
   },
 
   /** True if the current board is one of the ROM's (read-only). */
@@ -139,22 +164,36 @@ export const store = {
   },
 
   /** Applies several edits as one undo step. */
-  ops(list, label) {
+  ops(list, label, opts = {}) {
     if (!list.length) return Promise.resolve(null);
     if (this.readonly) {
       toast('This board is from the ROM and cannot be edited. Copy it to make changes.', 'warn');
       return Promise.resolve(null);
     }
     pending++;
+    // opts.optimistic: a space added locally now (addSpace), shown until the answer comes.
+    if (opts.optimistic && this.board) {
+      this.optimistic.push(opts.optimistic);
+      this.board.spaces.push(opts.optimistic);
+      emit('board', this.board);
+    }
+    // opts.overrides: the local changes (store.override) this edit sends, by index.
+    const sent = new Map((opts.overrides || []).map(i => [i, this.overrides.get(i)]));
+    const settle = () => {
+      if (opts.optimistic) this.optimistic = this.optimistic.filter(s => s !== opts.optimistic);
+      for (const [i, o] of sent) if (this.overrides.get(i) === o) this.overrides.delete(i);
+    };
     const run = async () => {
       try {
         const res = list.length === 1
           ? await api('/api/board/op', list[0])
           : await api('/api/board/ops', { ops: list });
+        settle();
         this.apply(res);
         this.addLog(label || list.map(o => o.op).join(', '));
         return res;
       } catch (e) {
+        settle();
         console.error(e);
         toast(e.message, 'error', 9000);
         this.addLog(`${list.map(o => o.op).join(', ')} failed: ${e.message}`, 'err');

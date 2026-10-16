@@ -1,0 +1,1353 @@
+[
+ {
+  "name": "spaces and connections (MP1)",
+  "boards": [
+   {
+    "default": [
+     1,
+     "NORMAL"
+    ]
+   }
+  ],
+  "steps": [
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 100,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 200,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 300,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 400,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 500,
+     "y": 200,
+     "type": 2
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 600,
+     "y": 200,
+     "type": 4,
+     "subtype": 2
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 0,
+     "endSpaceIndex": 1
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 1,
+     "endSpaceIndex": 2
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 2,
+     "endSpaceIndex": 3
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 2,
+     "endSpaceIndex": 4
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 2,
+     "endSpaceIndex": 4
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 3,
+     "endSpaceIndex": 3
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 4,
+     "endSpaceIndex": 5
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 5,
+     "endSpaceIndex": 1
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 6,
+     "endSpaceIndex": 0
+    }
+   },
+   {
+    "op": "setSpacePositions",
+    "args": {
+     "spaceIndices": [
+      1
+     ],
+     "coords": [
+      {
+       "x": 210
+      }
+     ]
+    }
+   },
+   {
+    "op": "setSpacePositions",
+    "args": {
+     "spaceIndices": [
+      1
+     ],
+     "coords": [
+      {
+       "x": 220,
+       "y": 110
+      }
+     ]
+    }
+   },
+   {
+    "op": "setSpacePositions",
+    "args": {
+     "spaceIndices": [
+      1,
+      2
+     ],
+     "coords": [
+      {
+       "x": 230
+      },
+      {
+       "y": 120,
+       "z": 5
+      }
+     ]
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "op": "setSpaceType",
+    "args": {
+     "spaceIndices": [
+      3,
+      4
+     ],
+     "type": 2
+    }
+   },
+   {
+    "op": "setSpaceType",
+    "args": {
+     "spaceIndices": [
+      3
+     ],
+     "type": 4,
+     "subtype": 1
+    }
+   },
+   {
+    "op": "setSpaceSubtype",
+    "args": {
+     "spaceIndices": [
+      3
+     ],
+     "subtype": 3
+    }
+   },
+   {
+    "op": "setSpaceSubtype",
+    "args": {
+     "spaceIndices": [
+      3
+     ]
+    }
+   },
+   {
+    "op": "setSpaceHostsStar",
+    "args": {
+     "spaceIndices": [
+      0,
+      1
+     ],
+     "hostsStar": true
+    }
+   },
+   {
+    "op": "setSpaceHostsStar",
+    "args": {
+     "spaceIndices": [
+      0
+     ],
+     "hostsStar": false
+    }
+   },
+   {
+    "op": "removeSpace",
+    "args": {
+     "index": 2
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "op": "removeSpace",
+    "args": {
+     "index": 99
+    }
+   },
+   {
+    "op": "removeSpaces",
+    "args": {
+     "spaceIndices": [
+      1,
+      3
+     ]
+    }
+   },
+   {
+    "op": "eraseConnections",
+    "args": {
+     "x": 150,
+     "y": 100
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "op": "eraseConnections",
+    "args": {
+     "x": 350,
+     "y": 100
+    }
+   },
+   {
+    "op": "eraseConnections",
+    "args": {
+     "x": 0,
+     "y": 0
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "redo": true
+   }
+  ]
+ },
+ {
+  "name": "rotation, grouping and filtered actions (MP3)",
+  "boards": [
+   {
+    "default": [
+     3,
+     "NORMAL"
+    ]
+   }
+  ],
+  "steps": [
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 100,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 200,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "setSpaceRotation",
+    "args": {
+     "spaceIndex": 1,
+     "angleYAxisDeg": 10.4
+    }
+   },
+   {
+    "op": "setSpaceRotation",
+    "args": {
+     "spaceIndex": 1,
+     "angleYAxisDeg": 22.5
+    }
+   },
+   {
+    "op": "setSpaceRotation",
+    "args": {
+     "spaceIndex": 1,
+     "angleYAxisDeg": -12.5
+    }
+   },
+   {
+    "op": "setSpacePositions",
+    "args": {
+     "spaceIndices": [
+      0
+     ],
+     "coords": [
+      {
+       "x": 5
+      }
+     ]
+    }
+   },
+   {
+    "op": "setSelectedSpace",
+    "args": 1
+   },
+   {
+    "op": "setSpacePositions",
+    "args": {
+     "spaceIndices": [
+      0
+     ],
+     "coords": [
+      {
+       "x": 6
+      }
+     ]
+    }
+   },
+   {
+    "op": "setSpaceType",
+    "args": {
+     "spaceIndices": [
+      1
+     ],
+     "type": 2
+    }
+   },
+   {
+    "op": "setSpaceRotation",
+    "args": {
+     "spaceIndex": 7,
+     "angleYAxisDeg": 1
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "op": "setSelectedSpaces",
+    "args": [
+     0,
+     1
+    ]
+   },
+   {
+    "op": "setBoardName",
+    "args": {
+     "name": "Untitled"
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "op": "addSelectedSpace",
+    "args": 2
+   },
+   {
+    "op": "clearSelectedSpaces",
+    "args": null
+   },
+   {
+    "op": "setHighlightedSpaces",
+    "args": {
+     "spaceIndices": [
+      0,
+      1
+     ]
+    }
+   },
+   {
+    "op": "setSelectionBoxCoords",
+    "args": {
+     "selectionCoords": [
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   },
+   {
+    "op": "setTemporaryUIConnections",
+    "args": {
+     "connections": [
+      [
+       0,
+       0,
+       5,
+       5
+      ]
+     ]
+    }
+   },
+   {
+    "op": "addConnection",
+    "args": {
+     "startSpaceIndex": 0,
+     "endSpaceIndex": 1
+    }
+   },
+   {
+    "op": "setHoveredBoardEventIndex",
+    "args": {
+     "eventIndex": 2
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "clear": true
+   },
+   {
+    "undo": true
+   }
+  ]
+ },
+ {
+  "name": "board details and audio (MP2)",
+  "boards": [
+   {
+    "default": [
+     2,
+     "NORMAL"
+    ]
+   }
+  ],
+  "steps": [
+   {
+    "op": "setBoardName",
+    "args": {
+     "name": "My Board"
+    }
+   },
+   {
+    "op": "setBoardDescription",
+    "args": {
+     "description": "Line one\nline two"
+    }
+   },
+   {
+    "op": "setBoardDifficulty",
+    "args": {
+     "difficulty": 5
+    }
+   },
+   {
+    "op": "setBoardCostumeTypeIndex",
+    "args": {
+     "costumeType": 3
+    }
+   },
+   {
+    "op": "setBackground",
+    "args": {
+     "bg": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+    }
+   },
+   {
+    "op": "setBoardOtherBg",
+    "args": {
+     "name": "boardlogo",
+     "value": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+    }
+   },
+   {
+    "op": "addAnimationBackground",
+    "args": {
+     "bg": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+    }
+   },
+   {
+    "op": "addAnimationBackground",
+    "args": {
+     "bg": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==A"
+    }
+   },
+   {
+    "op": "removeAnimationBackground",
+    "args": {
+     "index": 5
+    }
+   },
+   {
+    "op": "removeAnimationBackground",
+    "args": {
+     "index": 0
+    }
+   },
+   {
+    "op": "addAdditionalBackground",
+    "args": {
+     "bg": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+    }
+   },
+   {
+    "op": "removeAdditionalBackground",
+    "args": {
+     "index": -1
+    }
+   },
+   {
+    "op": "removeAdditionalBackground",
+    "args": {
+     "index": 0
+    }
+   },
+   {
+    "op": "removeAdditionalBackground",
+    "args": {
+     "index": 0
+    }
+   },
+   {
+    "op": "setAdditionalBackgroundCode",
+    "args": {
+     "code": "; code",
+     "language": 0
+    }
+   },
+   {
+    "op": "setAdditionalBackgroundCode",
+    "args": {
+     "code": "",
+     "language": 0
+    }
+   },
+   {
+    "op": "setAudioSelectCode",
+    "args": {
+     "code": "int x;",
+     "language": 1
+    }
+   },
+   {
+    "op": "setBoardAudio",
+    "args": {
+     "audioChanges": {
+      "gameAudioIndex": 7
+     }
+    }
+   },
+   {
+    "op": "setBoardAudio",
+    "args": {
+     "audioChanges": {
+      "audioType": 1
+     }
+    }
+   },
+   {
+    "op": "setBoardAudio",
+    "args": {
+     "audioChanges": {
+      "customAudioIndex": 0
+     }
+    }
+   },
+   {
+    "op": "setBoardAudio",
+    "args": {
+     "audioChanges": {
+      "customAudioIndex": 0,
+      "midiName": "song.mid",
+      "midiData": "data:audio/midi;base64,AAAA",
+      "soundbankIndex": 2
+     }
+    }
+   },
+   {
+    "op": "setBoardAudio",
+    "args": {
+     "audioChanges": {
+      "customAudioIndex": 1,
+      "midiName": "b.mid"
+     }
+    }
+   },
+   {
+    "op": "setBoardAudio",
+    "args": {
+     "audioChanges": {
+      "customAudioIndex": 0,
+      "delete": true
+     }
+    }
+   },
+   {
+    "op": "setBoardAudio",
+    "args": {
+     "audioChanges": {
+      "audioType": 0
+     }
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "redo": true
+   }
+  ]
+ },
+ {
+  "name": "board list",
+  "boards": [
+   {
+    "default": [
+     1,
+     "NORMAL"
+    ]
+   },
+   {
+    "default": [
+     2,
+     "NORMAL"
+    ]
+   },
+   {
+    "default": [
+     3,
+     "DUEL"
+    ]
+   }
+  ],
+  "romBoards": [
+   {
+    "default": [
+     3,
+     "NORMAL"
+    ]
+   }
+  ],
+  "steps": [
+   {
+    "op": "setCurrentBoard",
+    "args": {
+     "index": 1,
+     "rom": false
+    }
+   },
+   {
+    "op": "copyCurrentBoard",
+    "args": {}
+   },
+   {
+    "op": "copyCurrentBoard",
+    "args": {
+     "makeCurrent": true
+    }
+   },
+   {
+    "op": "setBoardName",
+    "args": {
+     "name": "Copied"
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 0
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 99
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 1
+    }
+   },
+   {
+    "op": "setCurrentBoard",
+    "args": {
+     "index": 0,
+     "rom": true
+    }
+   },
+   {
+    "op": "copyCurrentBoard",
+    "args": {}
+   },
+   {
+    "op": "copyCurrentBoard",
+    "args": {
+     "makeCurrent": true
+    }
+   },
+   {
+    "op": "setCurrentBoard",
+    "args": {
+     "index": 0,
+     "rom": true
+    }
+   },
+   {
+    "op": "setSpaceRotation",
+    "args": {
+     "spaceIndex": 0,
+     "angleYAxisDeg": 1
+    }
+   },
+   {
+    "op": "addBoard",
+    "args": {
+     "board": {
+      "default": [
+       1,
+       "NORMAL"
+      ]
+     }
+    }
+   },
+   {
+    "op": "addBoard",
+    "args": {
+     "board": {
+      "default": [
+       2,
+       "NORMAL"
+      ]
+     },
+     "rom": true
+    }
+   },
+   {
+    "op": "clearBoardsFromROM",
+    "args": null
+   },
+   {
+    "op": "setCurrentBoard",
+    "args": {
+     "index": 2,
+     "rom": false
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 2
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 0
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 0
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 0
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 0
+    }
+   },
+   {
+    "op": "deleteBoard",
+    "args": {
+     "boardIndex": 0
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   }
+  ]
+ },
+ {
+  "name": "events",
+  "boards": [
+   {
+    "default": [
+     1,
+     "NORMAL"
+    ]
+   }
+  ],
+  "steps": [
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 100,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 200,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 300,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 400,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 500,
+     "y": 100,
+     "type": 1
+    }
+   },
+   {
+    "op": "addEventToLibrary",
+    "args": {
+     "event": {
+      "language": 0,
+      "asm": "; NAME: Test Event\n; GAMES: MP1_USA,MP2_USA,MP3_USA\n; EXECUTION: Direct\n; PARAM: Space|target\n; PARAM: Space[]|spaces\n; PARAM: Number|count\nADDIU SP SP -4\nJR RA\nADDIU SP SP 4\n"
+     }
+    }
+   },
+   {
+    "op": "addEventToLibrary",
+    "args": {
+     "event": {
+      "language": 0,
+      "asm": "; NAME: Other Event\n; GAMES: MP1_USA,MP2_USA,MP3_USA\n; EXECUTION: Process\nJR RA\nNOP\n"
+     }
+    }
+   },
+   {
+    "op": "addEventToSpaces",
+    "args": {
+     "event": {
+      "id": "Test Event",
+      "activationType": 3,
+      "executionType": 1,
+      "custom": true
+     },
+     "spaceIndices": [
+      1,
+      2
+     ]
+    }
+   },
+   {
+    "op": "setSpaceEventsEventParameter",
+    "args": {
+     "spaceIndices": [
+      1,
+      2
+     ],
+     "eventIndices": [
+      0,
+      0
+     ],
+     "name": "target",
+     "value": 4
+    }
+   },
+   {
+    "op": "setSpaceEventsEventParameter",
+    "args": {
+     "spaceIndices": [
+      1
+     ],
+     "eventIndices": [
+      0
+     ],
+     "name": "spaces",
+     "value": [
+      0,
+      3,
+      4,
+      2
+     ]
+    }
+   },
+   {
+    "op": "setSpaceEventsActivationType",
+    "args": {
+     "spaceIndices": [
+      2
+     ],
+     "eventIndices": [
+      0
+     ],
+     "activationType": 1
+    }
+   },
+   {
+    "op": "setSelectedSpace",
+    "args": 3
+   },
+   {
+    "op": "addEventToSpace",
+    "args": {
+     "event": {
+      "id": "Other Event",
+      "activationType": 3,
+      "executionType": 2,
+      "custom": true
+     }
+    }
+   },
+   {
+    "op": "addEventToSpace",
+    "args": {
+     "event": {
+      "id": "Test Event",
+      "activationType": 3,
+      "executionType": 1,
+      "custom": true,
+      "parameterValues": {
+       "target": 2
+      }
+     },
+     "toStart": true
+    }
+   },
+   {
+    "op": "setSpaceEventEventParameter",
+    "args": {
+     "eventIndex": 0,
+     "name": "count",
+     "value": 3
+    }
+   },
+   {
+    "op": "setSpaceEventActivationType",
+    "args": {
+     "eventIndex": 1,
+     "activationType": 1
+    }
+   },
+   {
+    "op": "removeSpace",
+    "args": {
+     "index": 3
+    }
+   },
+   {
+    "op": "removeSpace",
+    "args": {
+     "index": 0
+    }
+   },
+   {
+    "op": "addEventToBoard",
+    "args": {
+     "event": {
+      "id": "Test Event",
+      "activationType": -2,
+      "executionType": 1,
+      "custom": true
+     }
+    }
+   },
+   {
+    "op": "setBoardEventEventParameter",
+    "args": {
+     "eventIndex": 0,
+     "name": "target",
+     "value": 1
+    }
+   },
+   {
+    "op": "setBoardEventActivationType",
+    "args": {
+     "eventIndex": 0,
+     "activationType": -3
+    }
+   },
+   {
+    "op": "removeSpace",
+    "args": {
+     "index": 1
+    }
+   },
+   {
+    "op": "setSelectedSpace",
+    "args": 0
+   },
+   {
+    "op": "removeEventFromSpace",
+    "args": {
+     "eventIndex": 0
+    }
+   },
+   {
+    "op": "removeEventsFromSpaces",
+    "args": {
+     "eventIndices": [
+      0
+     ],
+     "spaceIndices": [
+      1
+     ]
+    }
+   },
+   {
+    "op": "removeEventFromBoard",
+    "args": {
+     "eventIndex": 0
+    }
+   },
+   {
+    "op": "removeEventFromBoard",
+    "args": {
+     "eventIndex": 5
+    }
+   },
+   {
+    "op": "includeEventInBoard",
+    "args": {
+     "event": {
+      "language": 0,
+      "asm": "; NAME: Other Event\n; GAMES: MP1_USA,MP2_USA,MP3_USA\n; EXECUTION: Process\nJR RA\nNOP\n"
+     }
+    }
+   },
+   {
+    "op": "excludeEventFromBoard",
+    "args": {
+     "eventId": "Test Event"
+    }
+   },
+   {
+    "op": "changeCurrentEvent",
+    "args": {
+     "id": "Other Event",
+     "type": 1
+    }
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "undo": true
+   },
+   {
+    "redo": true
+   },
+   {
+    "op": "removeEventFromLibrary",
+    "args": {
+     "eventId": "Other Event"
+    }
+   }
+  ]
+ },
+ {
+  "name": "special spaces (adapters)",
+  "boards": [
+   {
+    "default": [
+     1,
+     "NORMAL"
+    ]
+   },
+   {
+    "default": [
+     2,
+     "NORMAL"
+    ]
+   },
+   {
+    "default": [
+     3,
+     "NORMAL"
+    ]
+   }
+  ],
+  "steps": [
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 10,
+     "y": 10,
+     "type": 5
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 20,
+     "y": 10,
+     "type": 6
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 30,
+     "y": 10,
+     "type": 12
+    }
+   },
+   {
+    "op": "setCurrentBoard",
+    "args": {
+     "index": 1,
+     "rom": false
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 10,
+     "y": 10,
+     "type": 12
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 20,
+     "y": 10,
+     "type": 10
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 30,
+     "y": 10,
+     "type": 11
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 40,
+     "y": 10,
+     "type": 0,
+     "subtype": 7
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 50,
+     "y": 10,
+     "type": 0,
+     "subtype": 5
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 60,
+     "y": 10,
+     "type": 5
+    }
+   },
+   {
+    "op": "setCurrentBoard",
+    "args": {
+     "index": 2,
+     "rom": false
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 10,
+     "y": 10,
+     "type": 12
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 20,
+     "y": 10,
+     "type": 10
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 40,
+     "y": 10,
+     "type": 0,
+     "subtype": 8
+    }
+   },
+   {
+    "op": "addSpace",
+    "args": {
+     "x": 60,
+     "y": 10,
+     "type": 5
+    }
+   },
+   {
+    "op": "removeSpace",
+    "args": {
+     "index": 1
+    }
+   }
+  ]
+ }
+]

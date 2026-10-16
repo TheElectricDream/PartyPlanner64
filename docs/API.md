@@ -78,7 +78,8 @@ advanced, choices?}]}, ...]}`: the original settings page's layout and descripti
 ### `POST /api/settings/reset` -> `{id: value, ...}`: back to the defaults.
 
 ### `GET /api/image/<sha1>`
-The image bytes (with its content type). 404 if unknown.
+The image bytes (with its content type), cacheable for good (the URL names the content).
+404 if unknown.
 
 ## The ROM
 
@@ -175,6 +176,11 @@ also accepted), `args` its payload as in the TypeScript. If the op fails, nothin
 | `setSpaceEventsActivationType` | `{spaceIndices, eventIndices, activationType}` |
 | `setSpaceEventEventParameter` | `{eventIndex, name, value, spaceIndex?}` |
 | `setSpaceEventsEventParameter` | `{spaceIndices, eventIndices, name, value}` |
+
+ROM boards: the original didn't edit them; clicking a space of a ROM board first made a copy and
+switched to it (`copyCurrentBoard(true)`). Pages should do the same with
+`POST /api/boards/copy {index, rom: true, makeCurrent: true}` before editing. (The ops themselves
+work on whatever board is current; `setSpaceRotation` refuses ROM boards, as in the original.)
 
 The original's single-space ops worked on the one selected space; here `spaceIndex` names it
 (without it, the selection kept by the selection ops below is used).

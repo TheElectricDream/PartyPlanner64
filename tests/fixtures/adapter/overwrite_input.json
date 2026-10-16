@@ -1,0 +1,697 @@
+{
+ "cases": [
+  {
+   "name": "mp1_dk",
+   "game": 1,
+   "boardIndex": 0,
+   "board": {
+    "spaces": [
+     {
+      "x": 100,
+      "y": 100,
+      "z": 0,
+      "type": 7
+     },
+     {
+      "x": 200,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "subtype": 0
+     },
+     {
+      "x": 300,
+      "y": 100,
+      "z": 0,
+      "type": 6,
+      "events": [
+       {
+        "id": "CHANCETIME",
+        "activationType": 3,
+        "executionType": 1
+       }
+      ]
+     },
+     {
+      "x": 400,
+      "y": 50,
+      "z": 0,
+      "type": 1,
+      "subtype": 3,
+      "events": [
+       {
+        "id": "PP64 Test",
+        "activationType": 3,
+        "executionType": 1,
+        "custom": true,
+        "parameterValues": {
+         "coins": 5,
+         "target": 7
+        }
+       }
+      ]
+     },
+     {
+      "x": 500,
+      "y": 50,
+      "z": 0,
+      "type": 1,
+      "subtype": 2
+     },
+     {
+      "x": 400,
+      "y": 150,
+      "z": 0,
+      "type": 2,
+      "events": [
+       {
+        "id": "BOWSER",
+        "activationType": 1,
+        "executionType": 1
+       },
+       {
+        "id": "PP64 Test",
+        "activationType": 1,
+        "executionType": 1,
+        "custom": true,
+        "parameterValues": {
+         "coins": 2,
+         "target": 0
+        }
+       }
+      ]
+     },
+     {
+      "x": 600,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "subtype": 1
+     },
+     {
+      "x": 700,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "star": true
+     },
+     {
+      "x": 650,
+      "y": 300,
+      "z": 0,
+      "type": 0
+     },
+     {
+      "x": 50,
+      "y": 400,
+      "z": 0,
+      "type": 0
+     }
+    ],
+    "links": {
+     "0": 1,
+     "1": 2,
+     "2": [
+      3,
+      5
+     ],
+     "3": 4,
+     "4": 6,
+     "5": 6,
+     "6": 7,
+     "7": 0
+    },
+    "name": "Test MP1",
+    "description": "A test board\nfor the port",
+    "difficulty": 3,
+    "game": 1,
+    "type": "NORMAL",
+    "bg": {
+     "fov": 17,
+     "scaleFactor": 1,
+     "cameraEyePosX": 0,
+     "cameraEyePosY": 1355,
+     "cameraEyePosZ": 1780,
+     "lookatPointX": 0,
+     "lookatPointY": 0,
+     "lookatPointZ": 0,
+     "width": 960,
+     "height": 720,
+     "src": "data:image/png;base64,"
+    },
+    "otherbg": {},
+    "events": {
+     "PP64 Test": {
+      "language": 0,
+      "code": "// NAME: PP64 Test\n// GAMES: MP1_USA,MP2_USA,MP3_USA\n// EXECUTION: Direct\n// PARAM: Number|coins\n// PARAM: Space|target\nADDIU SP, SP, -0x18\nSW RA, 0x10(SP)\nLI A0, coins\nLI A1, target\nJAL 0x80001234\nNOP\nLW RA, 0x10(SP)\nJR RA\nADDIU SP, SP, 0x18\n"
+     }
+    },
+    "audioType": 0,
+    "audioIndex": 7,
+    "boardevents": [
+     {
+      "id": "PP64 Test",
+      "activationType": -2,
+      "executionType": 1,
+      "custom": true,
+      "parameterValues": {
+       "coins": 1,
+       "target": 3
+      }
+     }
+    ]
+   }
+  },
+  {
+   "name": "mp1_wario",
+   "game": 1,
+   "boardIndex": 3,
+   "board": {
+    "spaces": [
+     {
+      "x": 100,
+      "y": 100,
+      "z": 0,
+      "type": 7
+     },
+     {
+      "x": 200,
+      "y": 100,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 300,
+      "y": 100,
+      "z": 0,
+      "type": 2
+     },
+     {
+      "x": 400,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "subtype": 3
+     },
+     {
+      "x": 400,
+      "y": 200,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 300,
+      "y": 200,
+      "z": 0,
+      "type": 1,
+      "star": true
+     },
+     {
+      "x": 200,
+      "y": 200,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 100,
+      "y": 200,
+      "z": 0,
+      "type": 1
+     }
+    ],
+    "links": {
+     "0": 1,
+     "1": 2,
+     "2": 3,
+     "3": 4,
+     "4": 5,
+     "5": 6,
+     "6": 7,
+     "7": 0
+    },
+    "name": "Wario Test",
+    "description": "A test board\nfor the port",
+    "difficulty": 9,
+    "game": 1,
+    "type": "NORMAL",
+    "bg": {
+     "fov": 17,
+     "scaleFactor": 1,
+     "cameraEyePosX": 0,
+     "cameraEyePosY": 1355,
+     "cameraEyePosZ": 1780,
+     "lookatPointX": 0,
+     "lookatPointY": 0,
+     "lookatPointZ": 0,
+     "width": 960,
+     "height": 720,
+     "src": "data:image/png;base64,"
+    },
+    "otherbg": {},
+    "events": {
+     "PP64 Test": {
+      "language": 0,
+      "code": "// NAME: PP64 Test\n// GAMES: MP1_USA,MP2_USA,MP3_USA\n// EXECUTION: Direct\n// PARAM: Number|coins\n// PARAM: Space|target\nADDIU SP, SP, -0x18\nSW RA, 0x10(SP)\nLI A0, coins\nLI A1, target\nJAL 0x80001234\nNOP\nLW RA, 0x10(SP)\nJR RA\nADDIU SP, SP, 0x18\n"
+     }
+    },
+    "audioType": 0,
+    "audioIndex": 7
+   }
+  },
+  {
+   "name": "mp2_western",
+   "game": 2,
+   "boardIndex": 0,
+   "board": {
+    "spaces": [
+     {
+      "x": 100,
+      "y": 100,
+      "z": 0,
+      "type": 7
+     },
+     {
+      "x": 200,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "subtype": 0
+     },
+     {
+      "x": 300,
+      "y": 100,
+      "z": 0,
+      "type": 12,
+      "subtype": 5,
+      "events": [
+       {
+        "id": "BANK",
+        "activationType": 1,
+        "executionType": 1
+       }
+      ]
+     },
+     {
+      "x": 400,
+      "y": 50,
+      "z": 0,
+      "type": 1,
+      "subtype": 6
+     },
+     {
+      "x": 500,
+      "y": 50,
+      "z": 0,
+      "type": 1,
+      "subtype": 7,
+      "events": [
+       {
+        "id": "ITEMSHOP",
+        "activationType": 1,
+        "executionType": 1
+       }
+      ]
+     },
+     {
+      "x": 400,
+      "y": 150,
+      "z": 0,
+      "type": 2,
+      "subtype": 3,
+      "events": [
+       {
+        "id": "BOO",
+        "activationType": 1,
+        "executionType": 1
+       }
+      ]
+     },
+     {
+      "x": 600,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "events": [
+       {
+        "id": "PP64 Test",
+        "activationType": 3,
+        "executionType": 1,
+        "custom": true,
+        "parameterValues": {
+         "coins": 4,
+         "target": 1
+        }
+       }
+      ]
+     },
+     {
+      "x": 700,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "star": true
+     },
+     {
+      "x": 650,
+      "y": 300,
+      "z": 0,
+      "type": 0
+     },
+     {
+      "x": 50,
+      "y": 400,
+      "z": 0,
+      "type": 0
+     }
+    ],
+    "links": {
+     "0": 1,
+     "1": 2,
+     "2": [
+      3,
+      5
+     ],
+     "3": 4,
+     "4": 6,
+     "5": 6,
+     "6": 7,
+     "7": 0
+    },
+    "name": "Test MP2",
+    "description": "A test board\nfor the port",
+    "difficulty": 3,
+    "game": 2,
+    "type": "NORMAL",
+    "bg": {
+     "fov": 3,
+     "scaleFactor": 0.1,
+     "cameraEyePosX": 0,
+     "cameraEyePosY": 1570,
+     "cameraEyePosZ": 1577,
+     "lookatPointX": 0,
+     "lookatPointY": 0,
+     "lookatPointZ": 0,
+     "width": 1152,
+     "height": 864,
+     "src": "data:image/png;base64,"
+    },
+    "otherbg": {},
+    "events": {
+     "PP64 Test": {
+      "language": 0,
+      "code": "// NAME: PP64 Test\n// GAMES: MP1_USA,MP2_USA,MP3_USA\n// EXECUTION: Direct\n// PARAM: Number|coins\n// PARAM: Space|target\nADDIU SP, SP, -0x18\nSW RA, 0x10(SP)\nLI A0, coins\nLI A1, target\nJAL 0x80001234\nNOP\nLW RA, 0x10(SP)\nJR RA\nADDIU SP, SP, 0x18\n"
+     }
+    },
+    "audioType": 0,
+    "audioIndex": 7,
+    "costumeTypeIndex": 2,
+    "boardevents": [
+     {
+      "id": "PP64 Test",
+      "activationType": -3,
+      "executionType": 1,
+      "custom": true,
+      "parameterValues": {
+       "coins": 9,
+       "target": 2
+      }
+     },
+     {
+      "id": "PP64 Test",
+      "activationType": -4,
+      "executionType": 1,
+      "custom": true,
+      "parameterValues": {
+       "coins": 8,
+       "target": 1
+      }
+     }
+    ]
+   }
+  },
+  {
+   "name": "mp3_chilly",
+   "game": 3,
+   "boardIndex": 0,
+   "board": {
+    "spaces": [
+     {
+      "x": 100,
+      "y": 100,
+      "z": 0,
+      "type": 7
+     },
+     {
+      "x": 200,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "subtype": 0
+     },
+     {
+      "x": 300,
+      "y": 100,
+      "z": 0,
+      "type": 12,
+      "subtype": 5,
+      "events": [
+       {
+        "id": "BANK",
+        "activationType": 1,
+        "executionType": 1
+       }
+      ]
+     },
+     {
+      "x": 400,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "events": [
+       {
+        "id": "PP64 Test",
+        "activationType": 3,
+        "executionType": 1,
+        "custom": true,
+        "parameterValues": {
+         "coins": 3,
+         "target": 9
+        }
+       }
+      ]
+     },
+     {
+      "x": 500,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "subtype": 8
+     },
+     {
+      "x": 600,
+      "y": 100,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 700,
+      "y": 100,
+      "z": 0,
+      "type": 1,
+      "subtype": 7,
+      "events": [
+       {
+        "id": "ITEMSHOP",
+        "activationType": 1,
+        "executionType": 1
+       }
+      ]
+     },
+     {
+      "x": 800,
+      "y": 100,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 300,
+      "y": 300,
+      "z": 0,
+      "type": 1,
+      "subtype": 3,
+      "events": [
+       {
+        "id": "BOO",
+        "activationType": 1,
+        "executionType": 1
+       }
+      ]
+     },
+     {
+      "x": 500,
+      "y": 300,
+      "z": 0,
+      "type": 1,
+      "star": true
+     },
+     {
+      "x": 700,
+      "y": 300,
+      "z": 0,
+      "type": 2
+     }
+    ],
+    "links": {
+     "0": 1,
+     "1": 2,
+     "2": [
+      3,
+      8
+     ],
+     "3": 4,
+     "4": 5,
+     "5": 6,
+     "6": 7,
+     "7": 0,
+     "8": 9,
+     "9": 10,
+     "10": 7
+    },
+    "name": "Test MP3",
+    "description": "A test board\nfor the port",
+    "difficulty": 3,
+    "game": 3,
+    "type": "NORMAL",
+    "bg": {
+     "fov": 15,
+     "scaleFactor": 0.1,
+     "cameraEyePosX": 0,
+     "cameraEyePosY": 300,
+     "cameraEyePosZ": 300,
+     "lookatPointX": 0,
+     "lookatPointY": 0,
+     "lookatPointZ": 0,
+     "width": 1152,
+     "height": 864,
+     "src": "data:image/png;base64,"
+    },
+    "otherbg": {},
+    "events": {
+     "PP64 Test": {
+      "language": 0,
+      "code": "// NAME: PP64 Test\n// GAMES: MP1_USA,MP2_USA,MP3_USA\n// EXECUTION: Direct\n// PARAM: Number|coins\n// PARAM: Space|target\nADDIU SP, SP, -0x18\nSW RA, 0x10(SP)\nLI A0, coins\nLI A1, target\nJAL 0x80001234\nNOP\nLW RA, 0x10(SP)\nJR RA\nADDIU SP, SP, 0x18\n"
+     }
+    },
+    "audioType": 0,
+    "audioIndex": 7,
+    "boardevents": [
+     {
+      "id": "PP64 Test",
+      "activationType": -5,
+      "executionType": 1,
+      "custom": true,
+      "parameterValues": {
+       "coins": 6,
+       "target": 4
+      }
+     }
+    ]
+   }
+  },
+  {
+   "name": "mp3_tiny",
+   "game": 3,
+   "boardIndex": 1,
+   "board": {
+    "spaces": [
+     {
+      "x": 100,
+      "y": 100,
+      "z": 0,
+      "type": 7
+     },
+     {
+      "x": 200,
+      "y": 100,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 300,
+      "y": 100,
+      "z": 0,
+      "type": 2
+     },
+     {
+      "x": 400,
+      "y": 100,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 400,
+      "y": 200,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 300,
+      "y": 200,
+      "z": 0,
+      "type": 1,
+      "star": true
+     },
+     {
+      "x": 200,
+      "y": 200,
+      "z": 0,
+      "type": 1
+     },
+     {
+      "x": 100,
+      "y": 200,
+      "z": 0,
+      "type": 1
+     }
+    ],
+    "links": {
+     "0": 1,
+     "1": 2,
+     "2": 3,
+     "3": 4,
+     "4": 5,
+     "5": 6,
+     "6": 7,
+     "7": 0
+    },
+    "name": "Tiny",
+    "description": "A test board\nfor the port",
+    "difficulty": 0,
+    "game": 3,
+    "type": "NORMAL",
+    "bg": {
+     "fov": 15,
+     "scaleFactor": 0.1,
+     "cameraEyePosX": 0,
+     "cameraEyePosY": 300,
+     "cameraEyePosZ": 300,
+     "lookatPointX": 0,
+     "lookatPointY": 0,
+     "lookatPointZ": 0,
+     "width": 1152,
+     "height": 864,
+     "src": "data:image/png;base64,"
+    },
+    "otherbg": {},
+    "events": {
+     "PP64 Test": {
+      "language": 0,
+      "code": "// NAME: PP64 Test\n// GAMES: MP1_USA,MP2_USA,MP3_USA\n// EXECUTION: Direct\n// PARAM: Number|coins\n// PARAM: Space|target\nADDIU SP, SP, -0x18\nSW RA, 0x10(SP)\nLI A0, coins\nLI A1, target\nJAL 0x80001234\nNOP\nLW RA, 0x10(SP)\nJR RA\nADDIU SP, SP, 0x18\n"
+     }
+    },
+    "audioType": 0,
+    "audioIndex": 7
+   }
+  }
+ ]
+}

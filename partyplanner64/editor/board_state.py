@@ -12,7 +12,8 @@ Differences from the TypeScript:
   it as `event_library` (an id -> event dict).
 - The reducers that worked on "the one selected space" accept an optional
   `spaceIndex` in their payload, so the server needn't track the selection.
-- Boards are plain dicts as in the board JSON, so `links` keys are strings.
+- Boards are plain dicts as in the board JSON; `links` keys are ints once
+  lib.boards.fix_potentially_old_board has seen a board (strings are accepted).
 """
 
 import copy
@@ -41,7 +42,7 @@ class BoardState:
     __slots__ = ("boards", "rom_boards", "current_board_index", "current_board_is_rom",
                  "selected_space_indices", "selection_box_coords", "highlighted_space_indices",
                  "temporary_connections", "current_event_id", "current_event_type",
-                 "hovered_board_event_index")
+                 "hovered_board_event_index", "_own", "_memo", "_cloned")
 
     def __init__(self):
         self.boards = []
@@ -55,25 +56,74 @@ class BoardState:
         self.current_event_id = None
         self.current_event_type = EventType.None_
         self.hovered_board_event_index = -1
+        self._own = None
+        self._memo = None
+        self._cloned = None
+
+    _FIELDS = ("boards", "rom_boards", "current_board_index", "current_board_is_rom",
+               "selected_space_indices", "selection_box_coords", "highlighted_space_indices",
+               "temporary_connections", "current_event_id", "current_event_type",
+               "hovered_board_event_index")
 
     def draft(self, edit_board=True):
-        """A copy to change: the lists are copied, and (edit_board) the current board."""
+        """A copy to change, as immer's draft: the lists are copied (and, with
+        edit_board, the current board; see clone_current_board)."""
         d = BoardState.__new__(BoardState)
-        for name in BoardState.__slots__:
+        for name in BoardState._FIELDS:
             setattr(d, name, getattr(self, name))
         d.boards = list(self.boards)
         d.rom_boards = list(self.rom_boards)
         d.selected_space_indices = dict(self.selected_space_indices)
+        d._own = (d.boards, d.rom_boards, d.selected_space_indices)
+        d._memo = {}
+        d._cloned = set()
         if edit_board:
-            collection = d.rom_boards if d.current_board_is_rom else d.boards
-            if 0 <= d.current_board_index < len(collection):
-                collection[d.current_board_index] = copy.deepcopy(collection[d.current_board_index])
+            d.clone_current_board()
         return d
+
+    def clone_current_board(self):
+        """Replace the current board with a deep copy to change (once per draft)."""
+        collection = self.rom_boards if self.current_board_is_rom else self.boards
+        index = self.current_board_index
+        if isinstance(index, int) and 0 <= index < len(collection):
+            board = collection[index]
+            if id(board) in self._cloned:
+                return          # already a copy made in this draft
+            clone = copy.deepcopy(board, self._memo)
+            self._cloned.add(id(clone))
+            collection[index] = clone
+
+    def unchanged_from(self, base):
+        """Whether this draft would leave immer's base state as it is.
+
+        immer counts an assignment of another object as a change, even of an
+        equal one, and an assignment of an equal plain value as none; copies
+        this draft made itself are compared by content.
+        """
+        own_boards, own_rom_boards, own_selected = self._own
+        memo = self._memo
+        for name in BoardState._FIELDS:
+            a, b = getattr(base, name), getattr(self, name)
+            if a is b:
+                continue
+            if name in ("boards", "rom_boards"):
+                if b is not (own_boards if name == "boards" else own_rom_boards):
+                    return False
+                if len(a) != len(b) or not all(_same(x, y, memo) for x, y in zip(a, b)):
+                    return False
+            elif name == "selected_space_indices":
+                if b is not own_selected or a != b:
+                    return False
+            elif isinstance(a, (dict, list)) or isinstance(b, (dict, list)):
+                return False
+            elif not _same_value(a, b):
+                return False
+        return True
 
     def __eq__(self, other):
         if not isinstance(other, BoardState):
             return NotImplemented
-        return all(getattr(self, n) == getattr(other, n) for n in BoardState.__slots__)
+        return all(getattr(self, n) == getattr(other, n) for n in BoardState._FIELDS)
 
     def __ne__(self, other):
         eq = self.__eq__(other)
@@ -92,6 +142,25 @@ class BoardState:
             "currentEventId": self.current_event_id,
             "currentEventType": int(self.current_event_type),
         }
+
+
+def _same_value(a, b):
+    return a == b and isinstance(a, bool) == isinstance(b, bool) and type(a) is not dict
+
+
+def _same(base, value, memo):
+    """immer's view: is `value` (in a draft) the unchanged `base`?"""
+    if base is value:
+        return True
+    if isinstance(base, (dict, list)) or isinstance(value, (dict, list)):
+        if memo.get(id(base)) is not value:
+            return False            # another object was put here
+        if isinstance(base, dict):
+            if base.keys() != value.keys():
+                return False
+            return all(_same(base[k], value[k], memo) for k in base)
+        return len(base) == len(value) and all(_same(x, y, memo) for x, y in zip(base, value))
+    return _same_value(base, value)
 
 
 def _make_default_board(*args):
@@ -595,21 +664,22 @@ def remove_space(state, board, index, event_library):
         return old_idx - 1 if int(old_idx) > int(index) else old_idx
 
     # Update the links that are at a greater index.
+    lib = _boards_lib()
     links = board.get("links")
     if links is not None:
         for i in range(old_space_len):
-            key = str(i)
-            if key not in links:
+            key = lib._link_key(links, i)
+            if key is None:
                 continue
 
             start = _adjust(i)
             end = links[key]
-            if start != i:
+            if start != i or key != start or isinstance(key, str):
                 del links[key]
             if isinstance(end, list):
-                links[str(start)] = [_adjust(e) for e in end]
+                links[start] = [_adjust(e) for e in end]
             else:
-                links[str(start)] = _adjust(end)
+                links[start] = _adjust(end)
 
     # Update space event parameter indices
     def _update(parameter, event, *rest):
@@ -645,7 +715,9 @@ def _remove_connections(space_idx, board):
     if not links:
         return
 
-    links.pop(str(space_idx), None)
+    key = _boards_lib()._link_key(links, space_idx)
+    if key is not None:
+        del links[key]
     for start_space in list(links.keys()):
         value = links[start_space]
         if isinstance(value, list):
@@ -660,14 +732,15 @@ def _remove_connections(space_idx, board):
 
 
 def _erase_lines(board, x, y):
-    from .jsjson import js_ordered_items
+    lib = _boards_lib()
     spaces = board["spaces"]
     links = board.get("links") or {}
     something_erased = False
-    for start_idx, _ in js_ordered_items(links):
-        if start_idx not in links:
+    for start_index in lib.get_link_start_indices(board):
+        start_idx = lib._link_key(links, start_index)
+        if start_idx is None:
             continue
-        start_space = spaces[int(start_idx)]
+        start_space = spaces[int(start_index)]
         end_links = links[start_idx]
         if isinstance(end_links, list):
             i = 0
@@ -737,12 +810,14 @@ def get_current_single_selected_space(state, payload=None):
         space_index = payload["spaceIndex"]
     else:
         selected = [int(k) for k in state.selected_space_indices]
-        assert_(len(selected) == 1)
+        if len(selected) != 1:
+            raise ValueError("This needs one selected space (or a spaceIndex).")
         space_index = selected[0]
     space = (board["spaces"][space_index]
              if isinstance(space_index, int) and 0 <= space_index < len(board["spaces"])
              else None)
-    assert_(bool(space))
+    if not space:
+        raise IndexError("There is no space %s." % (space_index,))
     return space
 
 

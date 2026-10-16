@@ -55,18 +55,68 @@ def js_round(x):
 
 
 def js_number_str(num):
-    """Number#toString for the numbers boards hold (5 -> "5", 2.5 -> "2.5")."""
+    """Number#toString (and JSON.stringify) of a number: 5.0 -> "5", 1e-7 -> "1e-7"."""
     if isinstance(num, bool):
         return "true" if num else "false"
-    if isinstance(num, float):
-        if num != num:
-            return "NaN"
-        if num in (math.inf, -math.inf):
-            return "Infinity" if num > 0 else "-Infinity"
-        if num.is_integer() and abs(num) < 1e21:
-            return str(int(num))
-        return repr(num)
-    return str(num)
+    if isinstance(num, int):
+        return str(num)
+    num = float(num)
+    if num != num:
+        return "NaN"
+    if num in (math.inf, -math.inf):
+        return "Infinity" if num > 0 else "-Infinity"
+    if num == 0:
+        return "0"
+    sign = "-" if num < 0 else ""
+    # The shortest round-tripping digits, as both JavaScript and repr() find them.
+    mantissa, _, exp = ("%r" % abs(num)).partition("e")
+    int_part, _, frac_part = mantissa.partition(".")
+    if frac_part == "0":
+        frac_part = ""
+    digits = (int_part + frac_part).lstrip("0")
+    point = len(int_part) + (int(exp) if exp else 0)  # Position of the decimal point.
+    point -= len(int_part + frac_part) - len((int_part + frac_part).lstrip("0"))
+    digits = digits.rstrip("0") or "0"
+    k = len(digits)
+    n = point
+    if k <= n <= 21:
+        out = digits + "0" * (n - k)
+    elif 0 < n <= 21:
+        out = digits[:n] + "." + digits[n:]
+    elif -6 < n <= 0:
+        out = "0." + "0" * (-n) + digits
+    else:
+        e = n - 1
+        out = digits[0] + ("." + digits[1:] if k > 1 else "") + "e" + ("+" if e >= 0 else "-") + str(abs(e))
+    return sign + out
+
+
+def json_stringify(value):
+    """JSON.stringify(value), compact, with JavaScript's number formatting and key order."""
+    import json
+
+    def enc(v):
+        if v is None:
+            return "null"
+        if isinstance(v, bool):
+            return "true" if v else "false"
+        if isinstance(v, (int, float)):
+            if isinstance(v, float) and (v != v or v in (math.inf, -math.inf)):
+                return "null"
+            return js_number_str(int(v) if isinstance(v, int) else v)
+        if isinstance(v, str):
+            return json.dumps(str(v), ensure_ascii=False)
+        if isinstance(v, dict):
+            return "{" + ",".join(
+                json.dumps(str(k), ensure_ascii=False) + ":" + enc(v[k]) for k in js_keys(v)) + "}"
+        if isinstance(v, (list, tuple)):
+            return "[" + ",".join(enc(item) for item in v) + "]"
+        value_attr = getattr(v, "value", None)
+        if value_attr is not None:
+            return enc(value_attr)
+        raise TypeError("Object of type %s is not JSON serializable" % type(v).__name__)
+
+    return enc(value)
 
 
 def at(lst, index):
@@ -99,8 +149,9 @@ def is_number(value):
 def link_key(links, index):
     """The key board.links uses for a space index.
 
-    Board JSON keeps links keyed by strings ("3"); boards built in Python
-    may use ints. Prefer whichever the dict already has.
+    Board JSON keeps links keyed by strings ("3"); the Python boards module
+    normalizes them to ints. Prefer whichever the dict already has (ints
+    for an empty dict).
     """
     if index in links:
         return index
@@ -108,10 +159,10 @@ def link_key(links, index):
     if skey in links:
         return skey
     for key in links:
-        if isinstance(key, int) and not isinstance(key, bool):
-            return index
+        if isinstance(key, str):
+            return skey
         break
-    return skey
+    return index
 
 
 def get_link(links, index):
@@ -121,3 +172,28 @@ def get_link(links, index):
     if index in links:
         return links[index]
     return links.get(str(index))
+
+
+def substring(s, start, end=None):
+    """String#substring: clamps to the string and swaps reversed bounds."""
+    length = len(s)
+    start = min(max(int(start), 0), length)
+    end = length if end is None else min(max(int(end), 0), length)
+    if start > end:
+        start, end = end, start
+    return s[start:end]
+
+
+def count_occurrences(s, sub):
+    """Count matches the way `while ((i = s.indexOf(sub, i + 1)) !== -1)` does."""
+    count = 0
+    last_index = s.find(sub, 0)
+    while last_index != -1:
+        count += 1
+        last_index = s.find(sub, last_index + 1)
+    return count
+
+
+def to_bytes_array(arr):
+    """arrayToArrayBuffer: a list of numbers as bytes (each wrapped to 8 bits)."""
+    return bytearray((int(v) & 0xFF) for v in arr)

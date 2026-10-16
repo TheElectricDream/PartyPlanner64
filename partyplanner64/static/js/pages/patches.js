@@ -74,10 +74,12 @@ export function show() {
 }
 
 async function load() {
-  await act(async () => {
+  try {
     data = await api('/api/patches');
-    render();
-  });
+  } catch (e) {
+    data = { error: e.message, cheats: [], romOpen: !!app.state?.rom };
+  }
+  render();
 }
 
 function renderHead() {
@@ -91,7 +93,9 @@ function render() {
   renderHead();
   const supported = !!data?.supported;
   const notice = $('#gsNotice', root);
-  notice.innerHTML = !data?.romOpen
+  notice.innerHTML = data?.error
+    ? `<div class="notice err">${esc(data.error)}</div>`
+    : !data?.romOpen
     ? '<div class="notice info">Open a ROM to add cheats to it.</div>'
     : !supported
       ? '<div class="notice warn">Embeddable GameShark cheats are not supported with this ROM: only Mario Party 1, 2 and 3 (U) have the hook they need.</div>'

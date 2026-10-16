@@ -18,6 +18,12 @@ from ..http import ApiError, route
 
 MAX_RESULTS = 500
 
+def _state_lock():
+    """The app's lock (state.lock): held while changing the ROM."""
+    from ... import state
+    return state.lock
+
+
 
 def _romhandler():
     from ...lib.romhandler import romhandler
@@ -146,7 +152,8 @@ def write_string(req):
     # The game reads up to a NUL; keep the terminator the string had.
     if old.endswith(b"\x00") and not content.endswith(b"\x00"):
         content += b"\x00"
-    table.write(index, bytearray(content))
+    with _state_lock():
+        table.write(index, bytearray(content))
     return {"index": index, "text": table.read(index), "raw": _hex_bytes(table.read(index, True))}
 
 

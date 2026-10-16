@@ -163,52 +163,52 @@ def _decompress02(buf, start, end, decompressed_size):
     # (the farthest lookback is 0x1000).
     PREFIX = 0x1000
     out = bytearray(PREFIX)
+    cur = PREFIX
     target = PREFIX + decompressed_size
     src_place = start
-    while len(out) < target:
+    while cur < target:
         # Read a new code word.
-        code = int.from_bytes(buf[src_place:src_place + 4], "big")
-        _check_src(src_place + 4, end)
+        if src_place + 4 > end:
+            raise IndexError("Offset is outside the bounds of the DataView")
+        code = (buf[src_place] << 24) | (buf[src_place + 1] << 16) | (buf[src_place + 2] << 8) | buf[src_place + 3]
         src_place += 4
         if code == 0xFFFFFFFF:
-            take = target - len(out)
+            take = target - cur
             if take > 32:
                 take = 32
             _check_src(src_place + take, end)
             out += buf[src_place:src_place + take]
             src_place += take
+            cur += take
             continue
         bit = 0x80000000
-        while bit:
-            if len(out) >= target:
-                break
+        while bit and cur < target:
             if code & bit:
                 # Copy the next byte from the source to the destination.
                 out.append(buf[src_place])
                 src_place += 1
+                cur += 1
             else:
                 # Interpret the next two bytes as a distance to travel
                 # backwards and a length to read.
                 byte1 = buf[src_place]
-                byte2 = buf[src_place + 1]
-                src_place += 2
-                back = (((byte1 & 0x0F) << 8) | byte2) + 1
-                count = ((byte1 & 0xF0) >> 4) + 2
+                back = (((byte1 & 0x0F) << 8) | buf[src_place + 1]) + 1
+                count = (byte1 >> 4) + 2
                 if count == 2:
                     # Special case where 0xF0 masked byte 1 is zero.
-                    count = buf[src_place] + 0x12
-                    src_place += 1
+                    count = buf[src_place + 2] + 0x12
+                    src_place += 3
+                else:
+                    src_place += 2
                 # Step back and copy count bytes into the dst.
-                cur = len(out)
-                remaining = target - cur
-                if count > remaining:
-                    count = remaining
+                if count > target - cur:
+                    count = target - cur
                 pos = cur - back
                 if back >= count:
                     out += out[pos:pos + count]
                 else:
-                    pattern = out[pos:cur]
-                    out += (pattern * (count // back + 1))[:count]
+                    out += (out[pos:cur] * (count // back + 1))[:count]
+                cur += count
             # Consider the code bit consumed.
             bit >>= 1
     _check_src(src_place, end)
@@ -268,9 +268,12 @@ def _compress05(buf, start, end):
     """Run length encoding compression.
     Implementation provided by @gamemasterplc
 
-    The TypeScript read one byte past the end of the input through a
-    DataView, which throws; this port reads such bytes as "no byte" (as a
-    Uint8Array index would), which is what the algorithm intends.
+    The TypeScript version never worked (nothing called it): it read one
+    byte past the end of the input through a DataView, which throws, and
+    copied literal runs with a doubled stride (src[pos + i] while also
+    advancing pos). This port reads bytes past the end as "no byte" (as a
+    Uint8Array index would) and copies literal runs contiguously, which is
+    what the algorithm intends: decompress(5, compress(5, x)) == x.
     """
     data = bytes(buf[start:end])
     n = len(data)
