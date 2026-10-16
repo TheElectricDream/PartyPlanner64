@@ -1,0 +1,338 @@
+[
+ {
+  "key": "CHAINSPLIT1",
+  "id": "CHAINSPLIT1",
+  "name": "",
+  "activationType": 1,
+  "executionType": 2,
+  "parameters": [
+   {
+    "name": "left_space",
+    "type": "Space"
+   },
+   {
+    "name": "right_space",
+    "type": "Space"
+   },
+   {
+    "name": "chains",
+    "type": "Number[]"
+   }
+  ],
+  "fakeEvent": true,
+  "supportedGames": [
+   "CLBE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "CHAINSPLIT2",
+  "id": "CHAINSPLIT2",
+  "name": "",
+  "activationType": 1,
+  "executionType": 2,
+  "parameters": [
+   {
+    "name": "left_space",
+    "type": "Space"
+   },
+   {
+    "name": "right_space",
+    "type": "Space"
+   },
+   {
+    "name": "chains",
+    "type": "Number[]"
+   }
+  ],
+  "fakeEvent": true,
+  "supportedGames": [
+   "NMWE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "CHANCETIME",
+  "id": "CHANCETIME",
+  "name": "Chance Time",
+  "activationType": 3,
+  "executionType": 1,
+  "supportedGames": [
+   "CLBE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "STARCHANCE",
+  "id": "STARCHANCE",
+  "name": "Chance Time from old star space",
+  "activationType": 3,
+  "executionType": 1,
+  "fakeEvent": true,
+  "supportedGames": [
+   "CLBE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "CHAINSPLIT3",
+  "id": "CHAINSPLIT3",
+  "name": "",
+  "activationType": 1,
+  "executionType": 2,
+  "parameters": [
+   {
+    "name": "spaceIndexArgs",
+    "type": "Number[]"
+   },
+   {
+    "name": "chainArgs",
+    "type": "Number[]"
+   },
+   {
+    "name": "reverse",
+    "type": "Boolean"
+   },
+   {
+    "name": "hasgate",
+    "type": "Boolean"
+   },
+   {
+    "name": "prevSpace",
+    "type": "Number"
+   },
+   {
+    "name": "altChain",
+    "type": "Number[]"
+   }
+  ],
+  "fakeEvent": true,
+  "supportedGames": [
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "CHAINMERGE3",
+  "id": "CHAINMERGE3",
+  "name": "",
+  "activationType": 1,
+  "executionType": 1,
+  "parameters": [
+   {
+    "name": "prevSpace",
+    "type": "Number"
+   },
+   {
+    "name": "chain",
+    "type": "Number"
+   },
+   {
+    "name": "spaceIndex",
+    "type": "Number"
+   }
+  ],
+  "fakeEvent": true,
+  "supportedGames": [
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "CHAINMERGE",
+  "id": "CHAINMERGE",
+  "name": "",
+  "activationType": 1,
+  "executionType": 1,
+  "parameters": [
+   {
+    "name": "prevSpace",
+    "type": "Number"
+   },
+   {
+    "name": "chain",
+    "type": "Number"
+   },
+   {
+    "name": "spaceIndex",
+    "type": "Number"
+   }
+  ],
+  "fakeEvent": true,
+  "supportedGames": [
+   "CLBE",
+   "NMWE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "BOO",
+  "id": "BOO",
+  "name": "Visit Boo",
+  "activationType": 1,
+  "executionType": 1,
+  "supportedGames": [
+   "CLBE",
+   "NMWE",
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "STAR",
+  "id": "STAR",
+  "name": "Buy star",
+  "activationType": 1,
+  "executionType": 1,
+  "fakeEvent": true,
+  "supportedGames": [
+   "CLBE",
+   "NMWE",
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "BANK",
+  "id": "BANK",
+  "name": "Visit Bank",
+  "activationType": 1,
+  "executionType": 1,
+  "supportedGames": [
+   "NMWE",
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "ITEMSHOP",
+  "id": "ITEMSHOP",
+  "name": "Visit Item Shop",
+  "activationType": 1,
+  "executionType": 1,
+  "supportedGames": [
+   "NMWE",
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "GATE",
+  "id": "GATE",
+  "name": "Skeleton Key Gate",
+  "activationType": 1,
+  "executionType": 2,
+  "fakeEvent": true,
+  "supportedGames": [
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "GATECLOSE",
+  "id": "GATECLOSE",
+  "name": "Skeleton Key Gate Close",
+  "activationType": 1,
+  "executionType": 1,
+  "parameters": [
+   {
+    "name": "gateIndex",
+    "type": "Number"
+   }
+  ],
+  "fakeEvent": true,
+  "supportedGames": [
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "BOULDERCHASE",
+  "id": "BOULDERCHASE",
+  "name": "Boulder chase",
+  "activationType": 3,
+  "executionType": 1,
+  "fakeEvent": true,
+  "supportedGames": [
+   "CLBE"
+  ],
+  "hasParse": true,
+  "hasWrite": false
+ },
+ {
+  "key": "BOWSER",
+  "id": "BOWSER",
+  "name": "Visit Bowser",
+  "activationType": 1,
+  "executionType": 1,
+  "supportedGames": [
+   "CLBE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "PASSSTART",
+  "id": "PASSSTART",
+  "name": "Pass start",
+  "activationType": 1,
+  "executionType": 2,
+  "supportedGames": [
+   "CLBE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "THWOMPCHAINSPLIT",
+  "id": "THWOMPCHAINSPLIT",
+  "name": "Thwomp Chain Split",
+  "activationType": 1,
+  "executionType": 2,
+  "fakeEvent": true,
+  "supportedGames": [
+   "CLBE"
+  ],
+  "hasParse": true,
+  "hasWrite": false
+ },
+ {
+  "key": "GATECHAINSPLIT",
+  "id": "GATECHAINSPLIT",
+  "name": "",
+  "fakeEvent": true,
+  "activationType": 1,
+  "executionType": 2,
+  "supportedGames": [
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ },
+ {
+  "key": "REVERSECHAINSPLIT",
+  "id": "REVERSECHAINSPLIT",
+  "name": "",
+  "fakeEvent": true,
+  "activationType": 1,
+  "executionType": 1,
+  "supportedGames": [
+   "NMVE"
+  ],
+  "hasParse": true,
+  "hasWrite": true
+ }
+]

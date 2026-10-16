@@ -232,6 +232,13 @@ select.input { padding-right: 6px; }
 .list-box li.active { background: rgba(76,141,255,.16); color: #fff; }
 .list-box .empty { color: var(--muted); cursor: default; font-style: italic; }
 
+/* an empty list or panel: what is missing and what to do */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+  padding: 22px 14px; border: 1px dashed var(--border-strong); border-radius: 10px; color: var(--muted); font-size: 12.5px;
+}
+.empty-state b { color: #c3c9d4; font-weight: 600; font-size: 13px; }
+
 /* ---------- the canvas/3D view with overlaid controls ---------- */
 .viewer { position: relative; flex: 1; min-height: 280px; overflow: hidden; background: #0e1014; }
 .viewer canvas { display: block; }

@@ -1,0 +1,4 @@
+[
+{"addr": 2148305220, "type": "data", "name": "overlay_table"},
+{"addr": 2148533744, "type": "data", "name": "overlay_ram_start"}
+]
