@@ -240,6 +240,15 @@ def test_event(req):
         single.supported_games = [game]
         failure = _validate(single)
         game_id = _plain(game)
-        results.append({"game": game_id, "gameName": get_game_name(game_id),
-                        "ok": failure is None, "error": failure})
+        result = {"game": game_id, "gameName": get_game_name(game_id),
+                  "ok": failure is None, "error": failure}
+        if failure is None and language == 1:   # C
+            # The C editor's "MIPS Assembly" tab shows what the C compiles to.
+            from ...lib.events.customevents import CustomAsmHelper
+            try:
+                result["asm"] = CustomAsmHelper.test_custom_event(
+                    language, code, event.parameters, {"game": game})
+            except Exception as e:  # noqa: BLE001 - shown to the user
+                result.update(ok=False, error=str(e) or type(e).__name__)
+        results.append(result)
     return {"event": event_json(event), "error": None, "results": results}

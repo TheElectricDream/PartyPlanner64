@@ -253,7 +253,14 @@ Adds it to the library if it passes the test compile (400 otherwise).
 
 ### `POST /api/events/test {code, language}`
 `{event: {...} | null, error, results: [{game: "NMVE", gameName: "MP3_USA", ok, error}]}`:
-the event read from the code and a test compile for each game it supports.
+the event read from the code and a test compile for each game it supports. For a C event
+(`language` 1), each passing result also has `asm`, the MIPS assembly the C compiles to.
+
+## Song names
+
+### `GET /api/songs/<game>` -> `{game, names: {index: name}}`
+The in-game songs of Mario Party 1, 2 or 3 by name (from the adapters; no ROM needed), for
+choosing a board's music.
 
 ## For route modules (Python)
 

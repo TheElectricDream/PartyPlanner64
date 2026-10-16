@@ -210,18 +210,22 @@ function paintStars(diff) {
 // ---------- music ----------
 
 async function loadRomSongs(game) {
+  // The names come from the game's adapter (no ROM needed); with a ROM of that game open,
+  // GET /api/audio also gives the soundbank count.
   const rom = app.state?.rom;
-  if (!rom || rom.gameVersion !== game) {
-    romSongs = null;
-    return;
-  }
-  if (romSongs && romSongs.game === game && romSongs.file === rom.fileName) return;
+  const romKey = rom && rom.gameVersion === game ? rom.fileName : '';
+  if (romSongs && romSongs.game === game && romSongs.file === romKey) return;
   try {
-    const res = await api('/api/audio');
-    const t0 = (res.songs || [])[0];
-    const names = {};
-    for (const it of t0?.items || []) if (it.name) names[it.index] = it.name;
-    romSongs = { game, file: rom.fileName, names, soundbankCount: t0?.soundbankCount || 0 };
+    let names = {};
+    let soundbankCount = 0;
+    if (romKey) {
+      const res = await api('/api/audio');
+      const t0 = (res.songs || [])[0];
+      for (const it of t0?.items || []) if (it.name) names[it.index] = it.name;
+      soundbankCount = t0?.soundbankCount || 0;
+    }
+    if (!Object.keys(names).length) names = (await api(`/api/songs/${game}`)).names || {};
+    romSongs = { game, file: romKey, names, soundbankCount };
   } catch {
     romSongs = null;
   }
@@ -231,7 +235,7 @@ function renderMusic(b, ro) {
   const advanced = !!app.setting('ui.advanced');
   const romKey = app.state?.rom ? `${app.state.rom.gameVersion}:${app.state.rom.fileName}` : '';
   const tryKey = `${romKey}:${b.game}`;
-  if (romSongs === null && app.state?.rom?.gameVersion === b.game && romSongsTried !== tryKey) {
+  if ((romSongs === null || romSongs.game !== b.game) && romSongsTried !== tryKey) {
     romSongsTried = tryKey;
     loadRomSongs(b.game).then(() => { sigs.delete('music'); if (store.board) renderMusic(store.board, store.readonly); });
   }
@@ -246,14 +250,14 @@ function renderMusic(b, ro) {
     const type = b.audioType ?? BoardAudioType.InGame;
     let input = '';
     if (type === BoardAudioType.InGame) {
-      if (romSongs && Object.keys(romSongs.names).length) {
+      if (romSongs && romSongs.game === b.game && Object.keys(romSongs.names).length) {
         const opts = Object.entries(romSongs.names).map(([i, n]) =>
           `<option value="${i}" ${+i === b.audioIndex ? 'selected' : ''}>${esc(n)}</option>`).join('');
         input = `<select class="input" data-song ${ro ? 'disabled' : ''} title="The game's song played on this board">${opts}</select>`;
       } else {
         input = `<div class="input-row"><input class="input mono" type="number" min="0" data-songnum value="${b.audioIndex ?? 0}" ${ro ? 'disabled' : ''}
             title="The index of the game's song played on this board"><span class="muted small nowrap">Song ${hex(b.audioIndex ?? 0)}</span></div>
-          <p class="hint">Open a ${esc(GameNames[b.game])} ROM to choose the song by name.</p>`;
+          <p class="hint">The song names could not be loaded; enter the song's index.</p>`;
       }
     } else {
       const entries = (b.audioData || []).map((a, i) => audioEntry(a, i, true, ro)).join('');

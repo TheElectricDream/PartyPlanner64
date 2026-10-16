@@ -1,10 +1,10 @@
 # Porting PartyPlanner64 to Python
 
-PartyPlanner64 was a TypeScript/React app. It is being reworked so that everything that can be
-Python is Python: the library that reads and writes Mario Party ROMs, the board editor's state,
+PartyPlanner64 was a TypeScript/React app (up to v0.8.2). It was reworked so that everything that
+can be Python is Python: the library that reads and writes Mario Party ROMs, the board editor's state,
 the server, and the command line. Only the browser user interface stays JavaScript (plain ES
-modules, no build step). This file sets the conventions the port follows, so that modules ported
-separately fit together.
+modules, no build step). This file records the conventions the port followed, so that modules ported
+separately fit together; they still apply to new code.
 
 The original TypeScript is the reference: the last TypeScript commit is `980d043`
 ("Ensure image preload comes after canvas initialization"). Port behaviour faithfully,
