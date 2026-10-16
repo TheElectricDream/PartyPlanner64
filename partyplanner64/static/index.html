@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PartyPlanner64</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon/favicon-32x32.png">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script type="importmap">{ "imports": { "three": "/static/vendor/three/three.module.min.js" } }</script>
+  <script type="module" src="/static/js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="/static/img/header/logo.png" alt="" class="brand-logo">
+      <div>
+        <h1>PartyPlanner64</h1>
+        <p id="hostLine">Connecting…</p>
+      </div>
+    </div>
+    <!-- Page tabs. data-needs: "rom" (a ROM is open), "advanced" or "debug" (settings). -->
+    <nav class="segmented page-tabs" aria-label="Pages">
+      <button type="button" data-page="editor" class="active" title="Lay out the spaces and paths of a board">Editor</button>
+      <button type="button" data-page="details" title="The board's name, description, backgrounds, music and more">Details</button>
+      <button type="button" data-page="events" title="The library of events spaces can run, and custom events">Events</button>
+      <button type="button" data-page="audio" data-needs="rom" title="Listen to the ROM's songs and sound effects">Audio</button>
+      <button type="button" data-page="models" data-needs="rom" title="Browse the ROM's 3D models">Models</button>
+      <button type="button" data-page="sprites" data-needs="rom" title="Browse the ROM's sprites and images">Sprites</button>
+      <button type="button" data-page="strings" data-needs="rom advanced" title="Read and edit the ROM's text">Strings</button>
+      <button type="button" data-page="patches" data-needs="rom" title="GameShark codes and other patches written with the ROM">Patches</button>
+      <button type="button" data-page="debug" data-needs="debug" title="Tools for looking inside the ROM">Debug</button>
+      <button type="button" data-page="settings" title="Editor settings">Settings</button>
+      <button type="button" data-page="about" title="About PartyPlanner64">About</button>
+    </nav>
+    <div class="topstats">
+      <button type="button" id="romLoadBtn" class="btn btn-sm" title="Open a Mario Party (U) ROM: .z64, .n64 or .v64">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Load ROM…</span></button>
+      <button type="button" id="romSaveBtn" class="btn btn-sm" hidden title="Download the ROM with the boards written to it">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 3h11l3 3v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zM8 3v5h7V3M8 21v-7h8v7"/></svg><span>Save ROM</span></button>
+      <button type="button" id="romCloseBtn" class="btn btn-sm btn-ghost" hidden title="Close the ROM (unsaved changes to it are lost)">Close ROM</button>
+      <span id="romBadge" class="badge badge-idle"><span class="dot"></span><span>No ROM</span></span>
+    </div>
+  </header>
+
+  <!-- Each page module (js/pages/<page>.js) fills its container the first time it is shown. -->
+  <div id="page-editor" class="page" hidden></div>
+  <div id="page-details" class="page" hidden></div>
+  <div id="page-events" class="page" hidden></div>
+  <div id="page-audio" class="page" hidden></div>
+  <div id="page-models" class="page" hidden></div>
+  <div id="page-sprites" class="page" hidden></div>
+  <div id="page-strings" class="page" hidden></div>
+  <div id="page-patches" class="page" hidden></div>
+  <div id="page-debug" class="page" hidden></div>
+  <div id="page-settings" class="page" hidden></div>
+  <div id="page-about" class="page" hidden></div>
+
+  <dialog id="appDialog" class="dialog"></dialog>
+  <div id="busy" class="busy" hidden><div class="busy-card"><span class="spinner"></span><span id="busyText">Working…</span></div></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <input type="file" id="filePicker" hidden>
+</body>
+</html>
