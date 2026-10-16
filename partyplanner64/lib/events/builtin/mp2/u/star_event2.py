@@ -17,7 +17,10 @@ def _parse(data_view, info):
 
 def _write(data_view, event, info, temp):
     # Most of the code lives in the overlay.
-    return f"""@@TPL@@"""
+    return f"""
+      J __PP64_INTERNAL_STAR_SPACE_EVENT ; star_space_event
+      NOP
+    """
 
 
 StarEvent2 = Event(parse=_parse, write=_write)

@@ -52,7 +52,7 @@ class Event:
         if self.custom:
             out["custom"] = True
         if self.language is not None:
-            out["language"] = int(self.language)
+            out["language"] = plain(self.language)
         if self.asm is not None:
             out["asm"] = self.asm
         if self.activation_type is not None:

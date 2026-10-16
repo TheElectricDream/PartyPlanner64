@@ -26,7 +26,7 @@ from .prep_c import prep_c
 
 # JavaScript's line terminators, for regexes that must behave like JS ones
 # with the "m" flag (where "." stops at \r too, and ^/$ see \r as a line end).
-_LT = "\n\r  "
+_LT = "\n\r\u2028\u2029"
 _BOL = "(?:^|(?<=[" + _LT + "]))"
 _EOL = "(?=[" + _LT + "]|\\Z)"
 _DOT = "[^" + _LT + "]"
@@ -216,6 +216,13 @@ def _make_fake_parameter_values(parameters):
     return parameter_values
 
 
+def _language(language):
+    try:
+        return EventCodeLanguage(language)
+    except ValueError:
+        return language
+
+
 def create_custom_event(language, code):
     """Creates a custom event object from a code string."""
     event_name = CustomAsmHelper.read_discrete_property(code, "NAME")
@@ -237,7 +244,7 @@ def create_custom_event(language, code):
         id=event_id,
         name=event_name,
         custom=True,
-        language=EventCodeLanguage(language),
+        language=_language(language),
         asm=code,
         activation_type=EditorEventActivationType.LANDON,
         execution_type=execution_type,

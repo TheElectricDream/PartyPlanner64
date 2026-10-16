@@ -24,7 +24,10 @@ def _parse(data_view, info):
 
 def _write(data_view, event, info, temp):
     # Most of the event remains in the overlay.
-    return f"""@@TPL@@"""
+    return f"""
+      J __PP64_INTERNAL_ITEM_SHOP_EVENT
+      NOP
+    """
 
 
 ItemShopEvent2 = Event(parse=_parse, write=_write)

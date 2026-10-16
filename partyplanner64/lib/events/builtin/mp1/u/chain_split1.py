@@ -68,7 +68,174 @@ def _parse(data_view, info):
 
 def _write(data_view, event, info, temp):
     chains = event["parameterValues"]["chains"]
-    return f"""@@TPL@@"""
+    return f"""
+        ADDIU SP SP 0xFFD8
+        SW RA 0x24(SP)
+        SW S2 0x20(SP)
+        SW S1 0x1C(SP)
+        SW S0 0x18(SP)
+
+        ; Change player to standing animation?
+        ADDIU A0 R0 -1
+        ADDIU A1 R0 -1
+        JAL 0x80052BE8
+        ADDIU A2 R0 2
+
+        JAL SleepVProcess
+        NOP
+        JAL chainsplit_1_setup_arrows
+        NOP
+        LUI S0 0x800F
+        ADDIU S0 S0 0xD5DC ; 0x800ED5DC
+        LH A0 0(S0)
+        LUI A1 hi(indices)
+        JAL 0x8003C218
+        ADDIU A1 A1 lo(indices)
+        ADDU S2 V0 R0
+        ADDU A0 S2 R0
+        LH A1 0(S0)
+        JAL 0x8003C060
+        ADDU A2 R0 R0
+        JAL PlayerIsCPU
+        ADDIU A0 R0 -1
+        BEQ V0 R0 do_direction_prompt
+        NOP
+        LUI A0 hi(ai_logic)
+        ADDIU A0 A0 lo(ai_logic)
+        JAL 0x8003E9B0
+        ADDU S0 R0 R0
+        SLL V0 V0 0x10
+        SRA S1 V0 0x10
+        BLEZ S1 choice_neg
+        ADDU A0 S2 R0
+      choice_pos:
+        JAL 0x8003BE84
+        ADDIU A1 R0 0xFFFE
+        ADDIU S0 S0 1
+        SLT V0 S0 S1
+        BNE V0 R0 choice_pos
+        ADDU A0 S2 R0
+      choice_neg:
+        JAL 0x8003BE84
+        ADDIU A1 R0 0xFFFC
+      do_direction_prompt:
+        JAL 0x8003C14C ; DirectionPrompt
+        ADDU A0 S2 R0
+        ADDU S0 V0 R0
+        JAL 0x8003B908
+        ADDU A0 S2 R0
+        JAL chainsplit_1_hide_arrows
+        NOP
+        BNE S0 R0 set_chain_right
+        ADDIU A0 R0 -1
+        J set_chain
+        ADDIU A1 R0 {js_str(_at(chains, 0))}
+      set_chain_right:
+        ADDIU A1 R0 {js_str(_at(chains, 1))}
+      set_chain:
+        JAL SetNextChainAndSpace
+        ADDU A2 R0 R0 ; 0th space of the chain
+        JAL 0x8005DD90
+        ADDU A0 R0 R0
+        LW RA 0x24(SP)
+        LW S2 0x20(SP)
+        LW S1 0x1C(SP)
+        LW S0 0x18(SP)
+        JR RA
+        ADDIU SP SP 0x28
+
+      ; Choose randomly
+      ai_logic:
+        .word 0x00000000, 0x00000000, 0x00003232
+
+      indices:
+        .halfword left_space
+        .halfword right_space
+        .halfword 0xFFFF
+        .align 4
+
+    .beginstatic
+      .definelabel CORE_800EE320,0x800EE320
+
+      chainsplit_1_setup_arrows:
+        addiu SP, SP, -0x18
+        sw    RA, 0x10(SP)
+      @@setup_arrows_loop1:
+        jal 0x8004B850 ; waiting for this to signal
+        NOP
+        beq V0, R0, @@setup_arrows_loop1_exit
+        NOP
+        jal SleepVProcess
+        NOP
+        j @@setup_arrows_loop1
+        NOP
+      @@setup_arrows_loop1_exit:
+        jal SleepVProcess
+        NOP
+        addu  A0, R0, R0
+        addiu A1, R0, 146
+        jal   0x80045D84
+        addiu A2, R0, 1
+        lui   AT, hi(chainsplit_1_memval1)
+        sw    V0, lo(chainsplit_1_memval1)(AT)
+        addiu A0, R0, 1
+        addiu A1, R0, 160
+        jal   0x80045D84
+        addiu A2, R0, 1
+        lui   AT, hi(chainsplit_1_memval2)
+        sw    V0, lo(chainsplit_1_memval2)(AT)
+        addiu A0, R0, 3
+        addiu A1, R0, 174
+        jal   0x80045D84
+        addiu A2, R0, 1
+        lui   AT, hi(chainsplit_1_memval3)
+        sw    V0, lo(chainsplit_1_memval3)(AT)
+        addiu A0, R0, 11
+        addiu A1, R0, 188
+        jal   0x80045D84
+        addiu A2, R0, 1
+        lui   AT, hi(chainsplit_1_memval4)
+        sw    V0, lo(chainsplit_1_memval4)(AT)
+        jal   SleepProcess
+        addiu A0, R0, 3
+        addiu V0, R0, 1
+        lui   AT, hi(CORE_800EE320)
+        sh    V0, lo(CORE_800EE320)(AT)
+        lw    RA, 0x10(SP)
+        jr    RA
+        addiu SP, SP, 0x18
+
+      chainsplit_1_hide_arrows:
+        addiu SP, SP, -0x18
+        sw    RA, 0x10(SP)
+        lui   AT, hi(CORE_800EE320)
+        sh    R0, lo(CORE_800EE320)(AT)
+        lui   A0, hi(chainsplit_1_memval1)
+        jal   0x80045E6C
+        lw    A0, lo(chainsplit_1_memval1)(A0)
+        lui   A0, hi(chainsplit_1_memval2)
+        jal   0x80045E6C
+        lw    A0, lo(chainsplit_1_memval2)(A0)
+        lui   A0, hi(chainsplit_1_memval3)
+        jal   0x80045E6C
+        lw    A0, lo(chainsplit_1_memval3)(A0)
+        lui   A0, hi(chainsplit_1_memval4)
+        jal   0x80045E6C
+        lw    A0, lo(chainsplit_1_memval4)(A0)
+        lw    RA, 0x10(SP)
+        jr    RA
+        addiu SP, SP, 0x18
+
+      chainsplit_1_memval1:
+        .word 0
+      chainsplit_1_memval2:
+        .word 0
+      chainsplit_1_memval3:
+        .word 0
+      chainsplit_1_memval4:
+        .word 0
+    .endstatic
+    """
 
 
 ChainSplit1 = Event(

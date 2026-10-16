@@ -30,7 +30,26 @@ def _write(data_view, event, info, temp):
     board_index = info.get("board_index")
     bowser_scene_num = scenes[board_index] if isinstance(board_index, int) and 0 <= board_index < len(scenes) else None
 
-    return f"""@@TPL@@"""
+    return f"""
+      addiu SP, SP, -0x18
+      sw    RA, 0x10(SP)
+
+      ; TODO: Turn player towards bowser
+      ;addiu A0, R0, -1 ; current player
+      ;addiu A1, R0, 8
+      ;jal   0x8004D2A4
+      ;addiu A2, R0, BOWSER_STANDING_SPACE_INDEX
+
+      addiu A0, R0, {js_str(bowser_scene_num)}
+      addu  A1, R0, R0
+      addiu A2, R0, 3
+      jal   0x800587BC
+      addiu A3, R0, 1
+
+      lw    RA, 0x10(SP)
+      jr    RA
+      addiu SP, SP, 0x18
+    """
 
 
 Bowser = Event(

@@ -24,7 +24,10 @@ def _parse(data_view, info):
 
 def _write(data_view, event, info, temp):
     # Code still lives in the overlay itself.
-    return f"""@@TPL@@"""
+    return f"""
+      J __PP64_INTERNAL_BANK_SPACE_EVENT
+      NOP
+    """
 
 
 BankEvent2 = Event(parse=_parse, write=_write)

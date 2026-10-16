@@ -1,0 +1,215 @@
+{
+ "events": {
+  "bad.c": {
+   "validate": "Error: Failed a test compile/assembly for MP3_USA. The event code may need adjustments before it can be used.\n\nError: Error during event compile:\nError  (6:31)\nUnexpected token ;",
+   "games": {
+    "CLBE": {
+     "error": "Error: Error during event compile:\nError  (6:31)\nUnexpected token ;"
+    },
+    "NMWE": {
+     "error": "Error: Error during event compile:\nError  (6:31)\nUnexpected token ;"
+    },
+    "NMVE": {
+     "error": "Error: Error during event compile:\nError  (6:31)\nUnexpected token ;"
+    },
+    "CLBJ": {
+     "error": "Error: Error during event compile:\nError  (6:31)\nUnexpected token ;"
+    }
+   }
+  },
+  "bad_inst.s": {
+   "validate": "Error: Failed a test compile/assembly for MP2_USA. The event code may need adjustments before it can be used.\n\nError: Error: Opcode frobnicate was not recognized\nLine: frobnicate A0 A1",
+   "games": {
+    "CLBE": {
+     "error": "Error: Error: Opcode frobnicate was not recognized\nLine: frobnicate A0 A1"
+    },
+    "NMWE": {
+     "error": "Error: Error: Opcode frobnicate was not recognized\nLine: frobnicate A0 A1"
+    },
+    "NMVE": {
+     "error": "Error: Error: Opcode frobnicate was not recognized\nLine: frobnicate A0 A1"
+    },
+    "CLBJ": {
+     "error": "Error: Error: Opcode frobnicate was not recognized\nLine: frobnicate A0 A1"
+    }
+   }
+  },
+  "bad_label.s": {
+   "validate": "Error: Failed a test compile/assembly for MP1_USA. The event code may need adjustments before it can be used.\n\nError: Error: Could not parse instruction: j nowhere_label\nLine: j nowhere_label",
+   "games": {
+    "CLBE": {
+     "error": "Error: Error: Could not parse instruction: j nowhere_label\nLine: j nowhere_label"
+    },
+    "NMWE": {
+     "error": "Error: Error: Could not parse instruction: j nowhere_label\nLine: j nowhere_label"
+    },
+    "NMVE": {
+     "error": "Error: Error: Could not parse instruction: j nowhere_label\nLine: j nowhere_label"
+    },
+    "CLBJ": {
+     "error": "Error: Error: Could not parse instruction: j nowhere_label\nLine: j nowhere_label"
+    }
+   }
+  },
+  "crlf.s": {
+   "validate": true,
+   "games": {
+    "CLBE": "4207b77b45356aa9415f18d8bcfb589f:16",
+    "NMWE": "4207b77b45356aa9415f18d8bcfb589f:16",
+    "NMVE": "4207b77b45356aa9415f18d8bcfb589f:16",
+    "CLBJ": "4207b77b45356aa9415f18d8bcfb589f:16"
+   }
+  },
+  "default_asm.s": {
+   "validate": true,
+   "games": {
+    "CLBE": "3ae6031ff95431ca07f17dbd1eab7fc3:20",
+    "NMWE": "3ae6031ff95431ca07f17dbd1eab7fc3:20",
+    "NMVE": "3ae6031ff95431ca07f17dbd1eab7fc3:20",
+    "CLBJ": "3ae6031ff95431ca07f17dbd1eab7fc3:20"
+   }
+  },
+  "default_c.c": {
+   "validate": true,
+   "games": {
+    "CLBE": "; .text\n\nmain:\n\taddiu\tsp, sp, -8         \n\tsw\tfp,          0(sp)\n\taddiu\tfp, sp, 0         \n\t;sw\tra, 4(fp)\n\tli\tv0, 0\nLcmpbranch1:\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 8\n\tjr\tra\n\tnop\n\n ; Next label number: 3\n ; Compilation succeeded.\n\n; .data\n\n; .rdata\n\n; .bss\n",
+    "NMWE": "; .text\n\nmain:\n\taddiu\tsp, sp, -8         \n\tsw\tfp,          0(sp)\n\taddiu\tfp, sp, 0         \n\t;sw\tra, 4(fp)\n\tli\tv0, 0\nLcmpbranch1:\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 8\n\tjr\tra\n\tnop\n\n ; Next label number: 3\n ; Compilation succeeded.\n\n; .data\n\n; .rdata\n\n; .bss\n",
+    "NMVE": "; .text\n\nmain:\n\taddiu\tsp, sp, -8         \n\tsw\tfp,          0(sp)\n\taddiu\tfp, sp, 0         \n\t;sw\tra, 4(fp)\n\tli\tv0, 0\nLcmpbranch1:\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 8\n\tjr\tra\n\tnop\n\n ; Next label number: 3\n ; Compilation succeeded.\n\n; .data\n\n; .rdata\n\n; .bss\n",
+    "CLBJ": "; .text\n\nmain:\n\taddiu\tsp, sp, -8         \n\tsw\tfp,          0(sp)\n\taddiu\tfp, sp, 0         \n\t;sw\tra, 4(fp)\n\tli\tv0, 0\nLcmpbranch1:\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 8\n\tjr\tra\n\tnop\n\n ; Next label number: 3\n ; Compilation succeeded.\n\n; .data\n\n; .rdata\n\n; .bss\n"
+   }
+  },
+  "edge1.s": {
+   "validate": "Error: Failed a test compile/assembly for MP1_USA. The event code may need adjustments before it can be used.\n\nError: Error: Opcode .beginstatic was not recognized\nLine: .beginstatic",
+   "games": {
+    "CLBE": {
+     "error": "Error: Error: Opcode .beginstatic was not recognized\nLine: .beginstatic"
+    },
+    "NMWE": {
+     "error": "Error: Error: Opcode .beginstatic was not recognized\nLine: .beginstatic"
+    },
+    "NMVE": {
+     "error": "Error: Error: Opcode .beginstatic was not recognized\nLine: .beginstatic"
+    },
+    "CLBJ": {
+     "error": "Error: Error: Opcode .beginstatic was not recognized\nLine: .beginstatic"
+    }
+   }
+  },
+  "event.c": {
+   "validate": "Error: Failed a test compile/assembly for MP1_USA. The event code may need adjustments before it can be used.\n\nError: Error during event compile:\nError  (45:10)\nUnexpected token <NumInt>",
+   "games": {
+    "CLBE": {
+     "error": "Error: Error during event compile:\nError  (45:10)\nUnexpected token <NumInt>"
+    },
+    "NMWE": {
+     "error": "Error: Error during event compile:\nError  (45:10)\nUnexpected token <NumInt>"
+    },
+    "NMVE": {
+     "error": "Error: Error during event compile:\nError  (45:10)\nUnexpected token <NumInt>"
+    },
+    "CLBJ": {
+     "error": "Error: Error during event compile:\nError  (45:10)\nUnexpected token <NumInt>"
+    }
+   }
+  },
+  "game_specific.s": {
+   "validate": "Error: Failed a test compile/assembly for MP1_USA. The event code may need adjustments before it can be used.\n\nError: Error: Could not parse instruction: jal GetBasicPromptSelection\nLine: jal GetBasicPromptSelection",
+   "games": {
+    "CLBE": {
+     "error": "Error: Error: Could not parse instruction: jal GetBasicPromptSelection\nLine: jal GetBasicPromptSelection"
+    },
+    "NMWE": {
+     "error": "Error: Error: Could not parse instruction: jal GetBasicPromptSelection\nLine: jal GetBasicPromptSelection"
+    },
+    "NMVE": "9ae4a871543fa5e1dd04bb69cca7421e:20",
+    "CLBJ": {
+     "error": "Error: Error: Could not parse instruction: jal GetBasicPromptSelection\nLine: jal GetBasicPromptSelection"
+    }
+   }
+  },
+  "good.c": {
+   "validate": true,
+   "games": {
+    "CLBE": "; .text\n\nhelper:\n\tsw\ta0, 0(sp)\n\taddiu\tsp, sp, -8         \n\tsw\tfp,          0(sp)\n\taddiu\tfp, sp, 0         \n\t;sw\tra, 4(fp)\n\tlw\tv0, 8(fp)\n\tsll\tv0, v0, 1\n\tli\tat, 0\n\taddu\tv0, v0, at\nLcmpbranch1:\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 8\n\tjr\tra\n\tnop\n\nmain:\n\taddiu\tsp, sp, -16        \n\tsw\tfp,          8(sp)\n\taddiu\tfp, sp, 8         \n\t sw\tra, 4(fp)\n\tli\ta0, 0\n\taddiu\tsp, sp, -16\n\tjal\thelper\n\tnop\n\taddiu\tsp, sp, 16\n\tli\tat, 0\n\taddu\tv0, v0, at\n\tsw\tv0, -4(fp)\n\tlw\tv0, -4(fp)\n\tli\tat, 11\n\tslt\tv0, v0, at\n\tbne\tv0, r0, Lcmpbranch5\n\tnop\n\tli\ta1, 0\n\tli\ta0, 0\n\taddiu\tsp, sp, -16\n\tjal\tShowPlayerCoinChange\n\tnop\n\taddiu\tsp, sp, 16\nLcmpbranch5:\n\tli\tv0, 0\nLcmpbranch3:\n\tlw\tra, 4(fp)\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 16\n\tjr\tra\n\tnop\n\n ; Next label number: 7\n ; Compilation succeeded.\n\n; .data\n\n; .rdata\n\n; .bss\n",
+    "NMWE": "; .text\n\nhelper:\n\tsw\ta0, 0(sp)\n\taddiu\tsp, sp, -8         \n\tsw\tfp,          0(sp)\n\taddiu\tfp, sp, 0         \n\t;sw\tra, 4(fp)\n\tlw\tv0, 8(fp)\n\tsll\tv0, v0, 1\n\tli\tat, 0\n\taddu\tv0, v0, at\nLcmpbranch1:\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 8\n\tjr\tra\n\tnop\n\nmain:\n\taddiu\tsp, sp, -16        \n\tsw\tfp,          8(sp)\n\taddiu\tfp, sp, 8         \n\t sw\tra, 4(fp)\n\tli\ta0, 0\n\taddiu\tsp, sp, -16\n\tjal\thelper\n\tnop\n\taddiu\tsp, sp, 16\n\tli\tat, 0\n\taddu\tv0, v0, at\n\tsw\tv0, -4(fp)\n\tlw\tv0, -4(fp)\n\tli\tat, 11\n\tslt\tv0, v0, at\n\tbne\tv0, r0, Lcmpbranch5\n\tnop\n\tli\ta1, 0\n\tli\ta0, 0\n\taddiu\tsp, sp, -16\n\tjal\tShowPlayerCoinChange\n\tnop\n\taddiu\tsp, sp, 16\nLcmpbranch5:\n\tli\tv0, 0\nLcmpbranch3:\n\tlw\tra, 4(fp)\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 16\n\tjr\tra\n\tnop\n\n ; Next label number: 7\n ; Compilation succeeded.\n\n; .data\n\n; .rdata\n\n; .bss\n",
+    "NMVE": "; .text\n\nhelper:\n\tsw\ta0, 0(sp)\n\taddiu\tsp, sp, -8         \n\tsw\tfp,          0(sp)\n\taddiu\tfp, sp, 0         \n\t;sw\tra, 4(fp)\n\tlw\tv0, 8(fp)\n\tsll\tv0, v0, 1\n\tli\tat, 0\n\taddu\tv0, v0, at\nLcmpbranch1:\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 8\n\tjr\tra\n\tnop\n\nmain:\n\taddiu\tsp, sp, -16        \n\tsw\tfp,          8(sp)\n\taddiu\tfp, sp, 8         \n\t sw\tra, 4(fp)\n\tli\ta0, 0\n\taddiu\tsp, sp, -16\n\tjal\thelper\n\tnop\n\taddiu\tsp, sp, 16\n\tli\tat, 0\n\taddu\tv0, v0, at\n\tsw\tv0, -4(fp)\n\tlw\tv0, -4(fp)\n\tli\tat, 11\n\tslt\tv0, v0, at\n\tbne\tv0, r0, Lcmpbranch5\n\tnop\n\tli\ta1, 0\n\tli\ta0, 0\n\taddiu\tsp, sp, -16\n\tjal\tShowPlayerCoinChange\n\tnop\n\taddiu\tsp, sp, 16\nLcmpbranch5:\n\tli\tv0, 0\nLcmpbranch3:\n\tlw\tra, 4(fp)\n\tlw\tfp, 0(fp)\n\taddiu\tsp, sp, 16\n\tjr\tra\n\tnop\n\n ; Next label number: 7\n ; Compilation succeeded.\n\n; .data\n\n; .rdata\n\n; .bss\n",
+    "CLBJ": {
+     "error": "Error: Error: Could not parse instruction: jal ShowPlayerCoinChange\nLine: jal ShowPlayerCoinChange"
+    }
+   }
+  },
+  "main_entry.s": {
+   "validate": true,
+   "games": {
+    "CLBE": "41e039c4b0f9d5273719d986f95d3a35:36",
+    "NMWE": "41e039c4b0f9d5273719d986f95d3a35:36",
+    "NMVE": "41e039c4b0f9d5273719d986f95d3a35:36",
+    "CLBJ": "41e039c4b0f9d5273719d986f95d3a35:36"
+   }
+  }
+ },
+ "bg": {
+  "1": [
+   [],
+   [
+    "All possible target game versions failed to compile/assemble.",
+    "Failed test assembly for MP1_USA:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP1_PAL:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP1_JPN:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n"
+   ],
+   []
+  ],
+  "2": [
+   [],
+   [
+    "All possible target game versions failed to compile/assemble.",
+    "Failed test assembly for MP2_USA:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP2_PAL:\nError: Symbols not available for game type NMWP\n",
+    "Failed test assembly for MP2_JPN:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n"
+   ],
+   []
+  ],
+  "3": [
+   [],
+   [
+    "All possible target game versions failed to compile/assemble.",
+    "Failed test assembly for MP3_USA:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP3_PAL:\nError: Symbols not available for game type NMVP\n",
+    "Failed test assembly for MP3_JPN:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n"
+   ],
+   []
+  ]
+ },
+ "audio": {
+  "1": [
+   [],
+   [
+    "All possible target game versions failed to compile/assemble.",
+    "Failed test assembly for MP1_USA:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP1_PAL:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP1_JPN:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n"
+   ],
+   []
+  ],
+  "2": [
+   [],
+   [
+    "All possible target game versions failed to compile/assemble.",
+    "Failed test assembly for MP2_USA:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP2_PAL:\nError: Symbols not available for game type NMWP\n",
+    "Failed test assembly for MP2_JPN:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n"
+   ],
+   []
+  ],
+  "3": [
+   [],
+   [
+    "All possible target game versions failed to compile/assemble.",
+    "Failed test assembly for MP3_USA:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n",
+    "Failed test assembly for MP3_PAL:\nError: Symbols not available for game type NMVP\n",
+    "Failed test assembly for MP3_JPN:\nError: Error: Could not parse instruction: j missing_label\nLine: j missing_label\n"
+   ],
+   []
+  ]
+ }
+}
