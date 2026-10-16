@@ -63,8 +63,15 @@ Tests are in `tests/`, mirroring the package (`tests/lib/test_compression.py`, .
   **camelCase keys** (`board["bg"]["src"]`, `space["subtype"]`, `event["activationType"]`).
   Board files written by the TypeScript editor must load, and files the Python writes must load in
   the TypeScript editor. Enum values in them are the plain numbers/strings.
-- Interfaces that are not saved (e.g. `ISceneInfo`, `IBoardInfo`) may be dicts with snake_case
-  keys or small classes/dataclasses; say which in the module docstring.
+- Interfaces that are not saved (`IBoardInfo`, `ISceneInfo`, `IEventParseInfo`,
+  `IEventWriteInfo`, `IAdapterOptions`, ...) are **dicts with snake_case keys** by the naming rule
+  (`board_info["bg_dir"]`, `info["cur_space_index"]`), so modules ported separately agree on them.
+  Use `.get()` where the TypeScript field was optional.
+- Events (`IEvent`, built-in or custom) are objects with snake_case attributes: `id`, `name`,
+  `activation_type`, `execution_type`, `fake_event`, `supported_games`, `parameters` (a list of
+  `{"name", "type"}` dicts, saved form), `custom`, `asm`, `language`, and methods
+  `parse(data_view, info)` and `write(data_view, event, info, temp)` (as in `events/events.ts`).
+  `to_json()` gives the camelCase form the TypeScript saved (localStorage "events").
 - **Buffers**: `ArrayBuffer` -> `bytearray` (`bytes` when read-only). `DataView` ->
   `partyplanner64.lib.utils.dataview.DataView` (same methods in snake_case, big-endian by default,
   views share the buffer like ArrayBuffer views do). `buffer.slice(a, b)` -> `bytearray(buf[a:b])`
