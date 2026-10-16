@@ -502,8 +502,10 @@ def parse_game_midi(in_view, input_size):
                         shutoff_time = track_event.absolute_time + track_event.duration_time
                         if event_count != count - 1:
                             for e in range(event_count + 1, count):
-                                if (events[e].absolute_time >= shutoff_time and e != count - 1) \
-                                        or e == count - 1:
+                                # Before the first event at or after the shutoff, or else
+                                # before the last event (which then moves to the shutoff).
+                                move_end = e == count - 1
+                                if move_end or events[e].absolute_time >= shutoff_time:
                                     note_off = TrackEvent()
                                     note_off.type = track_event.type
                                     note_off.absolute_time = shutoff_time
@@ -515,6 +517,8 @@ def parse_game_midi(in_view, input_size):
                                     note_off.contents[1] = 0
                                     note_off.obsolete_event = events[e].obsolete_event
                                     events.insert(e, note_off)
+                                    if move_end:
+                                        events[e + 1].absolute_time = shutoff_time  # move end to end
 
                                     events[e + 1].delta_time = \
                                         events[e + 1].absolute_time - note_off.absolute_time
@@ -538,6 +542,7 @@ def parse_game_midi(in_view, input_size):
                             note_off.contents[1] = 0
                             note_off.obsolete_event = track_event.obsolete_event
                             events.insert(event_count, note_off)
+                            events[event_count + 1].absolute_time = shutoff_time  # move end to end
 
                             events[event_count + 1].delta_time = \
                                 events[event_count + 1].absolute_time - note_off.absolute_time

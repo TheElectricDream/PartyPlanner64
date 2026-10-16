@@ -39,7 +39,7 @@ class Scenes:
 
     def get_data_view(self, index):
         buffer = self._overlays[index] if 0 <= index < len(self._overlays) else None
-        if not buffer:
+        if buffer is None:
             if not self._overlays:
                 raise RuntimeError("Overlay table was not parsed")
             raise RuntimeError("Index %s was not within the overlay table (0 - %d)"

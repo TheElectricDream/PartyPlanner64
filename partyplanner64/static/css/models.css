@@ -1,0 +1,18 @@
+/* Models page (js/pages/models.js). */
+.models-page { height: 100%; }
+.models-page:focus { outline: none; }
+.mdl-list-card { display: flex; flex-direction: column; }
+.mdl-list { margin-top: 10px; height: 240px; outline: none; }
+.mdl-list:focus { border-color: var(--accent); }
+.mdl-list li { justify-content: space-between; }
+.mdl-toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 6px; }
+.mdl-toggles .toggle { padding: 0; }
+.mdl-opt { padding: 0; margin-top: 12px; }
+.mdl-bg button { display: inline-flex; align-items: center; gap: 6px; }
+.mdl-bg i { width: 10px; height: 10px; border-radius: 3px; border: 1px solid rgba(255,255,255,.35); }
+.mdl-export { display: flex; gap: 8px; }
+.mdl-export .btn { flex: 1; }
+.mdl-viewer { background: #000; }
+.mdl-viewer canvas { position: absolute; inset: 0; }
+.mdl-name { color: #c3c9d4; padding: 0 6px; }
+.legend b { font-family: var(--mono); font-weight: 600; color: var(--text); }

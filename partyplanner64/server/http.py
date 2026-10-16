@@ -18,6 +18,10 @@ the path parameters, and returns:
 
 Raising ApiError("message") sends {"error": "message"} with status 400
 (or the status given); any other exception is a 500 with its message.
+
+Path parameters are URL-decoded. GET /api/events is the server-sent event
+stream when the request accepts text/event-stream (EventSource does), and an
+ordinary route otherwise (the event library, routes/events.py).
 """
 
 import json
@@ -28,7 +32,7 @@ import threading
 import traceback
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, quote, urlparse
+from urllib.parse import parse_qs, quote, unquote, urlparse
 
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
@@ -143,7 +147,7 @@ def find_route(method, path):
         if m != method:
             allowed.append(m)
             continue
-        params = {k: converters[k](v) for k, v in match.groupdict().items()}
+        params = {k: converters[k](unquote(v)) for k, v in match.groupdict().items()}
         return fn, params
     return None, allowed
 
@@ -229,7 +233,8 @@ class Handler(BaseHTTPRequestHandler):
                     if STATIC_DIR not in target.parents:
                         return self._send(404, b"Not found", "text/plain")
                     return self._file(target)
-                if url.path == "/api/events":
+                if url.path == "/api/events" and "text/event-stream" in (
+                        self.headers.get("Accept") or ""):
                     return self._events()
             if not url.path.startswith("/api/"):
                 return self._send(404, b"Not found", "text/plain")
@@ -266,7 +271,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Cache-Control", "no-store")
+        if not any(name.lower() == "cache-control" for name, _ in headers or []):
+            self.send_header("Cache-Control", "no-store")
         for name, value in headers or []:
             self.send_header(name, value)
         self.end_headers()

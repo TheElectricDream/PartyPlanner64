@@ -74,13 +74,25 @@ def assemble(input, buffer=None, files=None, symbol_output_map=None, text=False)
     if buffer is None:
         buffer = bytearray(state.out_index)
     state.buffer = buffer
-    data_view = state.data_view = DataView(buffer)
+    state.data_view = DataView(buffer)
     state.mem_pos = 0
     state.out_index = 0
     state.current_pass = SECOND_PASS
 
     # Second pass, assemble!
-    set_uint32 = data_view.set_uint32
+    try:
+        _second_pass(state, arr_new, text, out_strs)
+    except IndexError:
+        # (A RangeError from the DataView in the original.)
+        raise AssemblerError("Offset is outside the bounds of the DataView") from None
+
+    if text:
+        return out_strs
+    return buffer
+
+
+def _second_pass(state, arr_new, text, out_strs):
+    set_uint32 = state.data_view.set_uint32
     symbols_by_value = state.symbols_by_value
     for line in arr_new:
         state.line = line
@@ -118,10 +130,6 @@ def assemble(input, buffer=None, files=None, symbol_output_map=None, text=False)
         throw_error("An if directive was used without an endif directive", state)
     if current_static_index(state) != 0:
         throw_error("A beginfile directive was used without an endfile directive", state)
-
-    if text:
-        return out_strs
-    return buffer
 
 
 def _should_skip_current_instruction(state):

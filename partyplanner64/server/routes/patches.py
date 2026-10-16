@@ -23,6 +23,12 @@ _lock = threading.Lock()
 # reset_cheats() (a new ROM) without being told.
 _applied = []
 
+def _state_lock():
+    """The app's lock (state.lock): held while changing the ROM."""
+    from ... import state
+    return state.lock
+
+
 
 def _romhandler():
     from ...lib.romhandler import romhandler
@@ -31,7 +37,10 @@ def _romhandler():
 
 def _gs():
     """The gameshark modules: (parser, compiler, cheats, hook)."""
-    from ...lib.patches.gameshark import cheats, compiler, hook, parser
+    try:
+        from ...lib.patches.gameshark import cheats, compiler, hook, parser
+    except ImportError:
+        raise ApiError("GameShark patches aren't available in this installation.", 501)
     return parser, compiler, cheats, hook
 
 
@@ -103,7 +112,8 @@ def add_patch(req):
     buf = compiler.Compiler().compile(codes)
     if not buf:
         raise ApiError("There was an error compiling the entered cheats.")
-    cheats.current_cheats.append(buf)
+    with _state_lock():
+        cheats.current_cheats.append(buf)
     with _lock:
         _applied.append((buf, "\n".join(" ".join(line.split()) for line in text.strip().splitlines()
                                         if line.strip()),
@@ -117,12 +127,14 @@ def delete_patch(req, index):
     cheats = _gs()[2]
     if not 0 <= index < len(cheats.current_cheats):
         raise ApiError("There is no cheat %d." % index, 404)
-    del cheats.current_cheats[index]
+    with _state_lock():
+        del cheats.current_cheats[index]
     return _listing()
 
 
 @route("POST", "/api/patches/clear")
 def clear_patches(req):
     if _romhandler().get_rom() is not None:
-        _gs()[2].current_cheats.clear()
+        with _state_lock():
+            _gs()[2].current_cheats.clear()
     return _listing()

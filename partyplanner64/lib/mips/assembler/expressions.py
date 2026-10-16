@@ -32,7 +32,7 @@ def parse_immediate(value):
     if result is None:
         return None
     if negative:
-        result = -result
+        result = -result if result else -0.0  # (JavaScript has a negative zero.)
     return result
 
 

@@ -90,7 +90,7 @@ def _parse_links(buffer, header):
             for j in range(1, chain_len):
                 start = chain_view.get_uint16(j * 2)
                 end = chain_view.get_uint16((j + 1) * 2)
-                key = str(start)  # Board JSON keys links by string.
+                key = start  # (A string key in board JSON.)
                 if key in links:
                     if not isinstance(links[key], list):
                         links[key] = [links[key]]

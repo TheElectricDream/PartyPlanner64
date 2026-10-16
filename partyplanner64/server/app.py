@@ -8,6 +8,7 @@ import argparse
 import importlib
 import ipaddress
 import pkgutil
+import signal
 import sys
 import threading
 import webbrowser
@@ -44,7 +45,11 @@ def serve(args):
     state.configure(data_dir=args.data_dir, debug=args.debug)
     load_routes()
     if args.rom:
-        state.open_rom_file(args.rom)
+        try:
+            info = state.open_rom_file(args.rom)
+            print("Opened %s (%s)." % (args.rom, info["title"]))
+        except Exception as e:  # noqa: BLE001 - start anyway
+            print("Could not open %s: %s" % (args.rom, e), file=sys.stderr)
 
     loopback = True
     try:
@@ -60,12 +65,19 @@ def serve(args):
     print("PartyPlanner64 is running at %s (Ctrl+C to stop)" % url)
     if not args.no_browser:
         threading.Timer(0.5, lambda: webbrowser.open(url)).start()
+    def stop(signum, frame):
+        raise KeyboardInterrupt
+    try:
+        signal.signal(signal.SIGTERM, stop)     # save the boards when stopped
+    except ValueError:
+        pass                                    # not the main thread
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         pass
     finally:
         server.server_close()
+        state.shutdown()
 
 
 def main(argv=None):
