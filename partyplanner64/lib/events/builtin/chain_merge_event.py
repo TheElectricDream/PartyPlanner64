@@ -82,7 +82,17 @@ def _parse(data_view, info):
 # TODO: We can do a O(1) + n/2 style improvement for this event.
 def _write(data_view, event, info, temp):
     pv = event["parameterValues"]
-    asm = f"""@@TPL@@"""
+    asm = f"""
+      ADDIU SP, SP, -0x18
+      SW    RA, 0x10(SP)
+      ADDIU A0, R0, -1
+      ADDIU A1, R0, {js_str(pv.get("chain"))}
+      JAL   SetNextChainAndSpace
+      ADDIU A2, R0, {js_str(js_or(pv.get("spaceIndex"), 0))}
+      LW    RA, 0x10(SP)
+      JR    RA
+      ADDIU SP, SP, 0x18
+    """
 
     return asm
 

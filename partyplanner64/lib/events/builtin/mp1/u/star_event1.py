@@ -26,7 +26,34 @@ def _parse(data_view, info):
 
 
 def _write(data_view, event, info, temp):
-    return f"""@@TPL@@"""
+    return f"""
+      addiu SP, SP, -0x18
+      sw    RA, 0x10(SP)
+      jal   GetCurrentSpaceIndex
+      NOP
+      sll   V0, V0, 0x10
+      jal   __PP64_INTERNAL_STAR_SPACE
+      sra   A0, V0, 0x10
+      sll   V0, V0, 0x10
+      sra   V0, V0, 0x10
+      addiu V1, R0, 1
+      bne   V0, V1, L800F9700 ; test if player bought star?
+      addiu A0, R0, 68
+      addu  A1, R0, R0
+      jal   0x800587EC
+      addiu A2, R0, 2
+      jal   __PP64_INTERNAL_GET_NEXT_TOAD_INDEX
+      NOP
+      sll   V0, V0, 0x10
+      addiu A0, R0, -1
+      addiu A1, R0, 8
+      jal   0x8004D2A4
+      sra   A2, V0, 0x10
+    L800F9700:
+      lw    RA, 0x10(SP)
+      jr    RA
+      addiu SP, SP, 0x18
+    """
 
 
 StarEvent1 = Event(

@@ -268,7 +268,9 @@ def add_connection_internal(start_space_index, end_space_index, board):
     key = _link_key(links, start_space_index)
     current = links[key] if key is not None else None
     if key is None:
-        key = start_space_index
+        # A new key: a string when the dict has string keys (unnormalized JSON), else an int.
+        first = next(iter(links), None)
+        key = str(start_space_index) if isinstance(first, str) else start_space_index
     if isinstance(current, list):
         current.append(end_space_index)
     elif _is_number(current):
