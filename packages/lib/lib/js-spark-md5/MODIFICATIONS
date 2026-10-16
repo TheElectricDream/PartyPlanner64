@@ -1,2 +1,0 @@
-hash() now takes additional options to specify the portion of the array to hash.
-Minor changes to compile with react-scripts.

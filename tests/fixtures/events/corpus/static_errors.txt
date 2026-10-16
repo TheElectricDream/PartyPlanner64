@@ -1,0 +1,4 @@
+.beginstatic
+.beginstatic
+.endstatic
+.endstatic

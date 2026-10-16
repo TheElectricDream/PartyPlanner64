@@ -1,9 +1,0 @@
-import "./U/BooEvent1";
-import "./U/BoulderChase";
-import "./U/BowserEvent1";
-import "./U/ChainSplit1";
-import "./U/ChanceTimeEvent1";
-import "./U/PassStartEvent1";
-import "./U/StarChanceEvent1";
-import "./U/StarEvent1";
-import "./U/ThwompChainSplit";

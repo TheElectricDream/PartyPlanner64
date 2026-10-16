@@ -1,0 +1,14 @@
+{
+ "bare_mp1": {"name": "Old 1", "spaces": [{"x": 1, "y": 2, "type": 7}], "links": {}, "bg": {"width": 960, "height": 720, "src": ""}},
+ "mp2_no_costume": {"name": "Old 2", "game": 2, "type": "NORMAL", "spaces": [], "links": {}, "events": {"Str": "; NAME: Str\nnop"}, "audioData": {"name": "song", "data": "x", "soundbankIndex": 2}, "bg": {"width": 1, "height": 2, "src": ""}},
+ "mp2_costume": {"name": "Old 2c", "game": 2, "costumeTypeIndex": 3, "audioType": 1, "spaces": [], "links": {}, "bg": {"width": 1, "height": 2, "src": "", "fov": 9}},
+ "mp3_normal": {"name": "Old 3", "game": 3, "spaces": [], "links": {"3": 1, "10": [2, 4], "2": 5}, "bg": {"width": 1, "height": 2, "src": ""}},
+ "mp3_duel": {"name": "Old 3d", "game": 3, "type": "DUEL", "audioType": null, "spaces": [], "links": {}, "bg": {"width": 1, "height": 2, "src": ""}},
+ "old_custom_events": {"name": "Old custom", "game": 1, "events": {"Keep": "; NAME: Keep\nnop", "Dup": "; NAME: Dup\nold"},
+   "spaces": [{"x": 0, "y": 0, "type": 1, "events": [
+     {"id": "ignored", "name": "Dup", "asm": "; NAME: Dup\nnew", "parameters": [{"name": "a", "type": "Number"}], "supportedGames": ["CLBE"], "activationType": 3, "executionType": 1, "custom": true},
+     {"id": "Keep", "activationType": 3, "executionType": 1, "custom": true, "parameters": []}]},
+     {"x": 0, "y": 0, "type": 1}],
+   "boardevents": [{"id": "x", "name": "BoardEv", "asm": "; NAME: BoardEv\nnop", "activationType": -2, "executionType": 2}],
+   "links": {}, "bg": {"width": 1, "height": 2, "src": ""}}
+}
