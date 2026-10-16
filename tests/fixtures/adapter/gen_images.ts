@@ -74,7 +74,7 @@ function setup(game: number) {
     files.set(`${n[0]}/${n[1]}`, nPack);
     files.set(`${h[0]}/${h[1]}`, hPack);
     await adapter._brandBootSplashscreen();
-    results["brand" + game] = { packs: [blob(nPack), blob(hPack)], log };
+    results["brand" + game] = { packs: [blob(nPack), blob(hPack)], log: log.slice() };
     // Branding off.
     const off: any = getAdapter(game, { writeBranding: false });
     log.length = 0;
