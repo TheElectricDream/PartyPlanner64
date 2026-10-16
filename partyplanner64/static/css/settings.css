@@ -1,0 +1,20 @@
+/* Settings page (js/pages/settings.js). */
+.set-head-actions { display: flex; align-items: center; gap: 10px; flex: none; }
+.settings-grid { max-width: 1240px; }
+.set-group-desc { margin: -4px 0 10px; }
+.set-list { display: flex; flex-direction: column; }
+.set-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 2px;
+  border-top: 1px solid var(--border); cursor: pointer;
+}
+.set-row:first-child { border-top: 0; padding-top: 4px; }
+.set-row:hover .set-name { color: #fff; }
+.set-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.set-name { font-size: 13px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.set-desc { font-size: 12px; color: var(--muted); }
+.set-adv {
+  font: 600 10px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--warn);
+  border: 1px solid #5c4516; border-radius: 999px; padding: 1px 6px;
+}
+.set-row .toggle { padding: 0; }
+.set-more { margin-top: 6px; font-style: italic; }

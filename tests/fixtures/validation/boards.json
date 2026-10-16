@@ -1,0 +1,12243 @@
+{
+"mp1_audio_code_bad": {
+"audioIndex": 0,
+"audioSelectCode": {
+"code": "  jal nothing_here\n  nop",
+"language": 0
+},
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_bg_code_bad": {
+"additionalbgcode": {
+"code": "  j missing_label\n  nop",
+"language": 0
+},
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_bg_code_ok": {
+"additionalbg": [
+"x"
+],
+"additionalbgcode": "\r\n  jal func_80012345\r\n  nop\r\nlabel_a:\r\n  j label_a\r\n  nop\r\n",
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_blue_split": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+4
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_character_on_path": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_custom_audio_empty": {
+"audioData": [],
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_custom_audio_missing": {
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_custom_audio_object": {
+"audioData": {},
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_custom_events": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"boardevents": [
+{
+"activationType": -2,
+"custom": true,
+"executionType": 2,
+"id": "CRLF Event",
+"parameterValues": {
+"dest": 1
+}
+},
+{
+"activationType": -3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry",
+"parameterValues": {
+"enabled": false
+}
+}
+],
+"description": "",
+"difficulty": 3,
+"events": {
+"Bad Label": "; NAME: Bad Label\n; GAMES: MP1_USA,MP2_USA,MP3_USA\n; EXECUTION: Direct\n  j nowhere_label\n  nop\n",
+"CRLF Event": {
+"code": "; NAME: CRLF Event\r\n; GAMES: MP3_USA\r\n; EXECUTION: Process\r\n; PARAM: Space|dest\r\n;PARAM:Number|n\r\nmain:\r\n  jal func_80012345\r\n  nop\r\nlabel_a:\r\n  j label_a\r\n  nop\r\n",
+"language": 0
+},
+"Main Entry": {
+"code": "// NAME:   Main Entry   \n// GAMES: MP2_USA, MP3_USA\n// EXECUTION: Process\n//PARAM: Boolean|enabled\n// param: Number|lower_case_prop\n// PARAM: Number|bad name\n// PARAM: Number|bad|pipes\n// PARAM: Bogus|bogus_type\n// PARAM: Number|ok_name?!\nhelper:\n  jr RA\n  nop\nmain:\n  addiu SP, SP, -0x18\n  sw RA, 0x10(SP)\n  jal helper\n  nop\n  lw RA, 0x10(SP)\n  jr RA\n  addiu SP, SP, 0x18\n",
+"language": 0
+}
+},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry"
+}
+],
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 1,
+"id": "Bad Label"
+}
+],
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry",
+"parameterValues": {
+"enabled": true,
+"lower_case_prop": 1
+}
+}
+],
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_dead_end": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_events": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "NOPE"
+}
+],
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BOWSER"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+}
+],
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "ITEMSHOP"
+}
+],
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_few_colors": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_after_two_out": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": [
+9,
+1
+],
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_entry_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": [
+5,
+6
+],
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_entry_visible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_exit_gate": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_exit_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": [
+1,
+8
+],
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_exit_visible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_next_gate": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_not_invisible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 1,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_ok": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_on_path": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"subtype": 8,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_two_exits": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": [
+8,
+9
+],
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_gate_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": [
+3,
+7
+],
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_many_spaces": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 0,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 1,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 2,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 3,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 4,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 5,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 6,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 7,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 8,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 9,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 10,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 11,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 12,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 13,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 14,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 15,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 16,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 17,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 18,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 19,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 21,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 22,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 23,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 24,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 25,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 26,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 27,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 28,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 29,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 30,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 31,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 32,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 33,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 34,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 35,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 36,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 37,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 38,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 39,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 40,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 41,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 42,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 43,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 44,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 45,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 46,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 47,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 48,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 49,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 51,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 52,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 53,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 54,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 55,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 56,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 57,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 58,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 59,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 60,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 61,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 62,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 63,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 64,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 65,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 66,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 67,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 68,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 69,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 70,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 71,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 72,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 73,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 74,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 75,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 76,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 77,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 78,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 79,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 80,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 81,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 82,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 83,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 84,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 85,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 86,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 87,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 88,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 89,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 90,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 91,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 92,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 93,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 94,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 95,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 96,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 97,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 98,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 99,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 101,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 102,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 103,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 104,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 105,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 106,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 107,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 108,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 109,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 110,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 111,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 112,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 113,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 114,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 115,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 116,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 117,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 118,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 119,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 120,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 121,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 122,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 123,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 124,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 125,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 126,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 127,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 128,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 129,
+"y": 400,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_many_subtypes": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 100,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 110,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 120,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 100,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 110,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 100,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 110,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 100,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 110,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 120,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 100,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 110,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 120,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 100,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 110,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 120,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 0,
+"type": 0,
+"x": 100,
+"y": 100,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_nine_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 200,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 201,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 202,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 203,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 204,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 205,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 206,
+"y": 200,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_no_audio_index": {
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_no_audio_type": {
+"audioIndex": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_no_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_no_start": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 1,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_one_of_each_subtype": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 100,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 100,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 100,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 100,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 100,
+"y": 170,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_one_star": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_other_split": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": [
+4,
+1
+],
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_rotations": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"rotation": 0,
+"type": 13,
+"x": 300,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 10,
+"type": 13,
+"x": 301,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 20,
+"type": 13,
+"x": 302,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 30,
+"type": 13,
+"x": 303,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 40,
+"type": 13,
+"x": 304,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 50,
+"type": 13,
+"x": 305,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 60,
+"type": 13,
+"x": 306,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 70,
+"type": 13,
+"x": 307,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 80,
+"type": 13,
+"x": 308,
+"y": 300,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_seven_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 200,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 201,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 202,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 203,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 204,
+"y": 200,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_start_dead": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_too_many_paths": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": [
+2,
+3,
+4
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp1_valid": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 1,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_audio_code_bad": {
+"audioIndex": 0,
+"audioSelectCode": {
+"code": "  jal nothing_here\n  nop",
+"language": 0
+},
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_bg_code_bad": {
+"additionalbgcode": {
+"code": "  j missing_label\n  nop",
+"language": 0
+},
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_bg_code_ok": {
+"additionalbg": [
+"x"
+],
+"additionalbgcode": "\r\n  jal func_80012345\r\n  nop\r\nlabel_a:\r\n  j label_a\r\n  nop\r\n",
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_blue_split": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+4
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_character_on_path": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_custom_audio_empty": {
+"audioData": [],
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_custom_audio_missing": {
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_custom_audio_object": {
+"audioData": {},
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_custom_events": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"boardevents": [
+{
+"activationType": -2,
+"custom": true,
+"executionType": 2,
+"id": "CRLF Event",
+"parameterValues": {
+"dest": 1
+}
+},
+{
+"activationType": -3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry",
+"parameterValues": {
+"enabled": false
+}
+}
+],
+"description": "",
+"difficulty": 3,
+"events": {
+"Bad Label": "; NAME: Bad Label\n; GAMES: MP1_USA,MP2_USA,MP3_USA\n; EXECUTION: Direct\n  j nowhere_label\n  nop\n",
+"CRLF Event": {
+"code": "; NAME: CRLF Event\r\n; GAMES: MP3_USA\r\n; EXECUTION: Process\r\n; PARAM: Space|dest\r\n;PARAM:Number|n\r\nmain:\r\n  jal func_80012345\r\n  nop\r\nlabel_a:\r\n  j label_a\r\n  nop\r\n",
+"language": 0
+},
+"Main Entry": {
+"code": "// NAME:   Main Entry   \n// GAMES: MP2_USA, MP3_USA\n// EXECUTION: Process\n//PARAM: Boolean|enabled\n// param: Number|lower_case_prop\n// PARAM: Number|bad name\n// PARAM: Number|bad|pipes\n// PARAM: Bogus|bogus_type\n// PARAM: Number|ok_name?!\nhelper:\n  jr RA\n  nop\nmain:\n  addiu SP, SP, -0x18\n  sw RA, 0x10(SP)\n  jal helper\n  nop\n  lw RA, 0x10(SP)\n  jr RA\n  addiu SP, SP, 0x18\n",
+"language": 0
+}
+},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry"
+}
+],
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 1,
+"id": "Bad Label"
+}
+],
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry",
+"parameterValues": {
+"enabled": true,
+"lower_case_prop": 1
+}
+}
+],
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_dead_end": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_events": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "NOPE"
+}
+],
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BOWSER"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+}
+],
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "ITEMSHOP"
+}
+],
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_few_colors": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_after_two_out": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": [
+9,
+1
+],
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_entry_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": [
+5,
+6
+],
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_entry_visible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_exit_gate": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_exit_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": [
+1,
+8
+],
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_exit_visible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_next_gate": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_not_invisible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 1,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_ok": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_on_path": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"subtype": 8,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_two_exits": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": [
+8,
+9
+],
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_gate_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": [
+3,
+7
+],
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_many_spaces": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 0,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 1,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 2,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 3,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 4,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 5,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 6,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 7,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 8,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 9,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 10,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 11,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 12,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 13,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 14,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 15,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 16,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 17,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 18,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 19,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 21,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 22,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 23,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 24,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 25,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 26,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 27,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 28,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 29,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 30,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 31,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 32,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 33,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 34,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 35,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 36,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 37,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 38,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 39,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 40,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 41,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 42,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 43,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 44,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 45,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 46,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 47,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 48,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 49,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 51,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 52,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 53,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 54,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 55,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 56,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 57,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 58,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 59,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 60,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 61,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 62,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 63,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 64,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 65,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 66,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 67,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 68,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 69,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 70,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 71,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 72,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 73,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 74,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 75,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 76,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 77,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 78,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 79,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 80,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 81,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 82,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 83,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 84,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 85,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 86,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 87,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 88,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 89,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 90,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 91,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 92,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 93,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 94,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 95,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 96,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 97,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 98,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 99,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 101,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 102,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 103,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 104,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 105,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 106,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 107,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 108,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 109,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 110,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 111,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 112,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 113,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 114,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 115,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 116,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 117,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 118,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 119,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 120,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 121,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 122,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 123,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 124,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 125,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 126,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 127,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 128,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 129,
+"y": 400,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_many_subtypes": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 100,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 110,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 120,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 100,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 110,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 100,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 110,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 100,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 110,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 120,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 100,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 110,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 120,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 100,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 110,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 120,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 0,
+"type": 0,
+"x": 100,
+"y": 100,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_nine_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 200,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 201,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 202,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 203,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 204,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 205,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 206,
+"y": 200,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_no_audio_index": {
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_no_audio_type": {
+"audioIndex": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_no_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_no_start": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 1,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_on_other": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_one_of_each_subtype": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 100,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 100,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 100,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 100,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 100,
+"y": 170,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_one_star": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_other_split": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": [
+4,
+1
+],
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_rotations": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"rotation": 0,
+"type": 13,
+"x": 300,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 10,
+"type": 13,
+"x": 301,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 20,
+"type": 13,
+"x": 302,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 30,
+"type": 13,
+"x": 303,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 40,
+"type": 13,
+"x": 304,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 50,
+"type": 13,
+"x": 305,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 60,
+"type": 13,
+"x": 306,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 70,
+"type": 13,
+"x": 307,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 80,
+"type": 13,
+"x": 308,
+"y": 300,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_seven_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 200,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 201,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 202,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 203,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 204,
+"y": 200,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_start_dead": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_too_many_paths": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": [
+2,
+3,
+4
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp2_valid": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 2,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_audio_code_bad": {
+"audioIndex": 0,
+"audioSelectCode": {
+"code": "  jal nothing_here\n  nop",
+"language": 0
+},
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_bg_code_bad": {
+"additionalbgcode": {
+"code": "  j missing_label\n  nop",
+"language": 0
+},
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_bg_code_ok": {
+"additionalbg": [
+"x"
+],
+"additionalbgcode": "\r\n  jal func_80012345\r\n  nop\r\nlabel_a:\r\n  j label_a\r\n  nop\r\n",
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_blue_split": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+4
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_character_on_path": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_custom_audio_empty": {
+"audioData": [],
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_custom_audio_missing": {
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_custom_audio_object": {
+"audioData": {},
+"audioIndex": 0,
+"audioType": 1,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_custom_events": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"boardevents": [
+{
+"activationType": -2,
+"custom": true,
+"executionType": 2,
+"id": "CRLF Event",
+"parameterValues": {
+"dest": 1
+}
+},
+{
+"activationType": -3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry",
+"parameterValues": {
+"enabled": false
+}
+}
+],
+"description": "",
+"difficulty": 3,
+"events": {
+"Bad Label": "; NAME: Bad Label\n; GAMES: MP1_USA,MP2_USA,MP3_USA\n; EXECUTION: Direct\n  j nowhere_label\n  nop\n",
+"CRLF Event": {
+"code": "; NAME: CRLF Event\r\n; GAMES: MP3_USA\r\n; EXECUTION: Process\r\n; PARAM: Space|dest\r\n;PARAM:Number|n\r\nmain:\r\n  jal func_80012345\r\n  nop\r\nlabel_a:\r\n  j label_a\r\n  nop\r\n",
+"language": 0
+},
+"Main Entry": {
+"code": "// NAME:   Main Entry   \n// GAMES: MP2_USA, MP3_USA\n// EXECUTION: Process\n//PARAM: Boolean|enabled\n// param: Number|lower_case_prop\n// PARAM: Number|bad name\n// PARAM: Number|bad|pipes\n// PARAM: Bogus|bogus_type\n// PARAM: Number|ok_name?!\nhelper:\n  jr RA\n  nop\nmain:\n  addiu SP, SP, -0x18\n  sw RA, 0x10(SP)\n  jal helper\n  nop\n  lw RA, 0x10(SP)\n  jr RA\n  addiu SP, SP, 0x18\n",
+"language": 0
+}
+},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry"
+}
+],
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 1,
+"id": "Bad Label"
+}
+],
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 3,
+"custom": true,
+"executionType": 2,
+"id": "Main Entry",
+"parameterValues": {
+"enabled": true,
+"lower_case_prop": 1
+}
+}
+],
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_dead_end": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_events": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "NOPE"
+}
+],
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BOWSER"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+}
+],
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"events": [
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "BANK"
+},
+{
+"activationType": 1,
+"executionType": 1,
+"id": "ITEMSHOP"
+}
+],
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_few_colors": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_after_two_out": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": [
+9,
+1
+],
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_entry_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": [
+5,
+6
+],
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_entry_visible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_exit_gate": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_exit_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": [
+1,
+8
+],
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_exit_visible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_next_gate": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_not_invisible": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 1,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_ok": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_on_path": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"subtype": 8,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_two_exits": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": [
+8,
+9
+],
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_gate_two_in": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+6
+],
+"2": [
+3,
+7
+],
+"3": 4,
+"4": 5,
+"5": 1,
+"6": 7,
+"7": 8,
+"8": 9,
+"9": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 70,
+"y": 70,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 80,
+"y": 70,
+"z": 0
+},
+{
+"type": 0,
+"x": 90,
+"y": 70,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 70,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_many_spaces": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 0,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 1,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 2,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 3,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 4,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 5,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 6,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 7,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 8,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 9,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 10,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 11,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 12,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 13,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 14,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 15,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 16,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 17,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 18,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 19,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 21,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 22,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 23,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 24,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 25,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 26,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 27,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 28,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 29,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 30,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 31,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 32,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 33,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 34,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 35,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 36,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 37,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 38,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 39,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 40,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 41,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 42,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 43,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 44,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 45,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 46,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 47,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 48,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 49,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 51,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 52,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 53,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 54,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 55,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 56,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 57,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 58,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 59,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 60,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 61,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 62,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 63,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 64,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 65,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 66,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 67,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 68,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 69,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 70,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 71,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 72,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 73,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 74,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 75,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 76,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 77,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 78,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 79,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 80,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 81,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 82,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 83,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 84,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 85,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 86,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 87,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 88,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 89,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 90,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 91,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 92,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 93,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 94,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 95,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 96,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 97,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 98,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 99,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 100,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 101,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 102,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 103,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 104,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 105,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 106,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 107,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 108,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 109,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 110,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 111,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 112,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 113,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 114,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 115,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 116,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 117,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 118,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 119,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 120,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 121,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 122,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 123,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 124,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 125,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 126,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 127,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 128,
+"y": 400,
+"z": 0
+},
+{
+"type": 1,
+"x": 129,
+"y": 400,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_many_subtypes": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 100,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 110,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 120,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 100,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 110,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 100,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 110,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 100,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 110,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 120,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 100,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 110,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 120,
+"y": 170,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 100,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 110,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 8,
+"type": 0,
+"x": 120,
+"y": 180,
+"z": 0
+},
+{
+"subtype": 0,
+"type": 0,
+"x": 100,
+"y": 100,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_nine_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 200,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 201,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 202,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 203,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 204,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 205,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 206,
+"y": 200,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_no_audio_index": {
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_no_audio_type": {
+"audioIndex": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_no_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_no_start": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 1,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_one_of_each_subtype": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"subtype": 3,
+"type": 0,
+"x": 100,
+"y": 130,
+"z": 0
+},
+{
+"subtype": 1,
+"type": 0,
+"x": 100,
+"y": 110,
+"z": 0
+},
+{
+"subtype": 2,
+"type": 0,
+"x": 100,
+"y": 120,
+"z": 0
+},
+{
+"subtype": 5,
+"type": 0,
+"x": 100,
+"y": 150,
+"z": 0
+},
+{
+"subtype": 7,
+"type": 0,
+"x": 100,
+"y": 170,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_one_star": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_other_split": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": [
+4,
+1
+],
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_rotations": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"rotation": 0,
+"type": 13,
+"x": 300,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 10,
+"type": 13,
+"x": 301,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 20,
+"type": 13,
+"x": 302,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 30,
+"type": 13,
+"x": 303,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 40,
+"type": 13,
+"x": 304,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 50,
+"type": 13,
+"x": 305,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 60,
+"type": 13,
+"x": 306,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 70,
+"type": 13,
+"x": 307,
+"y": 300,
+"z": 0
+},
+{
+"rotation": 80,
+"type": 13,
+"x": 308,
+"y": 300,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_seven_stars": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 200,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 201,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 202,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 203,
+"y": 200,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 204,
+"y": 200,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_start_dead": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_too_many_paths": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": [
+2,
+3,
+4
+],
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+},
+"mp3_valid": {
+"audioIndex": 0,
+"audioType": 0,
+"bg": {
+"height": 720,
+"src": "",
+"width": 960
+},
+"description": "",
+"difficulty": 3,
+"events": {},
+"game": 3,
+"links": {
+"0": 1,
+"1": 2,
+"2": 3,
+"3": 4,
+"4": 5,
+"5": 1
+},
+"name": "Synthetic",
+"otherbg": {},
+"spaces": [
+{
+"type": 7,
+"x": 10,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 20,
+"y": 10,
+"z": 0
+},
+{
+"type": 2,
+"x": 30,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 40,
+"y": 10,
+"z": 0
+},
+{
+"type": 1,
+"x": 50,
+"y": 10,
+"z": 0
+},
+{
+"star": true,
+"type": 0,
+"x": 60,
+"y": 10,
+"z": 0
+}
+],
+"type": "NORMAL"
+}
+}

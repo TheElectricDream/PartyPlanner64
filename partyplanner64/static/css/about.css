@@ -1,0 +1,32 @@
+/* About page (js/pages/about.js). */
+.about-page { max-width: 1240px; margin: 0 auto; width: 100%; }
+.about-hero {
+  display: flex; align-items: center; gap: 22px; padding: 18px 20px; margin-bottom: 16px;
+  background: radial-gradient(120% 140% at 0% 0%, #1a2232 0%, var(--panel) 55%); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.about-logo { width: 240px; max-width: 40%; height: auto; image-rendering: auto; flex: none; }
+.about-hero-text h2 { font-size: 20px; }
+.about-tagline { margin: 6px 0 12px; color: #c3c9d4; max-width: 620px; }
+.about-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.about-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; color: #c3c9d4; font-size: 13px; }
+.about-list li::marker { color: var(--muted); }
+.about-first { margin-top: 0; }
+.about-mpl { display: block; margin: 0 0 12px; text-align: center; padding: 10px; border-radius: var(--radius-sm); background: #0e1117; border: 1px solid var(--border); }
+.about-mpl img { max-width: 100%; max-height: 64px; }
+.about-shirt {
+  display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 8px 10px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--panel-2); text-decoration: none; color: var(--text); font-size: 13px;
+}
+.about-shirt:hover { border-color: #414959; }
+.about-shirt img { width: 44px; height: 44px; object-fit: contain; }
+.about-roms td.mono { font-size: 11.5px; color: #c3c9d4; }
+.about-cli {
+  margin: 10px 0 0; padding: 10px 12px; border-radius: var(--radius-sm); background: #0d1016; border: 1px solid var(--border);
+  font: 12.5px/1.6 var(--mono); color: #d4d9e2; white-space: pre-wrap;
+}
+.about-disclaimer { margin: 14px 0 0; padding-top: 10px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted); }
+@media (max-width: 700px) {
+  .about-hero { flex-direction: column; align-items: flex-start; }
+  .about-logo { max-width: 70%; }
+}
