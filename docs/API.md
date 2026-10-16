@@ -89,7 +89,7 @@ Opens the ROM (closing one already open) and reads its boards.
 valid ROM."}` or `"This ROM is not supported right now."` (`ui.allowallroms` skips the second
 check). Publishes `rom` and `boards`.
 
-### `POST /api/rom/close`
+### `POST /api/rom/close` -> `{boards}`
 Closes the ROM: its boards go, the current board becomes board 0. Publishes `rom`, `boards`.
 
 ### `POST /api/rom/save`
@@ -254,6 +254,14 @@ Adds it to the library if it passes the test compile (400 otherwise).
 ### `POST /api/events/test {code, language}`
 `{event: {...} | null, error, results: [{game: "NMVE", gameName: "MP3_USA", ok, error}]}`:
 the event read from the code and a test compile for each game it supports.
+
+## For route modules (Python)
+
+`partyplanner64.state`: `lock` (an RLock; hold it while using the ROM), `require_rom()` (the
+open `ROM`, or ApiError 409), `rom_info()`, `get_setting(id)`, `get_settings()`,
+`current_board()` (the store's board: don't change it), `get_board(index, rom)`,
+`boards_info()`. Board edits go through `partyplanner64.editor.store.store.dispatch(type,
+payload)` or `partyplanner64.editor.ops.apply([(op, args)])`.
 
 ## Files in the data folder
 

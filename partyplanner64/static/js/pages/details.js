@@ -75,12 +75,18 @@ const TEMPLATE = `
   </div>
   <div class="details-empty viewer-empty" hidden></div>
   <div class="details-grid">
-    <div class="details-masonry">
-      <section class="card" data-card="info"><div class="card-head"><h2>Basic Info</h2></div><div class="card-body"></div></section>
-      <section class="card" data-card="bg"><div class="card-head"><h2>Main Background</h2><span class="pill"></span></div><div class="card-body"></div></section>
-      <section class="card" data-card="music"><div class="card-head"><h2>Background Music</h2><div class="card-actions"></div></div><div class="card-body"></div></section>
-      <section class="card" data-card="morebg"><div class="card-head"><h2></h2></div><div class="card-body"></div></section>
-      <section class="card" data-card="images"><div class="card-head"><h2>Images</h2></div><div class="card-body"></div></section>
+    <div class="details-cols">
+      <div class="details-col">
+        <section class="card" data-card="info"><div class="card-head"><h2>Basic Info</h2></div><div class="card-body"></div></section>
+        <section class="card" data-card="music"><div class="card-head"><h2>Background Music</h2><div class="card-actions"></div></div><div class="card-body"></div></section>
+      </div>
+      <div class="details-col">
+        <section class="card" data-card="bg"><div class="card-head"><h2>Main Background</h2><span class="pill"></span></div><div class="card-body"></div></section>
+        <section class="card" data-card="morebg"><div class="card-head"><h2></h2></div><div class="card-body"></div></section>
+      </div>
+      <div class="details-col">
+        <section class="card" data-card="images"><div class="card-head"><h2>Images</h2></div><div class="card-body"></div></section>
+      </div>
     </div>
     <section class="card wide" data-card="stats"><div class="card-head"><h2>Stats</h2><span class="pill"></span></div><div class="card-body"></div></section>
     <section class="card wide code-card" data-card="code-additionalbg" hidden></section>
