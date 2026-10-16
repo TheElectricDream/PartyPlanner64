@@ -6,9 +6,8 @@
 .details-head-actions { align-items: center; }
 .details-page .viewer-empty { position: static; transform: none; margin: 60px auto; width: fit-content; }
 .details-grid { display: flex; flex-direction: column; gap: 16px; }
-.details-masonry { columns: 3 380px; column-gap: 16px; }
-.details-masonry > .card { break-inside: avoid; margin-bottom: 16px; display: inline-block; width: 100%; vertical-align: top; }
-.details-masonry > .card[hidden] { display: none; }
+.details-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; align-items: start; }
+.details-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 
 /* rich text (texteditor.tsx) */
 .rt { display: flex; flex-direction: column; gap: 6px; }
