@@ -46,7 +46,8 @@ def _gs():
 
 def _code_json(code):
     get = code.get if isinstance(code, dict) else (lambda k: getattr(code, k))
-    return {"opcode": get("opcode"), "addr": get("addr"), "value": get("value")}
+    # The parser gives the address as JS did (a signed 32-bit number).
+    return {"opcode": get("opcode"), "addr": get("addr") & 0xFFFFFFFF, "value": get("value")}
 
 
 def _parse(text):

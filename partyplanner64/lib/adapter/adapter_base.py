@@ -998,7 +998,7 @@ class AdapterBase:
             for offset in star_spaces_offsets:
                 for j in range(star_count):
                     star_idx = j if j < len(star_indices) else len(star_indices) - 1  # Keep writing last space to fill
-                    scene_view.set_uint16(offset + j * 2, _num(at(star_indices, star_idx)))
+                    scene_view.set_uint16(offset + j * 2, at(star_indices, star_idx))
 
             toad_spaces = get_spaces_of_sub_type(SpaceSubtype.TOAD, board)
 
@@ -1022,7 +1022,7 @@ class AdapterBase:
                             best_distance = dist
                             best_toad_idx = toad_idx
 
-                    scene_view.set_uint16(offset + j * 2, _num(best_toad_idx))
+                    scene_view.set_uint16(offset + j * 2, best_toad_idx)
 
     def _extract_boos(self, board, board_info):
         if not board_info.get("scene_index"):
@@ -1427,11 +1427,6 @@ def combine_splashscreen_logo_pixels(nintendo_arr, hudson_arr):
 def _defined(values):
     """Drop None (undefined) values, as JSON.stringify would."""
     return {k: v for k, v in values.items() if v is not None}
-
-
-def _num(value):
-    """ToNumber for a DataView setter: undefined becomes NaN, written as 0."""
-    return 0 if value is None else value
 
 
 def _json_stringify(obj):

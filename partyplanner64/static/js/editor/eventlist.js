@@ -3,7 +3,7 @@
 import { esc, promptDialog, toast } from '../api.js';
 import { EditorEventActivationType as A, EventParameterType, IMG } from './constants.js';
 import {
-  getEvent, getAvailableEvents, getBoardEvent, parseCustomEvent, getDistinctColor, isArrayEventParameterType,
+  getEvent, getAvailableEvents, getBoardEvent, parseCustomEvent, getDistinctColor,
 } from './board.js';
 import { setEventParamDropHandler } from './interaction.js';
 import { getImage } from './images.js';
@@ -212,4 +212,3 @@ function wireParam(chip, inst, i, opts) {
   }
 }
 
-export { isArrayEventParameterType };

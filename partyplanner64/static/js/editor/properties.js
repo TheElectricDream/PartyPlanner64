@@ -86,6 +86,15 @@ export class PropertiesCard {
       return;
     }
     const selected = store.selectedSpaces();
+    // Rebuild only when something shown changed (not for each step of a drag or a box selection).
+    const sig = JSON.stringify([store.selected, store.revision, store.index, store.rom, store.libraryLoaded,
+      store.overrideBg, !!this.app.setting('ui.advanced'), !!this.app.setting('ui.debug'), animationPlaying(),
+      store.optimistic.length, this.addedEvents.length]);
+    if (sig === this.sig) {
+      this.syncCoords(selected);
+      return;
+    }
+    this.sig = sig;
     // Keep the focused input (typing a coordinate) from being rebuilt under the cursor.
     const focused = document.activeElement;
     if (focused && this.body.contains(focused) && focused.matches('input[type=number]')) {

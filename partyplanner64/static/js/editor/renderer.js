@@ -3,7 +3,7 @@
 // their characters and badges, the selection box, and the telescope view.
 import { Space, SpaceSubtype, BoardType, EventParameterType } from './constants.js';
 import { spaces } from './spaces.js';
-import { drawImg, getImage } from './images.js';
+import { drawImg } from './images.js';
 import {
   getConnections, isConnectedTo, getEvent, isArrayEventParameterType, forEachEventParameter,
   getDistinctColor, hexstr,
@@ -557,9 +557,8 @@ export class BoardView {
   async setTelescope(on, st) {
     this.telescope.hidden = !on;
     if (!on) return;
-    const ctx = this.ctx(this.telescope);
+    this.ctx(this.telescope);
     addRecommendedBoundaryLine(st.board, this.telescope);
-    void ctx;
     const shot = await takeScreeny(st.board, {
       renderCharacters: true, bgSrc: st.overrideBg || st.board.bg.src, library: st.library,
     });
@@ -578,4 +577,3 @@ export class BoardView {
   }
 }
 
-export { getImage };

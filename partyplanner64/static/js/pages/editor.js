@@ -1,7 +1,7 @@
 // The Editor page: lay out a board's spaces and paths.
 // A sidebar of cards (Boards, Tools, Properties) next to the board view, with its toolbar, and a
 // console (Validation, Log) underneath. The drawing and editing are in js/editor/.
-import { $, $$, api, esc, act, toast, loadCss } from '../api.js';
+import { $, $$, api, esc, act, loadCss } from '../api.js';
 import { Action, BoardType, getEditTools, getPalette, SpaceNames, IMG } from '../editor/constants.js';
 import { store } from '../editor/store.js';
 import { BoardView } from '../editor/renderer.js';
@@ -530,4 +530,3 @@ export function hide() {
   rc?.close();
 }
 
-export { toast };

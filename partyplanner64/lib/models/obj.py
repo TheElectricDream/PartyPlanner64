@@ -4,7 +4,7 @@ scene_to_obj flattens every mesh into world space (the node transforms
 applied) and returns the .obj text (vertices with their vertex colors, as
 "v x y z r g b" in sRGB, texture coordinates flipped to OBJ's bottom-up v,
 normals, one usemtl per material group) and the .mtl text. scene_to_obj_zip
-packs object.obj, material.mtl and the textures (PNG) into a .zip, as the
+packs the .obj, the .mtl and the textures (PNG) into a .zip, as the
 original packed its output with JSZip.
 """
 
@@ -32,9 +32,14 @@ def _texture_name(index):
     return "texture_%d.png" % index
 
 
-def scene_to_obj(scene):
-    """Return (obj_text, mtl_text, textures) of a scene; textures maps file names to PNG bytes."""
-    lines = ["# PartyPlanner64", "mtllib material.mtl"]
+def scene_to_obj(scene, mtl_name="material.mtl"):
+    """Return {"obj": text, "mtl": text, "textures": {file name: PNG bytes}} of a scene.
+
+    Args:
+        scene: A scene description (form_to_scene).
+        mtl_name: The file name the .obj refers to the .mtl by.
+    """
+    lines = ["# PartyPlanner64", "mtllib %s" % mtl_name]
     used_materials = []
     counter = {"v": 0, "vt": 0, "vn": 0, "o": 0}
 
@@ -110,16 +115,16 @@ def scene_to_obj(scene):
             if desc.get("alpha_test"):
                 mtl.append("map_d %s" % name)
         mtl.append("")
-    return "\n".join(lines) + "\n", "\n".join(mtl) + "\n", textures
+    return {"obj": "\n".join(lines) + "\n", "mtl": "\n".join(mtl) + "\n", "textures": textures}
 
 
-def scene_to_obj_zip(scene):
-    """Return a .zip (bytes) of object.obj, material.mtl and the textures."""
-    obj_text, mtl_text, textures = scene_to_obj(scene)
+def scene_to_obj_zip(scene, name="object"):
+    """Return a .zip (bytes) of <name>.obj, <name>.mtl and the textures."""
+    result = scene_to_obj(scene, mtl_name="%s.mtl" % name)
     out = io.BytesIO()
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr("object.obj", obj_text)
-        zf.writestr("material.mtl", mtl_text)
-        for name, data in textures.items():
-            zf.writestr(name, data)
+        zf.writestr("%s.obj" % name, result["obj"])
+        zf.writestr("%s.mtl" % name, result["mtl"])
+        for tex_name, data in result["textures"].items():
+            zf.writestr(tex_name, data)
     return out.getvalue()

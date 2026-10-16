@@ -62,7 +62,8 @@ export class BoardsCard {
       const name = plainText(s.name) || 'Untitled';
       return `<li class="${active ? 'active' : ''}" data-index="${s.index}" data-rom="${rom ? 1 : 0}" role="option"
           aria-selected="${active}" title="Open “${esc(name)}” (${GameNames[s.game] || 'MP' + s.game}${s.type === BoardType.DUEL ? ', duel board' : ''}, ${s.spaceCount ?? '?'} spaces)${rom ? '. Loaded from the ROM: read-only.' : ''}">
-        ${rom ? `<img src="${IMG}/boardmenu/cart.png" class="rom-icon" alt="ROM">` : ''}
+        ${s.bg ? `<img src="${esc(s.bg)}" class="board-thumb" alt="" loading="lazy">` : '<span class="board-thumb"></span>'}
+        ${rom ? `<img src="${IMG}/boardmenu/cart.png" class="rom-icon" alt="ROM" title="Loaded from the ROM">` : ''}
         <span class="board-item-name">${esc(name)}</span>
         <span class="board-item-meta">MP${s.game}${s.type === BoardType.DUEL ? ' Duel' : ''}</span></li>`;
     };

@@ -43,7 +43,7 @@ function makeRom(game: string, rec: Rec) {
   const sceneBufs: { [i: number]: ArrayBuffer } = {};
   const scenes = {
     getInfo(i: number) {
-      const base = (0x80100000 + i * 0x1000) >>> 0;
+      const base = 0x80100000;
       return { rom_start: 0x200000 + i * 0x40000, rom_end: 0x200000 + i * 0x40000 + 0x30000, ram_start: base,
         code_start: base, code_end: base + 0x20000, rodata_start: base + 0x20000, rodata_end: base + 0x28000,
         bss_start: base + 0x28000, bss_end: base + 0x30000 };

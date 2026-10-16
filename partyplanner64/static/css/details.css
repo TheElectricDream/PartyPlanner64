@@ -104,3 +104,5 @@ textarea.rt-input { font-family: var(--mono); font-size: 12.5px; min-height: 0 !
 .code-messages:empty { display: none; }
 .code-messages { margin-top: 8px; }
 .code-messages .notice { white-space: pre-wrap; font-family: var(--mono); font-size: 12px; }
+
+.code-card .card-head:has(+ .code-body[hidden]) { margin-bottom: 0; }

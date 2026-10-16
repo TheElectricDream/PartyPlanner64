@@ -11,18 +11,37 @@ that js/lib/model3d.js builds into three.js objects, and exports glTF/GLB/OBJ.
         ?textures=0&wireframe=1&normals=1&camera=1&bg=FFFFFF)
     GET /api/models/<d>/<f>/animation/<ad>/<af> -> the animation for that model
     GET /api/models/<d>/<f>/export?format=gltf|glb|obj -> the file (format defaults to
-        models.useGLB: glb or gltf)
+        models.useGLB: glb or gltf; obj: a .zip of the .obj, its .mtl and the textures)
 """
 
 import inspect
 import importlib
 import json
 import threading
+import weakref
 
 from ..http import ApiError, Response, route
 
 _lock = threading.Lock()
-_lists = {}     # rom key -> {"models": [...], "animations": [...]}
+_lists = {}     # "lists" -> {"models": [...], "animations": [...]}
+_owner = None   # the MainFS they were made from (a weak reference)
+
+
+def _ref(obj):
+    """A weak reference to obj (a strong one if it can't have weak references)."""
+    try:
+        return weakref.ref(obj)
+    except TypeError:
+        return lambda: obj
+
+
+def _owned_by(obj, caches):
+    """Empty the caches unless they were filled for obj (the open ROM's file system)."""
+    global _owner
+    if _owner is None or _owner() is not obj:
+        for cache in caches:
+            cache.clear()
+        _owner = _ref(obj)
 
 
 def _romhandler():
@@ -35,7 +54,9 @@ def _mainfs():
     if rom is None:
         raise ApiError("Open a ROM first.", 409)
     mainfs = rom.get_main_fs()
-    return (id(rom), id(mainfs)), mainfs
+    with _lock:
+        _owned_by(mainfs, (_lists,))
+    return mainfs
 
 
 def _form_cls():
@@ -53,13 +74,13 @@ def _lib(name):
     for mod in ("...lib.models", "...lib.models.scene", "...lib.models.form_to_scene",
                 "...lib.models.form_to_three_js", "...lib.models.mtnx_to_animation",
                 "...lib.models.mtnx_to_three_js", "...lib.models.gltf", "...lib.models.export",
-                "...lib.models.obj"):
+                "...lib.models.obj", "...lib.models.gltf"):
         try:
             m = importlib.import_module(mod, __package__)
         except ImportError:
             continue
         fn = getattr(m, name, None)
-        if fn:
+        if callable(fn) and not inspect.ismodule(fn):
             return fn
     raise ApiError("This installation can't convert models yet (%s is missing)." % name, 501)
 
@@ -77,10 +98,10 @@ def _call(fn, *args, **opts):
 
 def _scan():
     """Every FORM and MTNX in the MainFS (kept until the ROM changes)."""
-    key, mainfs = _mainfs()
+    mainfs = _mainfs()
     with _lock:
-        if key in _lists:
-            return _lists[key]
+        if "lists" in _lists:
+            return _lists["lists"]
     FORM, MTNX = _form_cls(), _mtnx_cls()
     models, animations = [], []
     for d in range(mainfs.get_directory_count()):
@@ -95,13 +116,12 @@ def _scan():
                 animations.append({"dir": d, "file": f})
     result = {"models": models, "animations": animations}
     with _lock:
-        _lists.clear()
-        _lists[key] = result
+        _lists["lists"] = result
     return result
 
 
 def _file(d, f):
-    _, mainfs = _mainfs()
+    mainfs = _mainfs()
     if not (0 <= d < mainfs.get_directory_count() and 0 <= f < mainfs.get_file_count(d)):
         raise ApiError("There is no MainFS file %d/%d." % (d, f), 404)
     return mainfs.get(d, f)
@@ -204,25 +224,10 @@ def export_model(req, d, f):
     form = _form(d, f)
     name = "model-%d-%d" % (d, f)
     if fmt == "obj":
-        try:
-            export = _lib("form_to_obj")
-            result = _call(export, form)
-        except ApiError:
-            scene = _call(_lib("form_to_scene"), form)
-            result = _call(_lib("scene_to_obj"), scene)
-        if isinstance(result, dict):
-            # {"obj": text, "mtl": text, "textures": {name: png bytes}} -> a .zip
-            import io
-            import zipfile
-            out = io.BytesIO()
-            with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
-                z.writestr(name + ".obj", result.get("obj", ""))
-                if result.get("mtl"):
-                    z.writestr(name + ".mtl", result["mtl"])
-                for tex_name, data in (result.get("textures") or {}).items():
-                    z.writestr(tex_name, data)
-            return Response(out.getvalue(), "application/zip", filename=name + ".zip")
-        return Response(result, "text/plain; charset=utf-8", filename=name + ".obj")
+        # <name>.obj, <name>.mtl (named in the .obj's mtllib) and the textures, in a .zip.
+        scene = _call(_lib("form_to_scene"), form)
+        data = _lib("scene_to_obj_zip")(scene, name)
+        return Response(data, "application/zip", filename=name + ".zip")
     scene = _call(_lib("form_to_scene"), form)
     binary = fmt == "glb"
     result = _call(_lib("scene_to_gltf"), scene, binary=binary)

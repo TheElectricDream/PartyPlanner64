@@ -22,20 +22,35 @@ CASES = {case["name"]: case for case in INPUT["cases"]}
 STASH_FILES = [(10, 423), (10, 429), (10, 683), (19, 619), (19, 621)]
 
 
+def _save_board_infos():
+    saved = []
+    for game in ("CLBE", "NMWE", "NMVE"):
+        for info in boardinfo.get_board_infos(game):
+            saved.append((info, copy.deepcopy(info.get("space_event_tables")),
+                          "space_event_tables" in info))
+    return saved
+
+
+def _restore_board_infos(saved):
+    for info, tables, present in saved:
+        if present:
+            info["space_event_tables"] = copy.deepcopy(tables)
+        else:
+            info.pop("space_event_tables", None)
+
+
 @pytest.fixture
 def clean_board_infos():
     """load_boards records event table locations in the (module level) board infos."""
-    saved = {}
-    for game in ("CLBE", "NMWE", "NMVE"):
-        for info in boardinfo.get_board_infos(game):
-            saved[id(info)] = (info, copy.deepcopy(info.get("space_event_tables")),
-                               "space_event_tables" in info)
-    yield
-    for info, tables, present in saved.values():
-        if present:
-            info["space_event_tables"] = tables
-        else:
-            info.pop("space_event_tables", None)
+    saved = _save_board_infos()
+    yield saved
+    _restore_board_infos(saved)
+
+
+def _tables_json(tables):
+    if tables is None:
+        return None
+    return [{("tableOffset" if k == "table_offset" else k): v for k, v in t.items()} for t in tables]
 
 
 @pytest.mark.parametrize("name", sorted(CASES))
@@ -44,6 +59,7 @@ def test_load_boards(monkeypatch, clean_board_infos, name):
     rom = fakerom.install(monkeypatch, case["game"])
     rom.hvqfs.bg = dict(case["board"]["bg"])
     writer = get_adapter(case["game"], {})
+    fakerom.prefill(case["game"], writer, rom)
     writer.on_overwrite_promises = lambda *args: None
     writer.overwrite_board(case["boardIndex"], copy.deepcopy(case["board"]))
 
@@ -63,3 +79,6 @@ def test_load_boards(monkeypatch, clean_board_infos, name):
         assert len(got) == len(ref["boards"])
         for i, (g, e) in enumerate(zip(got, ref["boards"])):
             assert g == e, "board %d (%s)" % (i, "stashed" if stashed else "parsed")
+        infos = boardinfo.get_board_infos(fakerom.GAME_IDS[case["game"]])
+        assert [_tables_json(info.get("space_event_tables")) for info in infos] == ref["spaceEventTables"]
+        _restore_board_infos(clean_board_infos)

@@ -7,6 +7,51 @@
 import { romhandler } from "../packages/lib/romhandler";
 import { getAdapter } from "../packages/lib/adapter/adapters";
 import "../packages/lib/events/builtin/events.include";
+import { getBoardInfos } from "../packages/lib/adapter/boardinfo";
+import { create as createBoardDef } from "../packages/lib/adapter/boarddef";
+import { getSymbol } from "../packages/lib/symbols/symbols";
+import { parse as parseInst } from "mips-inst";
+
+// Fill the fake ROM with what the stock boards would have: a board def for every board,
+// and in each board's scene the values the board info points at and an event table
+// reached through a call to EventTableHydrate.
+function prefill(game: number, adapter: any, rom: any) {
+  const gameId = gameIds[game];
+  const mainfs = rom.getMainFS();
+  const scenes = rom.getScenes();
+  const loop: any = {
+    spaces: [0, 1, 2, 1, 1, 2, 1, 1].map((type, i) => ({ type, x: 10 * i, y: 5 * i, z: i })),
+    links: { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7, 7: 0 },
+  };
+  const jal = parseInst(`JAL ${getSymbol(gameId, "EventTableHydrate")}`);
+  getBoardInfos(gameId)!.forEach((info: any, j: number) => {
+    mainfs.write(adapter.boardDefDirectory, info.boardDefFile, createBoardDef(loop, [[0, 1, 2, 3, 4, 5, 6, 7]]));
+    if (typeof info.sceneIndex !== "number") return;
+    const v: DataView = scenes.getDataView(info.sceneIndex);
+    ["koopaSpaceInst", "bowserSpaceInst", "goombaSpaceInst", "booSpaceInst", "toadSpaceInst"].forEach((k, n) => {
+      if (info[k]) v.setUint16(info[k] + 2, n + 1);
+    });
+    const list = (o: any) => (o === undefined ? [] : Array.isArray(o) ? o : [o]);
+    for (const off of list(info.starSpaceArrOffset)) for (let i = 0; i < (info.starSpaceCount || 0); i++) v.setUint16(off + 2 * i, (i % 7) + 1);
+    for (const off of list(info.toadSpaceArrOffset)) for (let i = 0; i < (info.starSpaceCount || 0); i++) v.setUint16(off + 2 * i, (i % 5) + 2);
+    if (info.boosLoopFnOffset) {
+      v.setUint16(info.boosLoopFnOffset + 0x2a, 2);
+      v.setInt16(info.boosReadbackFnOffset + 0xd2, 0x1000);
+      v.setUint16(0x1000, 5);
+      v.setUint16(0x1002, 6);
+    }
+    for (const off of list(info.bankArrOffset)) for (let i = 0; i < (info.bankCount || 0); i++) v.setUint16(off + 2 * i, 7 + i);
+    for (const off of list(info.bankCoinArrOffset)) for (let i = 0; i < (info.bankCount || 0); i++) v.setUint16(off + 2 * i, 1 + i);
+    for (const off of list(info.itemShopArrOffset)) for (let i = 0; i < (info.itemShopCount || 0); i++) v.setUint16(off + 2 * i, 2 + i);
+    for (const off of list(info.booArrOffset)) for (let i = 0; i < (info.booCount || 0); i++) v.setUint16(off + 2 * i, 3 + i);
+    if (info.audioIndexOffset) v.setUint16(info.audioIndexOffset, 0x12 + j);
+    v.setUint32(0x100, 0x3c048010); // LUI A0, 0x8010
+    v.setUint32(0x104, jal);
+    v.setUint32(0x108, 0x24840800); // ADDIU A0, A0, 0x800
+    v.setInt16(0x800, 1); v.setUint32(0x804, 0x80100900); v.setInt16(0x808, -1);
+    v.setUint16(0x900, 1); v.setUint16(0x902, 1); v.setUint32(0x904, 0x80100a00);
+  });
+}
 import * as fs from "fs";
 
 import * as crypto from "crypto";
@@ -46,7 +91,7 @@ function makeRom(game: string, rec: Rec) {
   const sceneBufs: { [i: number]: ArrayBuffer } = {};
   const scenes = {
     getInfo(i: number) {
-      const base = (0x80100000 + i * 0x1000) >>> 0;
+      const base = 0x80100000;
       return { rom_start: 0x200000 + i * 0x40000, rom_end: 0x200000 + i * 0x40000 + 0x30000, ram_start: base,
         code_start: base, code_end: base + 0x20000, rodata_start: base + 0x20000, rodata_end: base + 0x28000,
         bss_start: base + 0x28000, bss_end: base + 0x30000 };
@@ -86,6 +131,8 @@ const gameIds: any = { 1: "CLBE", 2: "NMWE", 3: "NMVE" };
 const fullDir = process.argv[3]; // Optional: also save full buffers here, for debugging.
 const input = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
 const results: any = {};
+const SAVED: any = {};
+for (const g of ["CLBE", "NMWE", "NMVE"]) SAVED[g] = getBoardInfos(g as any)!.map((i: any) => i.spaceEventTables === undefined ? undefined : JSON.stringify(i.spaceEventTables));
 (async () => {
   for (const tc of input.cases) {
     const rec = new Rec();
@@ -97,6 +144,8 @@ const results: any = {};
     (romhandler as any).getDataView = () => new DataView(romBuf);
     BG = { ...tc.board.bg };
     const adapter: any = getAdapter(tc.game, {});
+    prefill(tc.game, adapter, rom);
+    rec.log.length = 0;
     adapter.onOverwritePromises = async () => {};
     await adapter.overwriteBoard(tc.boardIndex, JSON.parse(JSON.stringify(tc.board)));
     for (const stashed of [true, false]) {
@@ -116,7 +165,13 @@ const results: any = {};
       } catch (e: any) {
         res.error = String(e && e.message || e).slice(0, 2000);
       }
+      res.spaceEventTables = getBoardInfos(gameIds[tc.game])!.map((info: any) => info.spaceEventTables || null);
       results[tc.name + (stashed ? ":stashed" : ":parsed")] = res;
+      // Start the next load (and case) with the board infos as they were.
+      getBoardInfos(gameIds[tc.game])!.forEach((info: any, j: number) => {
+        if (SAVED[gameIds[tc.game]][j] === undefined) delete info.spaceEventTables;
+        else info.spaceEventTables = JSON.parse(SAVED[gameIds[tc.game]][j]);
+      });
     }
   }
   console.log(JSON.stringify(results));

@@ -12,15 +12,34 @@ finding them reads every file, so the list is kept until the ROM changes.
 
 import io
 import threading
+import weakref
 import zipfile
 from collections import OrderedDict
 
 from ..http import ApiError, Response, route
 
 _lock = threading.Lock()
-_list_cache = {}            # rom key -> [sprite summary]
-_frame_cache = OrderedDict()  # (rom key, dir, file) -> [img info]
+_list_cache = {}            # "list" -> [sprite summary]
+_frame_cache = OrderedDict()  # (dir, file) -> [img info]
+_owner = None               # the MainFS they were made from (a weak reference)
 FRAME_CACHE_SIZE = 32
+
+
+def _ref(obj):
+    """A weak reference to obj (a strong one if it can't have weak references)."""
+    try:
+        return weakref.ref(obj)
+    except TypeError:
+        return lambda: obj
+
+
+def _owned_by(obj, caches):
+    """Empty the caches unless they were filled for obj (the open ROM's file system)."""
+    global _owner
+    if _owner is None or _owner() is not obj:
+        for cache in caches:
+            cache.clear()
+        _owner = _ref(obj)
 
 
 def _romhandler():
@@ -33,7 +52,9 @@ def _mainfs():
     if rom is None:
         raise ApiError("Open a ROM first.", 409)
     mainfs = rom.get_main_fs()
-    return (id(rom), id(mainfs)), mainfs
+    with _lock:
+        _owned_by(mainfs, (_list_cache, _frame_cache))
+    return mainfs
 
 
 def _from_pack(buffer):
@@ -70,8 +91,8 @@ def list_sprites(mainfs):
 
 
 def _frames(d, f):
-    key, mainfs = _mainfs()
-    ck = (key, d, f)
+    mainfs = _mainfs()
+    ck = (d, f)
     with _lock:
         if ck in _frame_cache:
             _frame_cache.move_to_end(ck)
@@ -131,14 +152,13 @@ def sheet_png(imgs):
 
 @route("GET", "/api/sprites")
 def get_sprites(req):
-    key, mainfs = _mainfs()
+    mainfs = _mainfs()
     with _lock:
-        cached = _list_cache.get(key)
+        cached = _list_cache.get("list")
     if cached is None:
         cached = list_sprites(mainfs)
         with _lock:
-            _list_cache.clear()
-            _list_cache[key] = cached
+            _list_cache["list"] = cached
     return {"sprites": cached}
 
 

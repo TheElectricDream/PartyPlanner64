@@ -14,14 +14,34 @@ server renders a WAV that the page plays in an <audio> element.
 """
 
 import importlib
+import inspect
 import re
 import threading
+import weakref
 from collections import OrderedDict
 
 from ..http import ApiError, Response, route
 
 _lock = threading.Lock()
-_wav_cache = OrderedDict()      # (rom key, kind, t, i, revision) -> bytes
+_wav_cache = OrderedDict()      # (kind, t, i, revision) -> bytes
+_owner = None                   # the ROM they were made from (a weak reference)
+
+
+def _ref(obj):
+    """A weak reference to obj (a strong one if it can't have weak references)."""
+    try:
+        return weakref.ref(obj)
+    except TypeError:
+        return lambda: obj
+
+
+def _owned_by(obj, caches):
+    """Empty the caches unless they were filled for obj (the open ROM)."""
+    global _owner
+    if _owner is None or _owner() is not obj:
+        for cache in caches:
+            cache.clear()
+        _owner = _ref(obj)
 WAV_CACHE_SIZE = 12
 _revision = [0]                 # bumped when a song changes
 
@@ -120,7 +140,7 @@ def _find_function(name, modules):
         except ImportError:
             continue
         fn = getattr(m, name, None)
-        if fn:
+        if callable(fn) and not inspect.ismodule(fn):
             return fn
     return None
 
@@ -131,7 +151,9 @@ _AUDIO_MODULES = ("...lib.audio", "...lib.audio.render", "...lib.audio.synth",
 
 
 def _cached(key, make):
+    rom = _rom()
     with _lock:
+        _owned_by(rom, (_wav_cache,))
         if key in _wav_cache:
             _wav_cache.move_to_end(key)
             return _wav_cache[key]
@@ -177,7 +199,7 @@ def get_song_wav(req, t, i):
     if render is None:
         raise ApiError("Playing songs isn't available yet: this installation can't render "
                        "MIDI with the game's soundbanks. Download the MIDI instead.", 501)
-    wav = _cached((id(_rom()), "song", t, i, _revision[0]), lambda: render(t, i))
+    wav = _cached(("song", t, i, _revision[0]), lambda: render(t, i))
     return Response(wav, "audio/wav")
 
 
@@ -234,10 +256,10 @@ def get_sound_wav(req, t, i):
     table, sound = _sound(t, i)
     make = _find_function("sound_wav", _AUDIO_MODULES)
     if make is not None:
-        wav = _cached((id(_rom()), "sound", t, i, 0), lambda: make(t, i))
+        wav = _cached(("sound", t, i, 0), lambda: make(t, i))
     else:
         from ...lib.audio.wav import extract_wav_from_sound
-        wav = _cached((id(_rom()), "sound", t, i, 0),
+        wav = _cached(("sound", t, i, 0),
                       lambda: extract_wav_from_sound(table.tbl, sound, sound.sample_rate))
     name = None
     if req.query.get("download"):
