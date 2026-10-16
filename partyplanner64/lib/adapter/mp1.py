@@ -1,7 +1,6 @@
 """The Mario Party 1 adapter (port of adapter/MP1.ts)."""
 
 from ..types import Space, SpaceSubtype
-from ..utils.debug import log
 from ..utils.dataview import DataView
 from ..utils import canvas
 from ._js import at, count_occurrences, substring, to_bytes_array

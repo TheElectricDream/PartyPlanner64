@@ -1,5 +1,5 @@
 /* Settings page (js/pages/settings.js). */
-.settings-page .page-head .pill { margin-top: 2px; }
+.set-head-actions { display: flex; align-items: center; gap: 10px; flex: none; }
 .settings-grid { max-width: 1240px; }
 .set-group-desc { margin: -4px 0 10px; }
 .set-list { display: flex; flex-direction: column; }
