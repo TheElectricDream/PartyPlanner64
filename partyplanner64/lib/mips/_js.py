@@ -80,6 +80,8 @@ def parse_int(s, radix=10):
         count += 1
     if not count:
         return None
+    if n >= 9007199254740992:
+        n = int(float(n))  # JavaScript numbers are doubles.
     return sign * n
 
 

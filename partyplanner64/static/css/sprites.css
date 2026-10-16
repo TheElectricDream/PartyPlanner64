@@ -18,7 +18,7 @@
 .spr-viewer.bg-white { background: #fff; }
 .spr-frames { display: flex; flex-wrap: wrap; gap: 16px; padding: 72px 20px 24px; align-items: flex-start; }
 .spr-frame { margin: 0; display: flex; flex-direction: column; gap: 6px; }
-.spr-img { padding: 6px; border-radius: 8px; border: 1px dashed rgba(139,147,163,.45); line-height: 0; }
+.spr-img { text-align: center; padding: 6px; border-radius: 8px; border: 1px dashed rgba(139,147,163,.45); line-height: 0; }
 .spr-img img { image-rendering: pixelated; }
 .spr-frame figcaption {
   display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 4px 4px 4px 10px; border-radius: 8px;

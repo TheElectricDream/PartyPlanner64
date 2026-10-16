@@ -79,3 +79,17 @@ def test_overlay_speed():
     assemble(asm)
     elapsed = time.perf_counter() - start
     assert elapsed < 4, "assembling took %.2fs" % elapsed
+
+
+def test_single_lines_match_js():
+    """Every printed instruction form, assembled on its own (gen_lines.ts)."""
+    failures = []
+    for line, hex_out, text in _load("lines.json"):
+        src = ".org 0x80001000\n" + line
+        try:
+            got = [line, bytes(assemble(src)).hex(), "|".join(assemble(src, text=True))]
+        except Exception as e:  # noqa: BLE001
+            got = [line, None, str(e)]
+        if got != [line, hex_out, text]:
+            failures.append((got, [line, hex_out, text]))
+    assert not failures[:10], "%d mismatches: %r" % (len(failures), failures[:10])

@@ -190,3 +190,22 @@ def test_skip_validation(client, fake_rom):
 
 def test_romhandler_module_name():
     assert romhandler_module.romhandler is romhandler
+
+
+def test_real_validation(client):
+    """The library's validation, with a ROM that has only a header (MP3)."""
+    from partyplanner64.editor import boards
+    romhandler._rom = ROM(bytearray(_header("NMVE")))
+    try:
+        for n in range(2):
+            board = _make_default_board(3)
+            board["name"] = "ROM %d" % n
+            boards.add_board(board, rom=True)
+        v = client.get("/api/board/validate?romBoard=1")
+        assert v["romLoaded"] and len(v["boards"]) == 2
+        assert {"level": 1, "message": "Board is for MP1, but ROM is MP3"} in v["results"]
+        assert v["boards"][1]["forcedDisabled"] is True
+        status, _, body = client.call("POST", "/api/rom/overwrite", {"romBoardIndex": 1})
+        assert status == 400 and b"Board is for MP1, but ROM is MP3" in body
+    finally:
+        romhandler.clear()

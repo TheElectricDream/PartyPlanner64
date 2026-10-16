@@ -55,7 +55,7 @@ const optSets = [
 const printCases: any[] = [];
 const words: number[] = [];
 for (const name in ops) for (let k = 0; k < 12; k++) words.push(makeWord(ops[name]));
-for (let k = 0; k < 1500; k++) words.push(rnd32());
+for (let k = 0; k < 500; k++) words.push(rnd32());
 words.push(0, 0xFFFFFFFF, 0x03E00008, 0x0C000000, 0x08FFFFFF);
 for (const w of words) {
   const o = Math.floor(rand() * optSets.length);

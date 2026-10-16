@@ -11,6 +11,13 @@ from partyplanner64.lib.utils.dataview import DataView
 
 GAME_IDS = {1: "CLBE", 2: "NMWE", 3: "NMVE"}
 
+# What the fake string tables read (the string index is appended).
+STRS = {
+    "CLBE": "\u3014<GREEN>Fake Board<DEFAULT>\nFirst line\nSecond line\n<BLUE>Map Difficulty  \u3009\u3009\u3009<DEFAULT>",
+    "NMWE": "\u3014<BLUE>Fake Board\u0019<PURPLE>\t\tDifficulty\u0019 : \u3013\u3013\nFirst line\nSecond line",
+    "NMVE": "\u3014<GREEN>xFake Board{5}\nFirst line\nSecond \u3013 line",
+}
+
 
 def blob(buf):
     """How the fixtures record a buffer: hex when small, else length and SHA-1."""
@@ -77,6 +84,8 @@ class FakeScenes:
             self.bufs[i] = bytearray(0x30000)
         return DataView(self.bufs[i])
 
+    get_code_data_view = get_data_view
+
     def replace(self, i, buf, info=None):
         self.log.append(["scenes.replace", i, blob(buf), info])
 
@@ -84,6 +93,10 @@ class FakeScenes:
 class FakeHVQFS:
     def __init__(self, log):
         self.log = log
+        self.bg = {}
+
+    def read_background(self, dir):
+        return dict(self.bg, src="bg%d" % dir)
 
     def update_metadata(self, dir, values):
         self.log.append(["hvqfs.updateMetadata", dir, json.loads(json.dumps(values))])
@@ -96,19 +109,24 @@ class FakeHVQFS:
 
 
 class FakeStrings:
-    def __init__(self, log):
+    def __init__(self, log, game):
         self.log = log
+        self.game = game
 
     def write(self, i, buf):
         self.log.append(["strings.write", i, blob(buf)])
 
     def read(self, i, raw=False):
-        return ""
+        return STRS[self.game] + str(i)
 
 
 class FakeStrings3:
-    def __init__(self, log):
+    def __init__(self, log, game):
         self.log = log
+        self.game = game
+
+    def read(self, locale, d, i, raw=False):
+        return STRS[self.game] + "%d/%d" % (d, i)
 
     def write(self, locale, d, i, buf):
         self.log.append(["strings3.write", locale, d, i, blob(buf)])
@@ -139,8 +157,8 @@ class FakeROM:
         self.mainfs = FakeMainFS(self.log)
         self.scenes = FakeScenes(self.log)
         self.hvqfs = FakeHVQFS(self.log)
-        self.strings = FakeStrings(self.log)
-        self.strings3 = FakeStrings3(self.log)
+        self.strings = FakeStrings(self.log, self.game)
+        self.strings3 = FakeStrings3(self.log, self.game)
         self.animationfs = FakeAnimationFS(self.log)
         self.audio = FakeAudio()
         self.rom_buffer = bytearray(0xD0000)
