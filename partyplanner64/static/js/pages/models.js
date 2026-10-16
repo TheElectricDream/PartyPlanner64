@@ -436,7 +436,7 @@ function renderLegend() {
     if (pos) verts += pos.count;
     tris += o.geometry.index ? o.geometry.index.count / 3 : (pos ? pos.count / 3 : 0);
     const mats = Array.isArray(o.material) ? o.material : [o.material];
-    for (const m of mats) if (m?.map || m?.userData?.pp64Map) textures.add(m.map || m.userData.pp64Map);
+    for (const m of mats) if (m?.map) textures.add(m.map);
   });
   const clip = action?.getClip?.();
   el.hidden = false;

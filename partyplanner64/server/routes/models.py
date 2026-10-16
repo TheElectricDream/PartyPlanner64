@@ -7,7 +7,8 @@ that js/lib/model3d.js builds into three.js objects, and exports glTF/GLB/OBJ.
 
     GET /api/models                     -> {models: [{dir, file}], first: {dir, file} | null}
     GET /api/models/animations?dir=<d>  -> {animations: [{dir, file}]} (every MTNX, or dir d's)
-    GET /api/models/<d>/<f>             -> the scene (?textures=0&wireframe=1&normals=1&camera=1)
+    GET /api/models/<d>/<f>             -> the scene (form_to_scene; options
+        ?textures=0&wireframe=1&normals=1&camera=1&bg=FFFFFF)
     GET /api/models/<d>/<f>/animation/<ad>/<af> -> the animation for that model
     GET /api/models/<d>/<f>/export?format=gltf|glb|obj -> the file (format defaults to
         models.useGLB: glb or gltf)
@@ -165,7 +166,11 @@ def get_animations(req):
 @route("GET", "/api/models/<int:d>/<int:f>")
 def get_model(req, d, f):
     form = _form(d, f)
-    scene = _call(_lib("form_to_scene"), form,
+    try:
+        bg = int(req.query.get("bg") or "0", 16) & 0xFFFFFF
+    except ValueError:
+        raise ApiError("bg is a colour in hexadecimal, e.g. FFFFFF.")
+    scene = _call(_lib("form_to_scene"), form, bg_color=bg,
                   show_textures=_flag(req, "textures", True),
                   show_wireframe=_flag(req, "wireframe", False),
                   show_vertex_normals=_flag(req, "normals", False),
