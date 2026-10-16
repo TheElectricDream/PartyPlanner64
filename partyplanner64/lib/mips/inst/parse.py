@@ -7,7 +7,7 @@ from .bitstrings import is_binary_literal, make_bit_mask, make_bit_mask_from_str
 from .immediates import get_imm_format_details, parse_immediate
 from .opcodes import get_opcode_details, get_value_bit_length
 from .regex import get_opcode, make_regex_for_opcode
-from .regs import get_cond_bits, get_fmt3_bits, get_fmt_bits, get_reg_bits
+from .regs import get_cond_bits, get_fmt_bits, get_reg_bits
 
 _newline = re.compile(r"\r?\n")
 
