@@ -87,13 +87,12 @@ def from_pil(img):
 def get_image_data(src, width, height):
     """Return the ImageData for an image source, sized to width x height.
 
-    Port of utils/img/getImageData.ts (bilinear resize when the size
-    differs).
+    Port of utils/img/getImageData.ts: when the size differs it resizes
+    with the exact port of npm resize-image-data (bilinear), so images
+    written to ROMs match the TypeScript's pixel for pixel.
     """
-    img = open_image(src)
-    if img.width != width or img.height != height:
-        img = img.resize((int(width), int(height)), Image.BILINEAR)
-    return from_pil(img)
+    from .img.get_image_data import get_image_data as exact
+    return exact(src, width, height)
 
 
 def image_data_to_data_url(image_data):

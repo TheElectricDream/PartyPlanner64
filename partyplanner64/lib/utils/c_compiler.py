@@ -93,6 +93,7 @@ class _SmallerC:
     """One instance of the SmallerC module, with its file system and console."""
 
     def __init__(self, print_func):
+        _load_module()  # Raises a clear error when wasmtime is missing.
         import wasmtime
 
         self._print = print_func

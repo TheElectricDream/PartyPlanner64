@@ -232,9 +232,10 @@ function renderTools() {
       data-action="${p.type}" title="${esc(p.name)}${p.draggable ? ' (click the board, or drag this onto it)' : ''}" draggable="${p.draggable && !ro}" ${ro ? 'disabled' : ''}>
       <img src="${p.icon}" alt=""></button>`).join('');
   const chars = group('character');
-  body.innerHTML = `
-    ${ro ? '<div class="notice warn ro-tools">This board is from the ROM and is read-only. <button type="button" class="btn btn-sm btn-primary" data-copyedit title="Make an editable copy of this board and switch to it">Copy to Edit</button></div>' : ''}
-    <span class="field-label">Spaces</span>
+  body.innerHTML = ro
+    ? `<div class="notice warn ro-tools">This board is from the ROM and is read-only: you can look at its spaces, but not change them.
+        <button type="button" class="btn btn-sm btn-primary" data-copyedit title="Make an editable copy of this board and switch to it">Copy to Edit</button></div>`
+    : `<span class="field-label">Spaces</span>
     <div class="palette">${group('space')}</div>
     ${chars ? `<span class="field-label">${b.game === 1 ? 'Characters' : 'Characters & Buildings'}</span><div class="palette">${chars}</div>` : ''}
     <p class="hint tool-hint"></p>`;
@@ -247,7 +248,8 @@ function renderTools() {
   $('[data-copyedit]', body)?.addEventListener('click', () => boardsCard.copyBoard(true));
   const cur = [...edit, ...palette].find(t => t.type === store.action);
   pill.textContent = cur ? (cur.group ? cur.name.replace(/^Add |^Mark space as /, '').replace(/^\w/, c => c.toUpperCase()) : cur.name) : 'Move';
-  $('.tool-hint', body).textContent = toolHint(store.action);
+  const hint = $('.tool-hint', body);
+  if (hint) hint.textContent = toolHint(store.action);
 }
 
 function toolHint(action) {
@@ -357,6 +359,7 @@ function onBoard() {
   const empty = $('.editor-empty', root);
   if (!b) return;
   empty.hidden = true;
+  if (store.readonly && store.action !== Action.MOVE && store.action !== Action.TELESCOPE) store.setAction(Action.MOVE);
   redraw('all');
   renderTools();
   $('[data-undo]', root).disabled = !store.canUndo || store.readonly;

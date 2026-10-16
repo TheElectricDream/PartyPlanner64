@@ -326,7 +326,7 @@ export class PropertiesCard {
         ${ro ? '' : `<button type="button" class="btn btn-sm" data-add="add" title="Add a background the board can switch to (${bw} × ${bh})">
           <img src="${IMG}/toolbar/animadd.png" alt="">Add Background</button>`}
       </div>` : ''}
-      ${ro ? `<div class="notice info">Boards from the ROM are read-only. <button type="button" class="btn btn-sm btn-primary" data-copy title="Make an editable copy of this board">Copy to Edit</button></div>` : `<div class="section">
+      ${ro ? '<p class="hint">Boards from the ROM are read-only: copy the board to change it.</p>' : `<div class="section">
         <div class="section-head"><h3 class="tip" title="Events that run at set times of each turn rather than on a space">Board Events</h3></div>
         <div class="props-events"></div></div>`}`;
 

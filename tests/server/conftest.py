@@ -61,6 +61,20 @@ def start_server(data_dir, debug=False):
     return server
 
 
+@pytest.fixture(autouse=True)
+def _restore_globals():
+    """state.configure replaces the global event library; put it back after."""
+    from partyplanner64.lib import debug
+    from partyplanner64.lib.events import event_library
+    from partyplanner64.lib.romhandler import romhandler
+    library = event_library.get_event_library_implementation()
+    was_debug = debug.is_debug()
+    yield
+    event_library._event_library = library
+    debug.set_debug(was_debug)
+    romhandler.clear()
+
+
 @pytest.fixture
 def data_dir(tmp_path):
     return tmp_path / "data"

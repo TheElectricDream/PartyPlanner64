@@ -106,6 +106,7 @@ async function load() {
     if (dir >= info.directories.length) dir = 0;
     renderSide();
     await loadDir();
+    return true;
   }) ?? renderEmpty('Strings Unavailable', 'The ROM\'s strings couldn\'t be read.');
 }
 
