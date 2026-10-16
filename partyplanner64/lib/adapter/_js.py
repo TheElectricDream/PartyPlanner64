@@ -12,6 +12,7 @@ differently; reproducing them keeps the written ROM bytes identical:
 """
 
 import math
+from enum import Enum
 
 
 def _array_index(key):
@@ -95,7 +96,13 @@ def json_stringify(value):
     """JSON.stringify(value), compact, with JavaScript's number formatting and key order."""
     import json
 
+    def key(k):
+        k = getattr(k, "value", k) if isinstance(k, Enum) else k
+        return json.dumps(js_number_str(k) if isinstance(k, (int, float)) else str(k), ensure_ascii=False)
+
     def enc(v):
+        if isinstance(v, Enum):
+            v = v.value
         if v is None:
             return "null"
         if isinstance(v, bool):
@@ -107,13 +114,9 @@ def json_stringify(value):
         if isinstance(v, str):
             return json.dumps(str(v), ensure_ascii=False)
         if isinstance(v, dict):
-            return "{" + ",".join(
-                json.dumps(str(k), ensure_ascii=False) + ":" + enc(v[k]) for k in js_keys(v)) + "}"
+            return "{" + ",".join(key(k) + ":" + enc(v[k]) for k in js_keys(v)) + "}"
         if isinstance(v, (list, tuple)):
             return "[" + ",".join(enc(item) for item in v) + "]"
-        value_attr = getattr(v, "value", None)
-        if value_attr is not None:
-            return enc(value_attr)
         raise TypeError("Object of type %s is not JSON serializable" % type(v).__name__)
 
     return enc(value)

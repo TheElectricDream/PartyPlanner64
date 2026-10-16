@@ -15,4 +15,6 @@
 .mdl-viewer { background: #000; }
 .mdl-viewer canvas { position: absolute; inset: 0; }
 .mdl-name { color: #c3c9d4; padding: 0 6px; }
-.legend b { font-family: var(--mono); font-weight: 600; color: var(--text); }
+#mdlLegend span { gap: 0; }
+#mdlLegend b { font-family: var(--mono); font-weight: 600; color: var(--text); min-width: 34px; text-align: right; margin-right: 6px; }
+.mdl-list { height: 200px; }

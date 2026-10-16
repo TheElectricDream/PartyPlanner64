@@ -1,7 +1,7 @@
 // Settings: every editor setting, grouped as the original's settings view grouped them,
 // saved on the server (POST /api/settings). The original's colour themes ("classic",
 // "dark-gray") are gone: the page has a single dark design.
-import { $, $$, api, act, esc, loadCss, toast } from '../api.js';
+import { $, $$, api, act, esc, loadCss, toast, confirmDialog } from '../api.js';
 
 /**
  * The settings, by group. advanced: shown only with Advanced Features on (as in the original).
@@ -62,10 +62,21 @@ export function init(container, theApp) {
           <p class="hint">Changes apply at once and are kept on this computer, in the data folder, for every
             page that uses the editor.</p>
         </div>
-        <span class="pill" id="setAdvancedPill" title="Advanced settings are shown when Advanced Features is on"></span>
+        <div class="set-head-actions">
+          <span class="pill" id="setAdvancedPill" title="Advanced settings are shown when Advanced Features is on"></span>
+          <button type="button" class="btn btn-sm" id="setReset" title="Put every setting back to its default">Reset to Defaults</button>
+        </div>
       </div>
       <div class="grid settings-grid"></div>
     </div>`;
+  $('#setReset', root).addEventListener('click', async () => {
+    if (!await confirmDialog('Put every setting back to its default?', { title: 'Reset Settings', yes: 'Reset' })) return;
+    await act(async () => {
+      await api('/api/settings/reset', {});
+      await app.refresh();
+      toast('The settings are back to their defaults.', 'success', 3000);
+    });
+  });
   app.on('state', () => render());
   render();
 }
