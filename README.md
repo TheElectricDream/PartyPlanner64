@@ -52,6 +52,8 @@ A ROM is not required to create and edit boards with PartyPlanner64, however to 
 
 ROMs that have been edited can also be re-opened.
 
+The games' own board backgrounds (Hudson's HVQ format, which the earlier TypeScript editor could not decode) are shown in the editor. Backgrounds you set are still written in the formats the games accept from PartyPlanner64, not HVQ.
+
 ROM files must be ran with Expansion Pak on hardware, emulators must be configured to use 8MB RAM or the game will crash.
 
 ### Emulators

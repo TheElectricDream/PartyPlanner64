@@ -14,7 +14,7 @@ from ..utils.arrays import copy_range
 from ..utils.canvas import ImageData, image_data_to_data_url
 from ..utils.dataview import DataView
 from ..utils.debug import hexstr, log
-from ..utils.img.hvq import decode, encode
+from ..utils.img.hvq import HVQMPS, decode, encode
 from ..utils.img.rgba5551 import rgba5551to_rgba32, rgba5551from_rgba32
 from ..utils.img.tiler import from_tiles, to_tiles
 from ..utils.number import make_divisible_by
@@ -432,8 +432,9 @@ class HVQFS:
         # Grab DataViews of all of the tiles.
         game = self._rom.get_game_version()
         adjust = 1 if game == 1 else 2  # Skip HVQ-MPS in newer games
+        mps = self._get_mps(dir)
         hvq_tiles = [DataView(t) for t in self._hvq_cache[dir][adjust:]]
-        rgba16_tiles = [decode(t) for t in hvq_tiles]
+        rgba16_tiles = [decode(t, mps) for t in hvq_tiles]
         rgba16_views = [DataView(t) for t in rgba16_tiles]
         ordered_rgb16_tiles = []
         for y in range(tile_y_count - 1, -1, -1):
@@ -444,18 +445,17 @@ class HVQFS:
         bg_buffer_rgba32 = rgba5551to_rgba32(bg_buffer_rgba16, width, height)
         return ImageData(width, height, bg_buffer_rgba32)
 
-    def is_hvq_compressed(self, dir):
-        """Return whether background `dir` has HVQ-compressed tiles.
-
-        Real HVQ decoding was never implemented (utils/img/hvq.py), so these
-        tiles read as black: the game's own backgrounds. Backgrounds written by
-        PartyPlanner64 use other encodings and read properly.
-        """
-        tiles = self._hvq_cache[dir] if dir < len(self._hvq_cache) else None
-        if not tiles:
-            return False
-        adjust = 1 if self._rom.get_game_version() == 1 else 2
-        return any(bytes(t[:3]) == b"HVQ" for t in tiles[adjust:])
+    def _get_mps(self, dir):
+        """Return the background's HVQ-MPS (Mario Party 2 and 3: file 1, what
+        its HVQS tiles share), parsed, or None."""
+        files = self._hvq_cache[dir]
+        if self._rom.get_game_version() == 1 or len(files) < 2 or bytes(files[1][:7]) != b"HVQ-MPS":
+            return None
+        try:
+            return HVQMPS(files[1])
+        except Exception as exc:  # noqa: BLE001 - the tiles then read as black
+            log("HVQFS: background %s has a bad HVQ-MPS file (%s)" % (dir, exc))
+            return None
 
     def read_background(self, dir):
         """Return the background as the metadata plus width, height and src (a PNG data URL)."""
