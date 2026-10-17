@@ -18,7 +18,7 @@ const GROUPS = [
         desc: 'Enables debug output and the Debug page, which may aid development.' },
       { id: 'ui.skipvalidation', name: 'Skip Overwrite Validation', advanced: true,
         desc: 'Allow boards to be written to the ROM regardless of warnings.' },
-      { id: 'ui.showromboards', name: 'Show ROM Boards', advanced: true,
+      { id: 'ui.showromboards', name: 'Show ROM Boards',
         desc: 'Show the boards parsed from the ROM in the editor\'s board list.' },
       { id: 'ui.allowallroms', name: 'Allow All ROMs', advanced: true,
         desc: 'Allows more than just the officially supported ROMs to attempt to load.' },

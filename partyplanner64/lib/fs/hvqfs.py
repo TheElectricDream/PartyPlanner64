@@ -444,6 +444,19 @@ class HVQFS:
         bg_buffer_rgba32 = rgba5551to_rgba32(bg_buffer_rgba16, width, height)
         return ImageData(width, height, bg_buffer_rgba32)
 
+    def is_hvq_compressed(self, dir):
+        """Return whether background `dir` has HVQ-compressed tiles.
+
+        Real HVQ decoding was never implemented (utils/img/hvq.py), so these
+        tiles read as black: the game's own backgrounds. Backgrounds written by
+        PartyPlanner64 use other encodings and read properly.
+        """
+        tiles = self._hvq_cache[dir] if dir < len(self._hvq_cache) else None
+        if not tiles:
+            return False
+        adjust = 1 if self._rom.get_game_version() == 1 else 2
+        return any(bytes(t[:3]) == b"HVQ" for t in tiles[adjust:])
+
     def read_background(self, dir):
         """Return the background as the metadata plus width, height and src (a PNG data URL)."""
         metadata = self.get_metadata(dir)
