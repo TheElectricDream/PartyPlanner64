@@ -94,9 +94,13 @@ class FakeHVQFS:
     def __init__(self, log):
         self.log = log
         self.bg = {}
+        self.hvq_dirs = set()       # backgrounds in HVQ (the game's own)
 
     def read_background(self, dir):
         return dict(self.bg, src="bg%d" % dir)
+
+    def is_hvq_compressed(self, dir):
+        return dir in self.hvq_dirs
 
     def update_metadata(self, dir, values):
         self.log.append(["hvqfs.updateMetadata", dir, json.loads(json.dumps(values))])

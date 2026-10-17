@@ -72,8 +72,16 @@ export class BoardsCard {
     const romList = b.romList || [];
     if (showRom && romList.length) {
       html += `<li class="list-sep" aria-hidden="true">ROM Boards</li>` + romList.map(s => item(s, true)).join('');
+    } else if (romList.length) {
+      html += `<li class="list-hint" data-showrom title="Show ROM Boards is off in Settings">
+        <span>${romList.length} board${romList.length === 1 ? '' : 's'} in the ROM ${romList.length === 1 ? 'is' : 'are'} hidden</span>
+        <button type="button" class="btn btn-sm">Show</button></li>`;
     }
     this.list.innerHTML = html;
+    $('[data-showrom] button', this.list)?.addEventListener('click', () => act(async () => {
+      await api('/api/settings', { 'ui.showromboards': true });
+      await this.app.refresh();
+    }));
     for (const li of $$('li[data-index]', this.list)) {
       li.addEventListener('click', () => {
         const index = +li.dataset.index;

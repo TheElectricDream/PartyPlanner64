@@ -268,7 +268,9 @@ def set_board_costume_type_index_action(state, payload, event_library):
 
 
 def set_background_action(state, payload, event_library):
-    get_current_board(state)["bg"]["src"] = payload["bg"]
+    board = get_current_board(state)
+    board["bg"]["src"] = payload["bg"]
+    board.pop("_bgHvq", None)       # a background of its own now (see HVQFS.is_hvq_compressed)
 
 
 def set_board_other_bg_action(state, payload, event_library):

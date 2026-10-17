@@ -95,6 +95,9 @@ const TEMPLATE = `
         <span class="pill warn">Read-Only</span><span>This board is from the ROM.</span>
         <button type="button" class="btn btn-sm btn-primary" data-copyedit title="Make an editable copy of this board and switch to it">Copy to Edit</button>
       </div>
+      <div class="hvq-note" hidden title="The game stores its board backgrounds in Hudson's HVQ format. PartyPlanner64 has never been able to decode it (the format is undocumented), so they show as black. The spaces and paths are the game's own. Backgrounds you set yourself show normally.">
+        <span class="pill">No Background</span><span>The game's own background (HVQ) can't be shown.</span>
+      </div>
     </div>
     <div class="console editor-console">
       <div class="console-head">
@@ -365,6 +368,7 @@ function onBoard() {
   $('[data-undo]', root).disabled = !store.canUndo || store.readonly;
   $('[data-redo]', root).disabled = !store.canRedo || store.readonly;
   $('.ro-banner', root).hidden = !store.readonly;
+  $('.hvq-note', root).hidden = !b._bgHvq;
   const name = plainText(b.name) || 'Untitled';
   const lg = $('.lg-board', root);
   lg.innerHTML = `<i style="background:var(--accent)"></i>${esc(name)} · MP${b.game}${b.type === BoardType.DUEL ? ' Duel' : ''} · ${b.spaces.length} spaces`;

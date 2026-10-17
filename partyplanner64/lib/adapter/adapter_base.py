@@ -170,6 +170,10 @@ class AdapterBase:
             if self.on_load:
                 self.on_load(new_board, board_info, board_from_rom is not None)
 
+            # (Python port) The editor says why the background is black.
+            if hvqfs.is_hvq_compressed(bg_dir):
+                new_board["_bgHvq"] = True
+
             boards.append(new_board)
 
         if is_debug():
@@ -405,6 +409,7 @@ class AdapterBase:
         board_copy.pop("bg", None)
         board_copy.pop("otherbg", None)
         board_copy.pop("animbg", None)
+        board_copy.pop("_bgHvq", None)  # (Python port) worked out again on load
         board_json_buffer = _string_to_array_buffer(_json_stringify(board_copy))
 
         dir, file = board_info["mainfs_board_file"]
