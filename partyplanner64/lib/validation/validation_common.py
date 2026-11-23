@@ -619,13 +619,27 @@ def _audio_details_issue_fails(context, args=None):
         from ..utils.arrays import data_url_to_array_buffer
 
         audio = _romhandler().get_rom().get_audio()
+        custom_banks = board.get("soundbanks") or []
+        used_banks = []
         for audio_entry in audio_data:
-            soundbank_index = audio_entry.get("soundbankIndex")
-            seq_table = audio.get_sequence_table(0)
-            bank_count = len(seq_table.soundbanks.banks)
-            # (A missing index compares false both ways in JavaScript.)
-            if _is_number(soundbank_index) and (soundbank_index < 0 or soundbank_index >= bank_count):
-                return f"Soundbank index for custom audio is out of range (0 - {bank_count - 1})"
+            custom = audio_entry.get("customSoundbank")
+            if custom is not None:
+                # One of the board's own soundbanks.
+                from ..audio.custom_bank import check_soundbank
+                if not _is_number(custom) or not 0 <= custom < len(custom_banks):
+                    return "Custom audio uses a soundbank the board doesn't have."
+                problem = check_soundbank(custom_banks[int(custom)])
+                if problem:
+                    return problem
+                if custom_banks[int(custom)] not in used_banks:
+                    used_banks.append(custom_banks[int(custom)])
+            else:
+                soundbank_index = audio_entry.get("soundbankIndex")
+                seq_table = audio.get_sequence_table(0)
+                bank_count = len(seq_table.soundbanks.banks)
+                # (A missing index compares false both ways in JavaScript.)
+                if _is_number(soundbank_index) and (soundbank_index < 0 or soundbank_index >= bank_count):
+                    return f"Soundbank index for custom audio is out of range (0 - {bank_count - 1})"
 
             if not audio_entry.get("data"):
                 return "Custom audio was chosen, but a midi file was not uploaded."
@@ -640,5 +654,11 @@ def _audio_details_issue_fails(context, args=None):
                 return "Custom audio midi data could not be converted into game audio."
             if not game_midi:
                 return "Custom audio midi data could not be converted into game audio."
+
+        if used_banks:
+            from ..audio.custom_bank import budget_problem
+            problem = budget_problem(_romhandler().get_rom_game(), used_banks)
+            if problem:
+                return problem
 
     return False

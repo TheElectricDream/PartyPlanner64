@@ -2,7 +2,10 @@
 the event code editor (apps/partyplanner64/utils/lib/mp-mips-autocomplete.ts).
 
     GET /api/symbols?games=MP1_USA,MP3_USA&type=code
-        -> {games: ["MP1_USA", "MP3_USA"], missing: [], symbols: [{name, type, addr, desc}]}
+        -> {games: ["MP1_USA", "MP3_USA"], missing: [], symbols: [{name, type, addr, desc, note}]}
+
+"desc" is a symbol's comment up to its first comma (as the original had it); "note",
+when there is more, is the whole comment (e.g. all of a function's arguments).
 
 With several games, the answer is the intersection of their symbols (by name), as
 the original completed only names that every supported game has. `type` filters
@@ -32,12 +35,21 @@ def _get_symbols(game, sym_type=None):
     return get_symbols(game, sym_type)
 
 
-def _plain(sym):
-    """A symbol as JSON (the port may give dicts or objects)."""
+def _get_notes(game):
+    from ...lib.symbols.symbols import get_symbol_notes
+    return get_symbol_notes(game)
+
+
+def _plain(sym, notes=None):
+    """A symbol as JSON (the port may give dicts or objects); "note" is its whole
+    comment when that says more than "desc" (which stops at the first comma)."""
     get = sym.get if isinstance(sym, dict) else (lambda k, d=None: getattr(sym, k, d))
     out = {"name": get("name"), "type": get("type"), "addr": get("addr")}
     if get("desc"):
         out["desc"] = get("desc")
+    note = (notes or {}).get(out["name"])
+    if note and note != out.get("desc"):
+        out["note"] = note
     return out
 
 
@@ -51,7 +63,8 @@ def symbols_for(games, sym_type=None):
     missing = []
     for game in games:
         try:
-            syms = [_plain(s) for s in _get_symbols(game, sym_type)]
+            notes = _get_notes(game)
+            syms = [_plain(s, notes) for s in _get_symbols(game, sym_type)]
         except ImportError:
             raise ApiError("The game symbols are not available in this installation.", 501)
         except Exception:  # noqa: BLE001 - e.g. no symbols for MP2/MP3 PAL

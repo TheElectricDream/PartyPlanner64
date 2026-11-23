@@ -16,7 +16,7 @@
 .dbg-result:empty { display: none; }
 .dbg-out-head {
   display: flex; align-items: center; justify-content: space-between; padding: 6px 10px 0;
-  border-bottom: 1px solid var(--border); background: #0c0e12;
+  border-bottom: 1px solid var(--border); background: var(--bg-deep);
 }
-.dbg-log { flex: 1; min-height: 0; margin: 0; background: #0c0e12; }
+.dbg-log { flex: 1; min-height: 0; margin: 0; background: var(--bg-deep); }
 .dbg-block { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px dashed #232833; }

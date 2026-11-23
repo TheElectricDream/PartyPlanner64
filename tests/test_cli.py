@@ -173,3 +173,45 @@ def test_validate_with_rom(tmp_path, capsys, fake_rom, monkeypatch):
     assert code == 0 and "warning: careful" in out and "Deep" not in out
     code, out, _ = run(["validate", str(board), "--rom", str(rom), "--rom-board", "1"], capsys)
     assert code == 1 and "error: too big" in out
+
+
+# playtest
+
+
+def test_playtest_needs_a_rom_file(capsys):
+    code, out, err = run(["playtest"], capsys)
+    assert code == 2
+    assert "--rom-file is needed" in err
+    code, out, err = run(["playtest", "--help"], capsys)
+    assert code == 0 and "--no-launch" in out and "--emulator" in out
+
+
+def test_playtest_writes_a_test_rom(capsys, tmp_path, monkeypatch):
+    from .lib.test_playtest import _mp3_rom_path
+    rom_path = _mp3_rom_path()
+    if not rom_path:
+        pytest.skip("The Mario Party 3 (U) ROM is not in roms/")
+    monkeypatch.setenv("PARTYPLANNER64_DATA", str(tmp_path / "data"))
+    from partyplanner64 import state
+    monkeypatch.setattr(state._app, "data_dir", None)
+    out_file = tmp_path / "test.z64"
+    try:
+        code, out, err = run(["playtest", "--rom-file", rom_path, "--target-board-index", "5",
+                              "--coins", "30", "--no-launch", "--output-file", str(out_file)], capsys)
+        assert code == 0, err
+        assert "Wrote %s" % out_file in out
+        rom = out_file.read_bytes()
+        assert rom[0x3B:0x40] == b"NEDE\x20"
+        # Options the game does not have, and boards that cannot be tested, are refused.
+        code, out, err = run(["playtest", "--rom-file", rom_path, "--coins", "5000", "--no-launch"],
+                             capsys)
+        assert code == 1 and "Coins must be from 0 to 999." in err
+        code, out, err = run(["playtest", "--rom-file", rom_path, "--target-board-index", "7",
+                              "--no-launch"], capsys)
+        assert code == 1 and "duel" in err
+        # By default it goes to the data folder.
+        code, out, err = run(["playtest", "--rom-file", rom_path, "--no-launch"], capsys)
+        assert code == 0, err
+        assert (tmp_path / "data" / "playtest" / "PartyPlanner64 Test (MP3).z64").is_file()
+    finally:
+        romhandler.clear()

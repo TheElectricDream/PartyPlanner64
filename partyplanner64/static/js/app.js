@@ -86,6 +86,8 @@ function renderTopbar() {
   for (const btn of $$('.page-tabs button')) {
     btn.hidden = !needsMet(btn.dataset.needs);
   }
+  // Many pages (a ROM open): the header puts their labels under the icons when narrow.
+  $('.topbar').classList.toggle('many', $$('.page-tabs button:not([hidden])').length > 7);
   // A page that is no longer available: back to the editor.
   const active = $(`.page-tabs button[data-page="${currentPage}"]`);
   if (currentPage && active?.hidden) showPage('editor');

@@ -136,7 +136,8 @@ def extract_wav_from_sound(tbl, sound, sampling_rate):
         _write_header(out_view, sampling_rate, data_chunk_size, 0x10)
 
         # Grab the wave data from the tbl.
-        # Skip first and last byte for some reason?
+        # Skip first and last byte for some reason? (As the original: no game bank has RAW16
+        # waves, and custom soundbanks are ADPCM.)
         if data_chunk_size + 1 > tbl_view.byte_length:
             raise IndexError("Offset is outside the bounds of the DataView")
         start = tbl_view.byte_offset + 1

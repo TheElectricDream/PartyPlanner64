@@ -10,6 +10,7 @@ import { store } from '../editor/store.js';
 import { createRichText } from '../editor/richtext.js';
 import { copyCurrentBoard } from '../editor/boards.js';
 import { supportsAnimationBackgrounds, supportsAdditionalBackgrounds, plainText } from '../editor/board.js';
+import { renderSoundbanks, chooseSoundbank, soundbankLabel } from '../editor/soundbanks.js';
 
 let app;
 let root;
@@ -80,6 +81,7 @@ const TEMPLATE = `
       <div class="details-col">
         <section class="card" data-card="info"><div class="card-head"><h2>Basic Info</h2></div><div class="card-body"></div></section>
         <section class="card" data-card="music"><div class="card-head"><h2>Background Music</h2><div class="card-actions"></div></div><div class="card-body"></div></section>
+        <section class="card" data-card="soundbanks" hidden><div class="card-head"><h2>Soundbanks</h2></div><div class="card-body"></div></section>
       </div>
       <div class="details-col">
         <section class="card" data-card="bg"><div class="card-head"><h2>Main Background</h2><span class="pill"></span></div><div class="card-body"></div></section>
@@ -143,6 +145,7 @@ function render() {
 
   renderInfo(b, ro);
   renderMusic(b, ro);
+  renderSoundbanksCard(b, ro);
   renderBackground(b, ro);
   renderImages(b, ro);
   renderMoreBackgrounds(b, ro);
@@ -239,7 +242,8 @@ function renderMusic(b, ro) {
     romSongsTried = tryKey;
     loadRomSongs(b.game).then(() => { sigs.delete('music'); if (store.board) renderMusic(store.board, store.readonly); });
   }
-  renderCard('music', [boardKey(), ro, advanced, b.game, b.audioType, b.audioIndex, b.audioData?.map(a => [a.name, a.soundbankIndex, !!a.data]),
+  renderCard('music', [boardKey(), ro, advanced, b.game, b.audioType, b.audioIndex, b.audioData?.map(a => [a.name, a.soundbankIndex, a.customSoundbank, !!a.data]),
+    b.soundbanks?.map(s => s.name),
     !!b.audioSelectCode, romKey, !!romSongs], el => {
     const actions = $('.card-actions', el);
     actions.innerHTML = advanced && !ro
@@ -298,7 +302,7 @@ function audioEntry(a, i, canDelete, ro) {
     <img src="${IMG}/details/audio.png" class="audio-icon" alt="" title="Custom audio track">
     <div class="audio-text">
       <div class="audio-name">${esc(name)}</div>
-      ${a.data ? `<div class="audio-bank muted small">Soundbank Index: <b>${a.soundbankIndex || 0}</b></div>` : ''}
+      ${a.data ? `<div class="audio-bank muted small">${soundbankLabel(store.board, a)}</div>` : ''}
     </div>
     ${ro ? '' : `<button type="button" class="btn btn-sm" data-midi title="Upload a MIDI file for this track">${a.data ? 'Replace' : 'Upload MIDI…'}</button>
       ${a.data ? '<button type="button" class="btn btn-sm" data-bank title="Change the soundbank (the instruments) the song plays with">Soundbank</button>' : ''}
@@ -319,16 +323,19 @@ async function promptMidi(customAudioIndex) {
 
 async function promptSoundbank(customAudioIndex) {
   const b = store.board;
-  const upperBound = romSongs && romSongs.game === b.game ? Math.max(0, romSongs.soundbankCount - 1) : 0;
-  const value = await promptDialog(`Enter new soundbank index${upperBound ? ` (0 through ${upperBound})` : ''}:`,
-    { title: 'Soundbank Index', value: String(b.audioData?.[customAudioIndex]?.soundbankIndex || 0) });
-  if (!value) return;
-  const idx = parseInt(value, 10);
-  if (isNaN(idx) || idx < 0 || (upperBound && idx > upperBound)) {
-    toast('Invalid soundbank index.', 'warn');
-    return;
-  }
-  setAudio({ customAudioIndex, soundbankIndex: idx }, 'Change soundbank');
+  const count = romSongs && romSongs.game === b.game ? romSongs.soundbankCount : 0;
+  await chooseSoundbank(b, customAudioIndex, count);
+}
+
+// ---------- soundbanks ----------
+
+function renderSoundbanksCard(b, ro) {
+  const show = (b.audioType ?? BoardAudioType.InGame) === BoardAudioType.Custom || !!b.soundbanks?.length;
+  card('soundbanks').hidden = !show;
+  if (!show) return;
+  renderCard('soundbanks', [boardKey(), ro, b.game, JSON.stringify(b.soundbanks || [])], el => {
+    renderSoundbanks($('.card-body', el), b, ro);
+  });
 }
 
 function hex(n) {
@@ -614,6 +621,9 @@ async function openCode(kind) {
     host.innerHTML = '';
     c.editor = await createCodeEditor(host, {
       language: c.language, value: code, readOnly: ro,
+      // The game's symbols (completion, hover help), and the names this code has (DEFAULT_BG...).
+      getGames: () => (store.board ? [`MP${store.board.game}_USA`] : []),
+      context: kind === 'additionalbg' ? 'background' : 'music',
       onChange: () => markDirty(kind),
       onSave: () => saveCode(kind),
     });

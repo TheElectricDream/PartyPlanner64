@@ -1,9 +1,10 @@
 // The Boards card (boardmenu.tsx, newboard.tsx and the board actions of header.tsx): your boards
-// and the ROM's, new, import, export, copy, delete, and Overwrite to ROM with validation.
+// and the ROM's, new, import, export, copy, delete, Overwrite to ROM with validation, and Test Play.
 import { $, $$, api, esc, toast, act, busy, dialog, confirmDialog, pickFile, download } from '../api.js';
 import { IMG, BoardType, GameNames } from './constants.js';
 import { store } from './store.js';
 import { plainText } from './board.js';
+import { playTest, playTestOptions } from './playtest.js';
 
 /** Escapes a validation message, keeping its links and line breaks (they were HTML). */
 export function messageHtml(text) {
@@ -44,6 +45,8 @@ export class BoardsCard {
     $('[data-copy]', card).addEventListener('click', () => this.copyBoard());
     $('[data-delete]', card).addEventListener('click', () => this.deleteBoard());
     $('[data-overwrite]', card).addEventListener('click', () => this.overwrite());
+    $('[data-playtest]', card).addEventListener('click', () => playTest(this.app));
+    $('[data-playtest-options]', card).addEventListener('click', () => playTestOptions(this.app));
     app.on('state', () => this.render());
     store.on('board', () => this.render());
     this.render();
@@ -105,6 +108,7 @@ export class BoardsCard {
     const romOpen = !!this.app.state?.rom;
     $('[data-delete]', this.card).disabled = !!cur.rom;
     $('[data-overwrite]', this.card).hidden = !romOpen || !!cur.rom;
+    $('.test-actions', this.card).hidden = !romOpen;
     const count = $('.board-count', this.card);
     count.textContent = `${(b.list || []).length}`;
     count.title = `${(b.list || []).length} board${(b.list || []).length === 1 ? '' : 's'} of your own${romList.length ? `, ${romList.length} in the ROM` : ''}`;

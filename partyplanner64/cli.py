@@ -7,12 +7,20 @@
     python -m partyplanner64 overwrite --rom-file MarioParty.z64 \\
         --target-board-index 0 --board-file board.json --output-file MyMarioParty.z64
 
+    # Test a board: a ROM that boots straight into it, started in your emulator:
+    python -m partyplanner64 playtest --rom-file MarioParty3.z64 --board-file board.json
+
     python -m partyplanner64 info MarioParty.z64             # the game and its boards
     python -m partyplanner64 export-boards MarioParty.z64 out/  # the ROM's boards as .json
     python -m partyplanner64 validate board.json [--rom MarioParty.z64 [--rom-board 0]]
 
 overwrite: --target-board-index is 0-based (0 is DK's Jungle Adventure in Mario
 Party 1). The input ROM is not changed; a new ROM is written to --output-file.
+playtest: writes the board (or, without --board-file, the ROM's own board at
+--target-board-index) into a test ROM that skips the title screen, the menus and
+the board's opening scenes, and starts the emulator with it (--no-launch: only
+writes the ROM). The players, coins and so on are the Test Play options saved by
+the web app, or the defaults.
 validate: without --rom, the board file is read and checked for a start space and
 dead ends; with --rom, it gets the checks the editor ran before overwriting a
 board of that ROM (all its boards, or the one given with --rom-board).
@@ -95,6 +103,77 @@ def _cmd_overwrite(args):
     if code == 0:
         print("Wrote %s" % args.output_file)
     return code
+
+
+def _cmd_playtest(args):
+    """Build a test ROM (lib/playtest) and start the emulator with it."""
+    from . import emulator, state
+    from .lib import playtest
+    from .lib.adapter.adapters import get_rom_adapter
+    from .lib.romhandler import romhandler
+
+    print(START_BANNER)
+    if not args.rom_file:
+        print("Bad arguments: --rom-file is needed", file=sys.stderr)
+        return 2
+    _setup_library()
+    if not _load_rom(args.rom_file, False):
+        return 1
+    version = romhandler.get_game_version()
+    index = args.target_board_index or 0
+    saved = state._playtest_saved()
+    try:
+        options = playtest.normalize_options(version, saved["options"].get(str(version)))
+    except playtest.PlaytestError:
+        options = None
+    try:
+        options = playtest.normalize_options(version, options)
+        for name in ("coins", "stars", "turns", "turn"):
+            if getattr(args, name) is not None:
+                options[name] = getattr(args, name)
+        options = playtest.normalize_options(version, options)
+        if args.board_file:
+            board = _read_board(args.board_file)
+            reason = playtest.unsupported_reason(romhandler.get_rom_game(), board.get("type"))
+            if reason:
+                raise playtest.PlaytestError(reason)
+            adapter = get_rom_adapter({})
+            adapter.load_boards()
+            print("Writing %s over board %d" % (args.board_file, index))
+            adapter.overwrite_board(index, board)
+        playtest.apply(index, options)
+        rom = romhandler.save_rom(False)
+        playtest.finish_rom(rom)
+    except playtest.PlaytestError as e:
+        print(e, file=sys.stderr)
+        return 1
+    except Exception as e:  # noqa: BLE001 - reported as overwrite does
+        print("Error building the test ROM:\n", e, file=sys.stderr)
+        return 1
+
+    output = Path(args.output_file) if args.output_file else \
+        state.default_data_dir() / state.PLAYTEST_DIR / ("PartyPlanner64 Test (MP%s).z64" % version)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_bytes(bytes(rom))
+    print("Wrote %s" % output)
+    if args.no_launch:
+        return 0
+    command = args.emulator or saved["emulator"]
+    if not command:
+        detected = emulator.detect()
+        command = detected["command"] if detected else ""
+    if not command:
+        print("No Nintendo 64 emulator was found; give its command with --emulator.",
+              file=sys.stderr)
+        return 1
+    try:
+        started = emulator.launch(command, output.resolve())
+    except emulator.EmulatorError as e:
+        print(e, file=sys.stderr)
+        return 1
+    emulator._process = None        # it keeps running after this command ends
+    print("Started %s" % started[0])
+    return 0
 
 
 def _rom_boards():
@@ -216,6 +295,20 @@ def main(argv=None):
     ow.add_argument("--board-file", help="a custom board JSON file")
     ow.add_argument("--output-file", help="the ROM file to create")
 
+    pt = sub.add_parser("playtest", help="test a board: boot a ROM straight into it, in an emulator")
+    pt.add_argument("--rom-file", help="a stock Mario Party ROM (often a .z64 file)")
+    pt.add_argument("--board-file", help="a custom board JSON file (default: the ROM's own board)")
+    pt.add_argument("--target-board-index", type=int,
+                    help="the index of the ROM board to use or overwrite (0-based, default 0)")
+    pt.add_argument("--output-file", help="the test ROM to write (default: in the data folder)")
+    pt.add_argument("--emulator", help="the emulator's command; %%f is the ROM file "
+                                       "(default: the saved one, or an installed emulator)")
+    pt.add_argument("--no-launch", action="store_true", help="write the test ROM only")
+    pt.add_argument("--coins", type=int, help="coins every player starts with")
+    pt.add_argument("--stars", type=int, help="stars every player starts with")
+    pt.add_argument("--turns", type=int, help="the number of turns of the game")
+    pt.add_argument("--turn", type=int, help="the turn the game starts on")
+
     info = sub.add_parser("info", help="show a ROM's game and boards")
     info.add_argument("rom", help="a Mario Party ROM")
     info.add_argument("--allow-all", action="store_true", help="try ROMs that aren't supported")
@@ -242,7 +335,7 @@ def main(argv=None):
             args = serve.parse_args([])
         app.serve(args)
         return 0
-    handler = {"overwrite": _cmd_overwrite, "info": _cmd_info,
+    handler = {"overwrite": _cmd_overwrite, "playtest": _cmd_playtest, "info": _cmd_info,
                "export-boards": _cmd_export_boards, "validate": _cmd_validate}[args.command]
     code = handler(args)
     if code:

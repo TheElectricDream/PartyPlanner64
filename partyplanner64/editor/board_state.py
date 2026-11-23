@@ -361,6 +361,46 @@ def set_board_audio_action(state, payload, event_library):
                 entry["data"] = audio_changes["midiData"]
             if _is_number(audio_changes.get("soundbankIndex")):
                 entry["soundbankIndex"] = audio_changes["soundbankIndex"]
+                entry.pop("customSoundbank", None)
+            if "customSoundbank" in audio_changes:
+                # One of the board's own soundbanks (an index into board["soundbanks"]), or None.
+                custom = audio_changes["customSoundbank"]
+                if _is_number(custom):
+                    assert_(0 <= custom < len(board.get("soundbanks") or []))
+                    entry["customSoundbank"] = int(custom)
+                else:
+                    entry.pop("customSoundbank", None)
+
+
+def set_board_soundbank_action(state, payload, event_library):
+    """Add, replace or delete one of the board's own soundbanks (lib/audio/custom_bank).
+    payload: {"index", "soundbank"} (index == count adds one) or {"index", "delete": True}.
+    Deleting a soundbank moves the songs that played it back to the game's soundbanks."""
+    board = get_current_board(state)
+    banks = board.setdefault("soundbanks", [])
+    index = payload["index"]
+    assert_(_is_number(index) and 0 <= index <= len(banks))
+    if payload.get("delete"):
+        assert_(index < len(banks))
+        del banks[index]
+        for entry in board.get("audioData") or []:
+            custom = entry.get("customSoundbank")
+            if custom == index:
+                entry.pop("customSoundbank", None)
+            elif _is_number(custom) and custom > index:
+                entry["customSoundbank"] = custom - 1
+        if not banks:
+            board.pop("soundbanks", None)
+        return
+    from ..lib.audio.custom_bank import check_soundbank
+    bank = payload["soundbank"]
+    problem = check_soundbank(bank)
+    if problem:
+        raise ValueError(problem)
+    if index == len(banks):
+        banks.append(bank)
+    else:
+        banks[index] = bank
 
 
 def add_space_action(state, payload, event_library):
@@ -888,6 +928,7 @@ REDUCERS = {
     "setAdditionalBackgroundCodeAction": set_additional_background_code_action,
     "setAudioSelectCodeAction": set_audio_select_code_action,
     "setBoardAudioAction": set_board_audio_action,
+    "setBoardSoundbankAction": set_board_soundbank_action,
 
     "addConnectionAction": add_connection_action,
     "eraseConnectionsAction": erase_connections_action,

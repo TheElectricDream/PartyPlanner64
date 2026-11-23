@@ -74,3 +74,24 @@ def get_symbol(game, name):
             return sym["addr"]
 
     raise ValueError("Symbol %s wasn't found for %s." % (name, _game_str(game)))
+
+
+_NOTES_FILES = {
+    Game.MP1_USA: "MarioParty1U", Game.MP1_JPN: "MarioParty1J", Game.MP1_PAL: "MarioParty1E",
+    Game.MP2_USA: "MarioParty2U", Game.MP2_JPN: "MarioParty2J",
+    Game.MP3_USA: "MarioParty3U", Game.MP3_JPN: "MarioParty3J",
+}
+
+
+def get_symbol_notes(game):
+    """The whole comment of each of a game's symbols, by name ({} without symbols).
+
+    A symbol's "desc" is its comment up to the first comma (as the original
+    kept it); these (notes/<Game>.json, also written by update_symbols.py) are
+    the whole comments, e.g. the arguments of a function: "A0=player_index,
+    A1=amount (signed), ensures 0 <= coins <= 999".
+    """
+    name = _NOTES_FILES.get(game)
+    if name is None:
+        return {}
+    return _load(os.path.join("notes", name))

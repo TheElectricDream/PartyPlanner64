@@ -103,6 +103,74 @@ validated first (as `GET /api/board/validate`); errors, or a board that can't be
 and your board stays current (or board 0 if a ROM board was current).
 -> `{boards}`. Publishes `rom`, `boards`.
 
+## Test play
+
+A test ROM boots straight into a board, in the middle of a game (`partyplanner64/lib/playtest`):
+no title screen, menus or opening scenes, and the game saves nothing. It is built from a copy of
+the open ROM, which is not changed. Mario Party 3 (U) Battle Royal boards only, so far.
+
+### `GET /api/playtest`
+```json
+{"romLoaded": true, "supported": true, "reason": null,
+ "game": {"characters": [{"id": 0, "name": "Mario"}, ...], "items": [{"id": 1, "name": "Skeleton Key"}, ...],
+          "itemSlots": 3, "difficulties": [...], "controls": [{"id": "pad1", "name": "Controller 1"}, ...],
+          "maxTurns": 50, "maxCoins": 999, "maxStars": 99, "defaults": options},
+ "options": {"players": [{"character": 0, "control": "pad1", "difficulty": 1, "items": []}, x4],
+             "coins": 50, "stars": 0, "turns": 20, "turn": 1},
+ "emulator": {"command": "", "detected": {"name": "RMG-K", "command": "... %f"}, "effective": "... %f"}}
+```
+`reason`: why the current board cannot be tested (no ROM, another game's board, a duel board, a
+game without test play); `game` and `options` are null for a game without test play.
+`control` is `pad1`..`pad4` or `cpu`; players may share a controller. `emulator.command` is the
+command as set (`""`: use the detected one); `%f` in it is the ROM file.
+
+### `POST /api/playtest/options {emulator?, options?}` -> as `GET /api/playtest`
+Saves the emulator's command and/or the test options of the open ROM's game (kept in
+`playtest.json`). Missing options keep their defaults; 400 for values the game does not have,
+409 for `options` without a ROM.
+
+### `POST /api/playtest {romBoardIndex?, options?, launch?}`
+Builds the test ROM of the current board, writes it to `playtest/` in the data folder and starts
+the emulator with it (stopping the one started before); `launch: false` only writes it. One of your
+boards is validated and written over ROM board `romBoardIndex`, by default the first it has no
+errors for; a ROM board is tested as it is. `options` replace the saved ones for this test.
+-> `{game, romBoardIndex, romBoardName, boardName, fileName, options, path, launched, command}`
+(`command`: the arguments run). 400 with the message when the board has problems, no emulator
+is found, or it cannot be started (the ROM is written all the same); 409 if no ROM.
+
+### `POST /api/playtest/rom {romBoardIndex?, options?}`
+-> the test ROM as a file (`PartyPlanner64 Test (MP3).z64`), for another emulator or a flash cart.
+
+### `POST /api/playtest/event/info {code, language}`
+The Test Play dialog of one custom event, given its code (as the event editor has it, saved or not;
+`language` 0 is MIPS, 1 is C).
+```json
+{"event": {"id": "Toll", "name": "Toll"}, "supported": true, "reason": null,
+ "test": {"activations": [{"id": 3, "name": "Land On"}, {"id": 1, "name": "Walk Over"}],
+          "spaceTypes": [{"id": 4, "name": "Happening"}, {"id": 1, "name": "Blue"}, {"id": 2, "name": "Red"}],
+          "parameters": [{"name": "toll", "type": "+Number"}],
+          "spaces": [{"index": 0, "name": "Start space"}, {"index": 1, "name": "Invisible space (after the start)"},
+                     {"index": 2, "name": "Loop space 1"}, ...],
+          "loopSpaces": 10, "defaults": settings},
+ "settings": {"activation": 3, "spaceType": 4, "parameterValues": {"toll": 1}},
+ "emulator": {...}}
+```
+`reason`: why the event cannot be tested (no ROM, not Mario Party 3 (U), no `MP3_USA` in its
+GAMES). `settings` are the ones saved by the event's last test, or the defaults. 400 for code
+without an event header.
+
+### `POST /api/playtest/event {code, language, settings?, romBoardIndex?, launch?}`
+Test-plays the event: a test board is made for it (`lib/playtest/eventtest.py`: a start space, an
+invisible space, then a loop of 10 spaces back to the invisible space), then tested as `POST
+/api/playtest` tests a board, with the saved Test Play options. With `activation` 3 (Land On) every
+loop space, of type `spaceType`, runs the event, so any roll lands on one; with 1 (Walk Over) the
+invisible space runs it, so every first move passes it. `parameterValues` are the event's PARAMs;
+a Space parameter is the index of a space of the test board. The settings are saved for the event.
+-> as `POST /api/playtest`, plus `{event, settings}`. 400 for bad settings or code that doesn't
+assemble (or compile) for Mario Party 3; 409 if no ROM.
+
+### `POST /api/playtest/stop` -> `{stopped}`: stops the emulator started last, if it still runs.
+
 ## Boards
 
 ### `GET /api/board`
@@ -256,6 +324,27 @@ Adds it to the library if it passes the test compile (400 otherwise).
 the event read from the code and a test compile for each game it supports. For a C event
 (`language` 1), each passing result also has `asm`, the MIPS assembly the C compiles to.
 
+## Code help
+
+The code editors' completions and hover help, and the Reference page, use these.
+
+### `GET /api/symbols?games=MP3_USA,MP1_USA&type=code`
+`{games, missing, symbols: [{name, type, addr, desc, note?}]}`: the functions and data that
+every one of the games has (games by name or id, e.g. `NMVE`), sorted by name; `type` keeps one
+type (`code`, `data`, `u8`, ...). `desc` is the symbol table's comment up to its first comma, as
+the original kept it; `note`, when there is more, is the whole comment (e.g. a function's
+arguments: `A0=player_index,A1=amount (signed), ensures 0 <= coins <= 999`). `missing` lists
+the games without symbols (MP2 and MP3 PAL).
+
+### `GET /api/reference` -> `{categories, entries: [...]}`
+The code reference (`partyplanner64/lib/reference`): what MIPS instructions, registers,
+directives, C keywords and types, the event header, parameters, board code names and the games'
+main functions mean, with examples. An entry is `{id, kind, category, name, words, lang, syntax,
+summary, body, examples: [{title, lang, code, check, params?, games?}], see, games?, contexts?,
+tags}`; the module's docstring describes each field. `body` is a little markup: paragraphs,
+`- ` lists, `` `code` ``, `**bold**` and `[[entry id|text]]` links. The tests assemble or compile
+every example whose `check` isn't `none`.
+
 ## Song names
 
 ### `GET /api/songs/<game>` -> `{game, names: {index: name}}`
@@ -277,3 +366,6 @@ payload)` or `partyplanner64.editor.ops.apply([(op, args)])`.
 of `{id, name, custom, language, asm, activationType, executionType, supportedGames,
 parameters}`), `settings.json` (`{id: value}`). They are written shortly after each change and when
 the server stops.
+`playtest.json` (`{emulator, options: {game version: options}, events: {event id: settings}}`)
+holds the Test Play options and each event's last test settings, and
+`playtest/` the test ROM built last and `emulator.log`, what the emulator printed.

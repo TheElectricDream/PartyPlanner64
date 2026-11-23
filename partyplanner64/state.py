@@ -585,8 +585,8 @@ def current_board():
         return bs.select_current_board(store.state)
 
 
-def validate_current_board(rom_board_index=None):
-    """Validate the current board for writing over the ROM's boards.
+def validate_current_board(rom_board_index=None, board=None):
+    """Validate the current board (or the given one) for writing over the ROM's boards.
 
     Returns {results: [{level, message}], general: {errors, warnings},
     boards: [{index, name, unavailable, forcedDisabled, errors, warnings}], romLoaded}.
@@ -598,7 +598,7 @@ def validate_current_board(rom_board_index=None):
             return empty
         from .lib.validation.validation import validate_current_board_for_overwrite
         rom_boards = list(store.state.rom_boards)
-        board = copy.deepcopy(current_board())
+        board = copy.deepcopy(current_board() if board is None else board)
         results = validate_current_board_for_overwrite(
             rom_boards, board, bool(get_setting("ui.skipvalidation")))
     if not results:
@@ -677,3 +677,322 @@ def overwrite_rom_board(rom_board_index):
         info = rom_info()
     _publish("rom", {"rom": info})
     return boards_info()
+
+
+# Test play: a ROM that boots straight into a board (lib/playtest), and the emulator
+
+PLAYTEST_FILE = "playtest.json"
+PLAYTEST_DIR = "playtest"
+
+
+def _playtest_saved():
+    """What playtest.json holds: {"emulator": str, "options": {game version: options},
+    "events": {event id: event test settings}}."""
+    data = _read_json_file(PLAYTEST_FILE)
+    if not isinstance(data, dict):
+        data = {}
+    emulator = data.get("emulator")
+    options = data.get("options")
+    events = data.get("events")
+    return {"emulator": emulator if isinstance(emulator, str) else "",
+            "options": options if isinstance(options, dict) else {},
+            "events": events if isinstance(events, dict) else {}}
+
+
+def _save_playtest(saved):
+    text = jsjson.stringify(saved, indent=1)
+    _app.saver.schedule(data_path(PLAYTEST_FILE), lambda: text)
+    _app.saver.flush()
+
+
+def _playtest_options(game_version, saved=None):
+    """A game's saved test options, checked (the defaults if they no longer fit)."""
+    from .lib import playtest
+    saved = saved if saved is not None else _playtest_saved()
+    try:
+        return playtest.normalize_options(game_version, saved["options"].get(str(game_version)))
+    except playtest.PlaytestError:
+        return playtest.normalize_options(game_version)
+
+
+def _emulator_info(saved=None):
+    from . import emulator
+    saved = saved if saved is not None else _playtest_saved()
+    detected = emulator.detect()
+    command = saved["emulator"].strip() or (detected["command"] if detected else "")
+    return {"command": saved["emulator"].strip(), "detected": detected, "effective": command}
+
+
+def playtest_info():
+    """What the Test Play dialog shows.
+
+    {romLoaded, supported, reason, game: describe() or None, options,
+     emulator: {command (as set, "" = automatic), detected: {name, command} or None,
+     effective}}.
+    """
+    from .lib import playtest
+    with lock:
+        saved = _playtest_saved()
+        info = {"romLoaded": rom_is_loaded(), "supported": False, "reason": None, "game": None,
+                "options": None, "emulator": _emulator_info(saved)}
+        if not info["romLoaded"]:
+            info["reason"] = "Open a ROM to test boards in it."
+            return info
+        rh = _romhandler()
+        version = rh.get_game_version()
+        board = current_board() or {}
+        reason = playtest.unsupported_reason(rh.get_rom_game(), board.get("type"))
+        if not reason and not store.state.current_board_is_rom and board.get("game") != version:
+            reason = "This board is for Mario Party %s; the ROM is Mario Party %s." % (
+                board.get("game"), version)
+        info["game"] = playtest.describe(version)
+        if info["game"]:
+            info["options"] = _playtest_options(version, saved)
+        info["supported"] = not reason
+        info["reason"] = reason
+        return info
+
+
+def set_playtest_options(emulator=None, options=None):
+    """Save the emulator command and/or the open ROM's game's test options."""
+    from .lib import playtest
+    with lock:
+        saved = _playtest_saved()
+        if emulator is not None:
+            if not isinstance(emulator, str):
+                raise _api_error("The emulator is a command line.")
+            saved["emulator"] = emulator.strip()
+        if options is not None:
+            version = _romhandler().get_game_version() if rom_is_loaded() else None
+            if not version:
+                raise _api_error("Open a ROM to set its game's test options.", 409)
+            try:
+                saved["options"][str(version)] = playtest.normalize_options(version, options)
+            except playtest.PlaytestError as e:
+                raise _api_error(str(e))
+        _save_playtest(saved)
+    return playtest_info()
+
+
+def _pick_test_board(rom_board_index, board=None):
+    """The ROM board to write the current board (or the given one) over for a test:
+    (index, name)."""
+    validation = validate_current_board(board=board)
+    entries = validation["boards"]
+    general = validation["general"]["errors"]
+
+    def blocked(entry):
+        return entry["unavailable"] or entry["forcedDisabled"] or entry["errors"]
+
+    if rom_board_index is not None:
+        if isinstance(rom_board_index, bool) or not isinstance(rom_board_index, int) \
+                or not 0 <= rom_board_index < len(entries):
+            raise _api_error("There is no ROM board %s." % (rom_board_index,))
+        candidates = [entries[rom_board_index]]
+    else:
+        candidates = entries
+    if not general:
+        for entry in candidates:
+            if not blocked(entry):
+                return entry["index"], entry["name"]
+    problems = list(general)
+    for entry in candidates:
+        for message in entry["errors"]:
+            if message not in problems:
+                problems.append(message)
+    if not problems:
+        problems.append("None of the ROM's boards can be overwritten by this board.")
+    raise _api_error("The board has problems to fix before it can be tested:\n\n%s"
+                     % "\n".join("- " + p for p in problems))
+
+
+def build_test_rom(rom_board_index=None, options=None, board=None):
+    """A ROM that boots straight into the current board: (bytes, info).
+
+    The open ROM is not changed: the board is written over one of the boards of a
+    copy of it (rom_board_index, or the first it passes the checks for), unless the
+    current board is one of the ROM's own. options: test options (lib.playtest);
+    the saved ones by default. board: a board to test instead of the current one
+    (an event's test board), written over a ROM board in the same way.
+    info: {game, romBoardIndex, romBoardName, boardName, fileName, options}.
+    """
+    from .lib import playtest
+    from .lib.adapter.adapters import get_rom_adapter
+    with lock:
+        require_rom()
+        rh = _romhandler()
+        version = rh.get_game_version()
+        state = store.state
+        given = board is not None
+        if not given:
+            board = bs.select_current_board(state)
+        if board is None:
+            raise _api_error("There is no board to test.")
+        from_rom = not given and bool(state.current_board_is_rom)
+        reason = playtest.unsupported_reason(rh.get_rom_game(), board.get("type"))
+        if reason:
+            raise _api_error(reason)
+        try:
+            options = playtest.normalize_options(version, options) if options is not None \
+                else _playtest_options(version)
+        except playtest.PlaytestError as e:
+            raise _api_error(str(e))
+
+        if from_rom:
+            target, target_name = state.current_board_index, board.get("name")
+        else:
+            if board.get("game") != version:
+                raise _api_error("This board is for Mario Party %s; the ROM is Mario Party %s."
+                                 % (board.get("game"), version))
+            target, target_name = _pick_test_board(rom_board_index, board if given else None)
+
+        original = rh._rom
+        rh._rom = copy.deepcopy(original)
+        try:
+            if not from_rom:
+                adapter = get_rom_adapter({"write_branding": False})
+                if not adapter:
+                    raise _api_error("This ROM can't be written to.")
+                adapter.overwrite_board(target, copy.deepcopy(board))
+            playtest.apply(target, options)
+            buffer = rh.save_rom(False)
+            playtest.finish_rom(buffer)
+        except playtest.PlaytestError as e:
+            raise _api_error(str(e))
+        except Exception as e:  # noqa: BLE001
+            if getattr(e, "status", None):           # an ApiError
+                raise
+            logger.exception("Building the test ROM failed")
+            raise _api_error("Error building the test ROM.\n\n%s" % e)
+        finally:
+            rh._rom = original
+        info = {
+            "game": version,
+            "romBoardIndex": target,
+            "romBoardName": target_name,
+            "boardName": board.get("name"),
+            "fileName": "PartyPlanner64 Test (MP%s).z64" % version,
+            "options": options,
+        }
+        return bytes(buffer), info
+
+
+def playtest(rom_board_index=None, options=None, launch=True, board=None):
+    """Build the test ROM, write it to the data folder and start the emulator with it.
+
+    board: a board to test instead of the current one (see build_test_rom).
+    Returns build_test_rom's info, plus {path, launched, command: [arguments]}.
+    """
+    from . import emulator
+    command = _emulator_info()["effective"]
+    if launch and not command:
+        raise _api_error("No Nintendo 64 emulator was found. Set the emulator's command "
+                         "in the Test Play options.")
+    data, info = build_test_rom(rom_board_index, options, board)
+    directory = data_path(PLAYTEST_DIR)
+    directory.mkdir(parents=True, exist_ok=True)
+    path = directory / info["fileName"]
+    tmp = directory / ("." + info["fileName"] + ".tmp")
+    tmp.write_bytes(data)
+    os.replace(tmp, path)          # a running emulator keeps the file it opened
+    info["path"] = str(path)
+    info["launched"] = False
+    info["command"] = None
+    if launch:
+        try:
+            info["command"] = emulator.launch(command, path,
+                                              log_path=directory / "emulator.log")
+        except emulator.EmulatorError as e:
+            raise _api_error("%s\n\nThe test ROM is at %s." % (e, path))
+        info["launched"] = True
+    return info
+
+
+# Test play of one event: a small board around it (lib/playtest/eventtest)
+
+def _event_for_test(code, language):
+    """The custom event of the code (as the event editor has it, saved or not)."""
+    from .lib.events.customevents import create_custom_event
+    if isinstance(language, str) and language.isdigit():
+        language = int(language)
+    if language not in (0, 1) or isinstance(language, bool):
+        raise _api_error("The language is 0 (MIPS assembly) or 1 (C).")
+    if not isinstance(code, str) or not code.strip():
+        raise _api_error("The event has no code.")
+    try:
+        return create_custom_event(language, code)
+    except ValueError as e:
+        raise _api_error(str(e))
+
+
+def _event_test_reason(event):
+    """Why the event cannot be test-played with the open ROM, or None."""
+    from .lib import playtest
+    from .lib.playtest import eventtest
+    from .lib.types import Game
+    if not rom_is_loaded():
+        return "Open a Mario Party 3 (U) ROM to test events in it."
+    rh = _romhandler()
+    return playtest.unsupported_reason(rh.get_rom_game()) or \
+        eventtest.unsupported_reason(event, Game.MP3_USA)
+
+
+def event_test_info(code, language):
+    """What the event's Test Play dialog shows.
+
+    {event: {id, name}, supported, reason, test: eventtest.describe(),
+     settings: the saved settings for the event (or the defaults), emulator}.
+    """
+    from .lib.playtest import eventtest
+    with lock:
+        event = _event_for_test(code, language)
+        saved = _playtest_saved()
+        reason = _event_test_reason(event)
+        return {
+            "event": {"id": event.id, "name": event.name},
+            "supported": not reason,
+            "reason": reason,
+            "test": eventtest.describe(event),
+            "settings": eventtest.normalize_settings(event, saved["events"].get(event.id),
+                                                     lenient=True),
+            "emulator": _emulator_info(saved),
+        }
+
+
+def event_playtest(code, language, settings=None, rom_board_index=None, launch=True):
+    """Test-play an event: build its test board, then a test ROM of it (playtest()).
+
+    The settings (eventtest.normalize_settings) are saved for the event's next test.
+    The players, coins, turn and emulator are the Test Play options.
+    Returns playtest()'s info, plus {event: name, settings}.
+    """
+    from .lib.events.customevents import validate_custom_event
+    from .lib.playtest import PlaytestError, eventtest
+    from .lib.types import Game
+    with lock:
+        require_rom()
+        event = _event_for_test(code, language)
+        reason = _event_test_reason(event)
+        if reason:
+            raise _api_error(reason)
+        try:
+            settings = eventtest.normalize_settings(event, settings)
+        except PlaytestError as e:
+            raise _api_error(str(e))
+        saved = _playtest_saved()
+        saved["events"][event.id] = settings
+        _save_playtest(saved)
+
+        # Its code is checked first, for a clearer message than the ROM build's.
+        single = copy.copy(event)
+        single.supported_games = [Game.MP3_USA]
+        try:
+            validate_custom_event(single)
+        except ValueError as e:
+            raise _api_error(str(e))
+        new_board = editor_boards._make_default_board(_romhandler().get_game_version())
+        board = eventtest.build_board(new_board, event, settings)
+    info = playtest(rom_board_index, None, launch, board)
+    info["event"] = event.name
+    info["settings"] = settings
+    return info

@@ -129,6 +129,7 @@ def test_reducer_names_complete():
         "addAnimationBackgroundAction", "removeAnimationBackgroundAction",
         "addAdditionalBackgroundAction", "removeAdditionalBackgroundAction",
         "setAdditionalBackgroundCodeAction", "setAudioSelectCodeAction", "setBoardAudioAction",
+        "setBoardSoundbankAction",   # the port's own: custom soundbanks
         "addConnectionAction", "eraseConnectionsAction", "setTemporaryUIConnections",
         "addSpaceAction", "removeSpaceAction", "removeSpacesAction", "setSpacePositionsAction",
         "setSpaceTypeAction", "setSpaceSubtypeAction", "setSpaceHostsStarAction",

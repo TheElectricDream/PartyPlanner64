@@ -12,25 +12,34 @@ EXPR_CHARS = ",\\-A-Za-z0-9_\\s\\(\\)\\?\\!\\@"
 
 # Immediates
 
+_IMMEDIATE = re.compile(r"(-?)(?:0([xbo])([0-9A-Fa-f]+)|([0-9]+))\Z")
+_RADIX = {"x": 16, "b": 2, "o": 8}
+# Looks like a number (starts with a digit), but isn't one: "0-toll", "0X10", "10+2".
+_NUMBERISH = re.compile(r"-?[0-9]")
+# A decimal fraction, for .float (instructions take only whole numbers).
+_DECIMAL = re.compile(r"-?[0-9]+\.[0-9]*(?:[eE][-+]?[0-9]+)?\Z")
+
+
 def parse_immediate(value):
-    """Parses a number like 10, -0x10, 0b101, o17. Returns None if not a number."""
+    """Parses a number: 10, -10, 0x0A, 0b1010, 0o12. Returns None if `value` isn't one.
+
+    The whole value must be the number. (The original read the leading digits and
+    ignored the rest, so "0-toll" was 0, "0X10" was 0 and "b10000" was 0, silently;
+    such values are now errors, see run_function.)
+    """
     if not isinstance(value, str):
         return None
-    negative = value[:1] == "-"
-    if negative:
-        value = value[1:]
-    c0 = value[:1]
-    c1 = value[1:2]
-    if c0 == "b" or (c0 == "0" and c1 == "b"):
-        result = parse_int(value[2:], 2)
-    elif c0 == "o" or (c0 == "0" and c1 == "o"):
-        result = parse_int(value[2:], 8)
-    elif c0 == "x" or (c0 == "0" and c1 == "x"):
-        result = parse_int(value[2:], 16)
-    else:
-        result = parse_int(value, 10)
-    if result is None:
+    m = _IMMEDIATE.match(value)
+    if not m:
         return None
+    negative, base, digits, decimal = m.groups()
+    if base:
+        try:
+            result = int(digits, _RADIX[base])
+        except ValueError:  # e.g. 0b102
+            return None
+    else:
+        result = int(decimal)
     if negative:
         result = -result if result else -0.0  # (JavaScript has a negative zero.)
     return result
@@ -111,6 +120,11 @@ def run_function(value, state):
         if isinstance(s, str):
             return s
 
+        if _DECIMAL.match(value):
+            return float(value)  # (The original read 1.5 as 1.)
+        if _NUMBERISH.match(value) and "(" not in value:  # (not an offset(base) like 0x10($a1))
+            throw_error("\"" + value + "\" is not a number. Numbers are written 10, -10, 0x0A, 0b1010 "
+                        "or 0o12, and operands can't do arithmetic (0-toll, toll+1).", state)
         return None
 
     fn = results.group(1)

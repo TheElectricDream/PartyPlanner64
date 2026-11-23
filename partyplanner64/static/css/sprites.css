@@ -10,9 +10,9 @@
 .spr-table tr:first-child td { border-top: 0; }
 
 .spr-viewer { overflow: auto; }
-.spr-viewer.bg-checker { background-color: #1a1e26; background-image:
-  linear-gradient(45deg, #232834 25%, transparent 25%), linear-gradient(-45deg, #232834 25%, transparent 25%),
-  linear-gradient(45deg, transparent 75%, #232834 75%), linear-gradient(-45deg, transparent 75%, #232834 75%);
+.spr-viewer.bg-checker { background-color: var(--panel-2); background-image:
+  linear-gradient(45deg, var(--panel-3) 25%, transparent 25%), linear-gradient(-45deg, var(--panel-3) 25%, transparent 25%),
+  linear-gradient(45deg, transparent 75%, var(--panel-3) 75%), linear-gradient(-45deg, transparent 75%, var(--panel-3) 75%);
   background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0; }
 .spr-viewer.bg-black { background: #000; }
 .spr-viewer.bg-white { background: #fff; }
@@ -22,6 +22,6 @@
 .spr-img img { image-rendering: pixelated; }
 .spr-frame figcaption {
   display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 4px 4px 4px 10px; border-radius: 8px;
-  background: rgba(19,22,28,.86); border: 1px solid var(--border); color: #c3c9d4; width: fit-content;
+  background: rgba(19,22,28,.86); border: 1px solid var(--border); color: var(--text-2); width: fit-content;
 }
 .spr-frame figcaption .btn { height: 24px; }

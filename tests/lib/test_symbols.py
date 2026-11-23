@@ -68,3 +68,17 @@ def test_convert_symbols():
     ]
     out = mod.symbols_to_json(syms[:2])
     assert out.startswith("[\n{") and out.endswith("}\n]\n") and json.loads(out) == syms[:2]
+
+
+def test_convert_symbol_notes():
+    mod = _update_symbols()
+    text = ("80000300,u32,osTvType,0=PAL,1=NTSC,2=MPAL\r\n"
+            "80000304,data,osRomType\n"
+            "800C92B4,data,thing?,iffy, left out\n"
+            "800C92BC,code,func,A0=player_index,A1=amount (signed), ensures 0 <= coins <= 999\n")
+    notes = mod.convert_symbol_notes(text)
+    assert notes == {"osTvType": "0=PAL,1=NTSC,2=MPAL",
+                     "func": "A0=player_index,A1=amount (signed), ensures 0 <= coins <= 999"}
+    out = mod.symbol_notes_to_json(notes)
+    assert json.loads(out) == notes and list(json.loads(out)) == ["osTvType", "func"]
+    assert json.loads(mod.symbol_notes_to_json({})) == {}

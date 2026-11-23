@@ -1374,11 +1374,18 @@ class AdapterBase:
             seq_table = audio.get_sequence_table(0)
             assert_(bool(seq_table))
             for audio_entry in board["audioData"]:
+                soundbank_index = audio_entry["soundbankIndex"]
+                custom = audio_entry.get("customSoundbank")
+                if isinstance(custom, int) and not isinstance(custom, bool):
+                    # One of the board's own soundbanks, added after the game's.
+                    from ..audio.custom_bank import add_soundbank
+                    soundbank_index = add_soundbank(seq_table, board["soundbanks"][custom],
+                                                    _romhandler().get_rom_game())
                 audio_indices.append(len(seq_table.midis))
                 seq_table.midis.append({
                     "buffer": create_game_midi(
                         bytearray(canvas.data_url_to_bytes(audio_entry["data"])), {"loop": True}),
-                    "soundbank_index": audio_entry["soundbankIndex"],
+                    "soundbank_index": soundbank_index,
                 })
         else:
             # BoardAudioType.InGame, default

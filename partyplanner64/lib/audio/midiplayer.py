@@ -14,7 +14,9 @@ Deviations from the browser: events are read with standard MIDI running
 status (midi-player-js read running-status controller, program and pitch bend
 values from the wrong bytes and started notes on running pitch bends), and
 velocities are used as stored (midi-player-js scaled non-running velocities by
-100/127). Event times are exact rather than on a 5 ms timer.
+100/127). Event times are exact rather than on a 5 ms timer. Sounds with a sustain
+loop (as the games' instruments have) repeat it until their note ends, as in the
+game; the browser played each sample once.
 """
 
 import logging
@@ -110,6 +112,26 @@ def render_sequence_wav(table, index, sample_rate=22050):
     game_midi_buffer = midi_info["buffer"]
     midi = parse_game_midi(DataView(game_midi_buffer), len(game_midi_buffer))
     return render_midi(midi, bank, seq_table.tbl, sample_rate)
+
+
+def render_with_soundbank(midi_file, soundbank, sample_rate=22050):
+    """Render a standard MIDI file (bytes) as the game would play it with a custom soundbank
+    (lib/audio/custom_bank) to a .wav file (bytes): converted to game MIDI and back, as
+    writing a board does, so the preview loops and plays what the game will.
+
+    Raises:
+        ValueError: The MIDI could not be converted.
+    """
+    from .custom_bank import preview_bank
+    try:
+        game_midi = create_game_midi(bytes(midi_file), {"loop": True})
+    except (IndexError, TypeError):
+        game_midi = None
+    if not game_midi:
+        raise ValueError("Could not process the midi file")
+    midi = parse_game_midi(DataView(bytes(game_midi)), len(game_midi))
+    bank, tbl = preview_bank(soundbank)
+    return render_midi(midi, bank, tbl, sample_rate)
 
 
 # --- Standard MIDI reading -------------------------------------------------
@@ -219,6 +241,9 @@ def _read_track(data):
         elif kind == 0xB:
             events.append({"tick": tick, "type": "controller", "channel": channel,
                            "number": values[0], "value": values[1]})
+        elif kind == 0xE:
+            events.append({"tick": tick, "type": "bend", "channel": channel,
+                           "value": values[0] | (values[1] << 7)})
         else:
             events.append({"tick": tick, "type": "other", "channel": channel})
     return events
@@ -261,7 +286,32 @@ def _schedule(division, tracks):
 
 
 class _SampleInfo:
-    __slots__ = ("samples", "rate", "keymap", "instrument_volume", "sound_volume")
+    __slots__ = ("samples", "rate", "keymap", "instrument_volume", "sound_volume", "loop", "bend_range")
+
+
+# How long a looping sound is rendered when its note never ends.
+_HELD_SECONDS = 4.0
+
+
+def _wave_loop(wave, length):
+    """(start, end) of a sound's sustain loop in samples, or None."""
+    info = wave.adpcm_wave if getattr(wave, "adpcm_wave", None) else getattr(wave, "raw_wave", None)
+    loop = getattr(info, "loop", None) if info else None
+    if loop is None or not loop.count or not 0 <= loop.start < loop.end:
+        return None
+    return loop.start, min(loop.end, length)
+
+
+def _looped(samples, loop, count):
+    """The samples, continued by repeating the loop until there are at least count."""
+    start, end = loop
+    if end - start < 1 or len(samples) >= count:
+        return samples
+    out = array("f", samples[:end])
+    piece = samples[start:end]
+    while len(out) < count:
+        out.extend(piece)
+    return out
 
 
 def _load_samples(tbl, bank, instrument_index, cache):
@@ -281,6 +331,8 @@ def _load_samples(tbl, bank, instrument_index, cache):
             info.keymap = sound.keymap
             info.instrument_volume = instrument.volume
             info.sound_volume = sound.sample_volume
+            info.loop = _wave_loop(sound.wave, len(info.samples))
+            info.bend_range = getattr(instrument, "bend_range", 200) or 200
             infos.append(info)
         cache[instrument_index] = infos
     return infos
@@ -296,6 +348,10 @@ def _find_sample_to_play(infos, note_number):
 def render_midi(midi, bank, tbl, sample_rate=22050):
     """Render a standard MIDI file with a soundbank to a mono 16-bit .wav file (bytes).
 
+    Channel volume (controller 7) and pitch bends apply to the notes sounding when they
+    change, as in the game: the volume squared (Mario Party 3 USA, measured: 64 plays at a
+    quarter, 32 at a sixteenth) and a bend's full range the instrument's bend range.
+
     Args:
         midi: The standard MIDI file (as parse_game_midi makes).
         bank: The ALBank to play with.
@@ -308,16 +364,34 @@ def render_midi(midi, bank, tbl, sample_rate=22050):
     sample_cache = {}
     channel_instrument_map = {}
     channel_volumes = [127] * (CHANNEL_COUNT + 1)
+    channel_bends = [8192] * (CHANNEL_COUNT + 1)
     active_nodes = {}  # (channel, track, note) -> voice
-    voices = []  # [start, stop or None, info, step, gain]
+    voices = []  # [start, stop or None, info, step, gain, segments or None]
+    # segments: [(sample, volume, bend)] when the channel's volume or bend changes mid-note.
+
+    def bend_ratio(info, bend):
+        return 2.0 ** ((bend - 8192) / 8192.0 * info.bend_range / 1200.0)
+
+    def changed(channel, at):
+        for (ch, _track, _note), voice in active_nodes.items():
+            if voice is None or ch != channel:
+                continue
+            if voice[5] is None:
+                voice[5] = [(voice[0], voice[6], voice[7])]
+            voice[5].append((at, channel_volumes[channel], channel_bends[channel]))
 
     for time, track, event in schedule:
         kind = event["type"]
         if kind == "program":
             channel_instrument_map[event["channel"]] = event["value"]
         elif kind == "controller":
-            if event["number"] == 7:
+            if event["number"] == 7 and channel_volumes[event["channel"]] != event["value"]:
                 channel_volumes[event["channel"]] = event["value"]
+                changed(event["channel"], int(round(time * sample_rate)))
+        elif kind == "bend":
+            if channel_bends[event["channel"]] != event["value"]:
+                channel_bends[event["channel"]] = event["value"]
+                changed(event["channel"], int(round(time * sample_rate)))
         elif kind == "note":
             channel = event["channel"]
             note_number = event["note"]
@@ -345,29 +419,86 @@ def render_midi(midi, bank, tbl, sample_rate=22050):
                 step = sample_info.rate * (2.0 ** (cents / 1200.0)) / sample_rate
                 gain = (sample_info.instrument_volume / VELOCITY_MAX
                         * sample_info.sound_volume / VELOCITY_MAX
-                        * channel_volumes[channel] / VELOCITY_MAX
                         * event["velocity"] / VELOCITY_MAX)
-                voice = [start, None, sample_info, step, gain]
+                vol, bend = channel_volumes[channel], channel_bends[channel]
+                voice = [start, None, sample_info, step, gain, None, vol, bend]
                 voices.append(voice)
                 active_nodes[key] = voice
 
+    mixer = Mixer()
+    plain = []
+    for start, stop, info, step, gain, segments, vol, bend in voices:
+        if segments is None or all(s[1:] == segments[0][1:] for s in segments):
+            plain.append((start, stop, info, step * bend_ratio(info, bend), gain * _volume(vol)))
+        else:
+            _mix_segments(mixer, start, stop, info, step, gain, segments, sample_rate, bend_ratio)
+
     # How much of each pitched sample is heard, so each is resampled once.
     needed = {}
-    for start, stop, info, step, gain in voices:
-        full = resampled_length(len(info.samples), step)
+    for start, stop, info, step, gain in plain:
+        if info.loop:
+            # A looping sound lasts until its note ends.
+            full = int(_HELD_SECONDS * sample_rate) if stop is None else stop - start
+        else:
+            full = resampled_length(len(info.samples), step)
         length = full if stop is None else min(full, stop - start)
         key = (id(info), step)
         if length > needed.get(key, 0):
             needed[key] = length
 
     resampled = {}
-    mixer = Mixer()
-    for start, stop, info, step, gain in voices:
+    for start, stop, info, step, gain in plain:
         key = (id(info), step)
         voice = resampled.get(key)
         if voice is None:
-            voice = resampled[key] = PackedVoice(resample_linear(info.samples, step, needed[key]))
+            src = info.samples
+            if info.loop:
+                src = _looped(src, info.loop, int(needed[key] * step) + 2)
+            voice = resampled[key] = PackedVoice(resample_linear(src, step, needed[key]))
         length = voice.length if stop is None else min(voice.length, stop - start)
         mixer.add(start, voice, gain, length)
 
     return pcm16_wav(mixer.render(), sample_rate)
+
+
+def _volume(value):
+    """The gain of a channel volume (controller 7): squared, as the game plays it."""
+    return (value / VELOCITY_MAX) ** 2
+
+
+def _mix_segments(mixer, start, stop, info, step, gain, segments, sample_rate, bend_ratio):
+    """Mix a note whose channel volume or bend changed while it sounded: each stretch at its
+    own volume and pitch, reading on through the sample (and its loop) where the last left off."""
+    if stop is None:
+        stop = start + (int(_HELD_SECONDS * sample_rate) if info.loop
+                        else resampled_length(len(info.samples), step))
+    total = stop - start
+    if total <= 0:
+        return
+    bounds = [max(0, at - start) for at, _, _ in segments] + [total]
+    steps = [step * bend_ratio(info, b) for _, _, b in segments]
+    need = int(sum(max(0, bounds[i + 1] - bounds[i]) * steps[i] for i in range(len(segments)))) + 3
+    src = info.samples
+    if info.loop:
+        src = _looped(src, info.loop, need)
+    last = len(src) - 1
+    out = []
+    pos = 0.0
+    for i, (_, vol, _) in enumerate(segments):
+        n = bounds[i + 1] - bounds[i]
+        if n <= 0:
+            continue
+        st = steps[i]
+        g = _volume(vol)
+        for _ in range(n):
+            j = int(pos)
+            if j >= last:
+                break
+            a = src[j]
+            out.append((a + (src[j + 1] - a) * (pos - j)) * g)
+            pos += st
+        else:
+            continue
+        break
+    if out:
+        mixer.add(start, PackedVoice(out), gain)

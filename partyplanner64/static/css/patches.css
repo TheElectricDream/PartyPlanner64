@@ -9,6 +9,6 @@
 .gs-cheat-head { display: flex; align-items: center; gap: 10px; }
 .gs-cheat-head b { font-size: 13px; font-weight: 600; }
 .gs-cheat-head .btn { margin-left: auto; }
-.gs-code { margin: 8px 0; padding: 8px 10px; background: #0d1016; border: 1px solid var(--border); border-radius: var(--radius-sm); white-space: pre-wrap; color: #d4d9e2; }
+.gs-code { margin: 8px 0; padding: 8px 10px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: var(--radius-sm); white-space: pre-wrap; color: var(--text); }
 .gs-table { margin-top: 6px; }
 .gs-op { font: 600 11px var(--mono); color: #c792ea; }

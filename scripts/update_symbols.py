@@ -7,7 +7,10 @@ Run from the repository root:
 
 Each `symbols/<Game>.sym` file (lines of `ADDR,type,name[,desc]`) becomes
 `partyplanner64/lib/symbols/<Game>.json`, a list of
-{"addr", "type", "name"[, "desc"]} objects.
+{"addr", "type", "name"[, "desc"]} objects, and
+`partyplanner64/lib/symbols/notes/<Game>.json` keeps each symbol's whole
+comment (the tables keep it only up to the first comma), for the editor's
+hover help and Reference page.
 """
 
 import json
@@ -58,6 +61,32 @@ def convert_symbols(text):
     return objs
 
 
+def convert_symbol_notes(text):
+    """The full comment of each symbol in a .sym file's text, by name.
+
+    convert_symbols keeps a comment only up to its first comma (as the original
+    did); the editor's hover help and Reference show the whole comment, e.g.
+    "A0=player_index,A1=amount (signed), ensures 0 <= coins <= 999".
+    Iffy symbols (names starting or ending with "?") are left out, as there.
+    """
+    notes = {}
+    for line in re.split(r"\r?\n", text):
+        pieces = line.strip().split(",", 3)
+        if len(pieces) < 4 or not pieces[3].strip():
+            continue
+        name = pieces[2]
+        if name.endswith("?") or name.startswith("?"):
+            continue
+        notes[name] = pieces[3].strip()
+    return notes
+
+
+def symbol_notes_to_json(notes):
+    """Serialize symbol notes: one symbol per line, in the file's order."""
+    return "{\n" + ",\n".join("%s: %s" % (json.dumps(k), json.dumps(v, ensure_ascii=False))
+                              for k, v in notes.items()) + "\n}\n"
+
+
 def symbols_to_json(symbols):
     """Serialize a symbol list: one symbol per line."""
     return "[\n" + ",\n".join(json.dumps(s, ensure_ascii=False) for s in symbols) + "\n]\n"
@@ -95,9 +124,12 @@ def main():
         print("Writing " + filename + "...")
 
         outputfile = os.path.join(SYMBOLS_OUT_DIR, filename + ".json")
+        notesfile = os.path.join(SYMBOLS_OUT_DIR, "notes", filename + ".json")
         try:
             with open(outputfile, "w", encoding="utf-8") as f:
                 f.write(output)
+            with open(notesfile, "w", encoding="utf-8") as f:
+                f.write(symbol_notes_to_json(convert_symbol_notes(contents)))
         except OSError as err:
             print("Could not write symbol file: %s: %s" % (file, err), file=sys.stderr)
             sys.exit(1)

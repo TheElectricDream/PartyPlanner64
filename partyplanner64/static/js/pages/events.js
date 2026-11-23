@@ -5,6 +5,11 @@
 import { $, $$, api, act, busy, esc, loadCss, toast, download, pickFile, confirmDialog, saveBlob } from '../api.js';
 import { createCodeEditor } from '../lib/codeeditor.js';
 import { GAMES, GAME_BY_ID, PARAM_TYPES, VALID_PARAM_NAME, DEFAULT_CODE, readHeader, writeHeader } from './events/header.js';
+import { testPlayEvent } from './events/testplay.js';
+
+const TEST_PLAY_TITLE = 'Start the emulator on a small board where the player lands on (or passes) this event';
+const TEST_HINT = 'Test Compile checks that the code assembles (or compiles) for each supported game. '
+  + 'Test Play runs it in the emulator, on a small board made for it.';
 
 const LANG = { 0: 'MIPS', 1: 'C' };
 const EXT = { 0: '.s', 1: '.c' };
@@ -188,6 +193,7 @@ function boardRow(ev) {
   return `<tr data-id="${esc(ev.id)}" data-board="1" data-language="${ev.language}">
       ${nameCell(ev)}<td>${gameChips(ev.supportedGames)}</td><td class="num">${ev.parameters.length}</td><td>${status}</td>
       <td class="ev-actions">${copy}
+        <button type="button" class="btn btn-ghost btn-sm" data-act="test" title="${TEST_PLAY_TITLE}">Test Play</button>
         <button type="button" class="btn btn-ghost btn-sm" data-act="export" title="Download the event's code">Export</button>
         <button type="button" class="btn btn-ghost btn-sm ev-del" data-act="delete" title="Delete the event from the board (and its uses on the board)">Delete</button></td>
     </tr>`;
@@ -203,6 +209,7 @@ function libRow(ev, onBoard) {
   return `<tr data-id="${esc(ev.id)}" data-language="${ev.language}">
       ${nameCell(ev)}<td>${gameChips(ev.supportedGames)}</td><td class="num">${ev.parameters.length}</td><td>${status}</td>
       <td class="ev-actions">${copy}
+        <button type="button" class="btn btn-ghost btn-sm" data-act="test" title="${TEST_PLAY_TITLE}">Test Play</button>
         <button type="button" class="btn btn-ghost btn-sm" data-act="export" title="Download the event's code">Export</button>
         <button type="button" class="btn btn-ghost btn-sm ev-del" data-act="delete" title="Delete the event from the library">Delete</button></td>
     </tr>`;
@@ -217,6 +224,11 @@ async function onListClick(e) {
   const enc = encodeURIComponent(id);
   const ev = (board ? data.boardEvents : data.events).find(x => x.id === id);
   switch (btn.dataset.act) {
+    case 'test': {
+      const full = await act(() => api(board ? `/api/board/events/${enc}` : `/api/events/${enc}`));
+      if (full) await testPlayEvent(app, full.code || '', full.language ?? 0);
+      break;
+    }
     case 'edit':
       await act(async () => {
         const full = await api(board ? `/api/board/events/${enc}` : `/api/events/${enc}`);
@@ -314,8 +326,11 @@ function buildEditor() {
         </section>
         <section class="card">
           <div class="card-head"><h2>Test</h2>
-            <button type="button" class="btn btn-sm" id="edTest" title="Assemble or compile the event for each supported game, without saving it">Test Compile</button></div>
-          <div id="edTestOut"><p class="hint ev-first">Checks that the code assembles (or compiles) for each supported game.</p></div>
+            <div class="card-actions">
+              <button type="button" class="btn btn-sm" id="edTest" title="Assemble or compile the event for each supported game, without saving it">Test Compile</button>
+              <button type="button" class="btn btn-sm btn-go" id="edTestPlay" title="${TEST_PLAY_TITLE}, with the code as it is in the editor (saved or not)">Test Play…</button>
+            </div></div>
+          <div id="edTestOut"><p class="hint ev-first">${TEST_HINT}</p></div>
         </section>
       </aside>
       <main class="main ev-editor-main">
@@ -338,7 +353,7 @@ function buildEditor() {
         <div class="ev-code" id="edCode"></div>
         <div class="ev-code ev-asm" id="edAsm" hidden></div>
         <div class="ev-editor-foot"><span id="edPos">Line 1, column 1</span>
-          <span class="muted" id="edHint">Ctrl+Space completes the game's symbols for the supported games.</span></div>
+          <span class="muted" id="edHint">Hover: explain · F1: Reference · Ctrl+Space: complete</span></div>
       </main>
     </div>`;
   const box = $('#evEdit', root);
@@ -351,6 +366,7 @@ function buildEditor() {
   });
   $('#edDelete', box).addEventListener('click', deleteFromEditor);
   $('#edTest', box).addEventListener('click', () => test());
+  $('#edTestPlay', box).addEventListener('click', () => testPlayEvent(app, editor.getValue(), ed.language));
   $('#edName', box).addEventListener('input', e => { ed.form.name = e.target.value; formChanged(); });
   for (const b of $$('[data-game]', $('#edGames', box))) {
     b.addEventListener('click', () => {
@@ -428,7 +444,7 @@ async function openEditor({ id = null, board = false, language = 1, code = null 
   editor.setValue(text);
   if (asmView) asmView.setValue('');
   showCodeTab('src');
-  $('#edTestOut', root).innerHTML = '<p class="hint ev-first">Checks that the code assembles (or compiles) for each supported game.</p>';
+  $('#edTestOut', root).innerHTML = `<p class="hint ev-first">${TEST_HINT}</p>`;
   renderEditor();
   editor.focus();
 }

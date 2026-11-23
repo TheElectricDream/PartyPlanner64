@@ -1,6 +1,6 @@
 // The Editor page: lay out a board's spaces and paths.
-// A sidebar of cards (Boards, Tools, Properties) next to the board view, with its toolbar, and a
-// console (Validation, Log) underneath. The drawing and editing are in js/editor/.
+// As the original laid it out: the boards on the left, the board view (with its toolbar, and a
+// console of Validation and Log underneath) in the middle, the toolbox and properties on the right. The drawing and editing are in js/editor/.
 import { $, $$, api, esc, act, loadCss } from '../api.js';
 import { Action, BoardType, getEditTools, getPalette, SpaceNames, IMG } from '../editor/constants.js';
 import { store } from '../editor/store.js';
@@ -33,10 +33,11 @@ const ICON = {
   camera: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
   fit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
   check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m5 12 5 5 9-10"/></svg>',
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>',
 };
 
 const TEMPLATE = `
-<div class="layout editor-page">
+<div class="layout with-right editor-page">
   <aside class="sidebar">
     <section class="card boards-card">
       <div class="card-head"><h2>Boards <span class="count board-count"></span></h2>
@@ -52,17 +53,13 @@ const TEMPLATE = `
         <button type="button" class="btn btn-sm btn-go" data-overwrite hidden title="Write the current board over one of the ROM's boards (checked for problems first)">
           <img src="${IMG}/header/romoverwrite.png" alt="">Overwrite to ROM…</button>
       </div>
+      <div class="board-actions test-actions" hidden>
+        <button type="button" class="btn btn-sm btn-go" data-playtest title="Start the emulator on this board, in the middle of a game: no title screen, menus or opening scenes. The open ROM is not changed.">
+          ${ICON.play}Test Play</button>
+        <button type="button" class="btn btn-sm" data-playtest-options title="The players, coins, stars and turn a test starts with, and the emulator">Options…</button>
+      </div>
     </section>
 
-    <section class="card tools-card">
-      <div class="card-head"><h2>Tools</h2><span class="pill tool-pill" title="The tool in use: click the board to use it">Move</span></div>
-      <div class="tools-body"></div>
-    </section>
-
-    <section class="card props-card">
-      <div class="card-head"><h2>Properties</h2><span class="pill" hidden></span></div>
-      <div class="props-body"></div>
-    </section>
   </aside>
 
   <main class="main">
@@ -112,6 +109,19 @@ const TEMPLATE = `
       <div class="log" data-pane="log"></div>
     </div>
   </main>
+
+  <!-- As in the original: the toolbox and the properties on the right. -->
+  <aside class="sidebar right">
+    <section class="card tools-card">
+      <div class="card-head"><h2>Toolbox</h2><span class="pill tool-pill" title="The tool in use: click the board to use it">Move</span></div>
+      <div class="tools-body"></div>
+    </section>
+
+    <section class="card props-card">
+      <div class="card-head"><h2>Properties</h2><span class="pill" hidden></span></div>
+      <div class="props-body"></div>
+    </section>
+  </aside>
 </div>`;
 
 /** The state the renderer draws. */
@@ -191,6 +201,37 @@ function setZoom(z, anchor) {
   applyZoom();
   scroll.scrollLeft = bx * scale - ax;
   scroll.scrollTop = by * scale - ay;
+}
+
+/** Holding the middle mouse button and moving scrolls the board view (the hand tool). */
+function setUpPanning(scroll) {
+  let pan = null;   // {id, x, y, left, top}
+  const end = () => {
+    if (!pan) return;
+    if (scroll.hasPointerCapture(pan.id)) scroll.releasePointerCapture(pan.id);
+    pan = null;
+    scroll.classList.remove('panning');
+  };
+  // Capture phase: the board's own handlers (select, drag spaces) never see the middle button.
+  scroll.addEventListener('pointerdown', e => {
+    if (e.button !== 1) return;
+    e.preventDefault();       // no autoscroll, and no paste on Linux
+    e.stopPropagation();
+    pan = { id: e.pointerId, x: e.clientX, y: e.clientY, left: scroll.scrollLeft, top: scroll.scrollTop };
+    scroll.setPointerCapture(e.pointerId);
+    scroll.classList.add('panning');
+  }, true);
+  scroll.addEventListener('pointermove', e => {
+    if (!pan || e.pointerId !== pan.id) return;
+    if (!(e.buttons & 4)) return end();   // released outside the window
+    scroll.scrollLeft = pan.left - (e.clientX - pan.x);
+    scroll.scrollTop = pan.top - (e.clientY - pan.y);
+  });
+  scroll.addEventListener('pointerup', e => { if (pan && e.pointerId === pan.id) end(); });
+  scroll.addEventListener('pointercancel', end);
+  scroll.addEventListener('lostpointercapture', end);
+  scroll.addEventListener('mousedown', e => { if (e.button === 1) e.preventDefault(); });
+  scroll.addEventListener('auxclick', e => { if (e.button === 1) e.preventDefault(); });
 }
 
 const ZOOM_STEPS = [0.25, 0.33, 0.5, 0.67, 0.75, 0.9, 1, 1.25, 1.5, 2, 3, 4];
@@ -476,6 +517,7 @@ export async function init(container, appRef) {
     e.preventDefault();
     setZoom(stepZoom(e.deltaY < 0 ? 1 : -1), [e.clientX, e.clientY]);
   }, { passive: false });
+  setUpPanning($('.board-scroll', root));
   $('[data-shot]', root).addEventListener('click', () => act(() => screenshotDialog()));
   $('.ro-banner [data-copyedit]', root).addEventListener('click', () => boardsCard.copyBoard(true));
 

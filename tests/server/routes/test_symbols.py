@@ -30,3 +30,21 @@ def test_symbols_missing_and_unknown(client):
     assert res["missing"] == ["MP2_PAL"] and res["symbols"] == []
     assert client.get("/api/symbols")["symbols"] == []
     assert "Unknown game" in client.get("/api/symbols?games=MP9", expect=400)["error"]
+
+
+def test_symbols_note_has_the_whole_comment(client):
+    syms = {s["name"]: s for s in client.get("/api/symbols?games=MP3_USA")["symbols"]}
+    coins = syms["AdjustPlayerCoins"]
+    assert coins["desc"] == "A0=player_index"
+    assert coins["note"] == "A0=player_index,A1=amount (signed), ensures 0 <= coins <= 999"
+    assert "note" not in syms["GetCurrentPlayerIndex"]      # no comment at all
+    assert "note" not in syms["PlayMusic"]                  # "A0=index": desc says it all
+
+
+def test_reference(client):
+    res = client.get("/api/reference")
+    assert res["categories"][0] == "Events"
+    by_id = {e["id"]: e for e in res["entries"]}
+    assert by_id["mips:addiu"]["examples"] and by_id["reg:a0"]["words"] == ["a0", "$a0"]
+    assert by_id["game:AdjustPlayerCoins"]["games"] == ["MP1_USA", "MP2_USA", "MP3_USA"]
+    assert res["functions"]["InitCameras"] == "Creates the given number of cameras."

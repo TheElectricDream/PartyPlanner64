@@ -718,8 +718,12 @@ def create_game_midi(midi_file, options=None):
                 elif sub_type < 0x7F and not (sub_type == 0x51 or sub_type == 0x2F):
                     # Various Unused Meta Events.
                     length = _get_vl_bytes(data_view, refs, False)  # Was _readMidiByte in Subdrag code.
-                    for _ in range(length):
-                        _read_midi_byte(data_view, refs, False)
+                    text = bytes(_read_midi_byte(data_view, refs, False) & 0xFF for _ in range(length))
+                    # (The port's own:) a "loopStart" marker sets where looping songs loop
+                    # back to; without one they loop from the start, as the original did.
+                    if (sub_type == 0x06 and loop_point == 0 and absolute_time > 0
+                            and text.decode("latin-1").replace(" ", "").lower() == "loopstart"):
+                        loop_point = absolute_time
                 elif sub_type == 0x7F:
                     # Unused Sequencer Specific Event
                     length = _get_vl_bytes(data_view, refs, False)
@@ -827,7 +831,10 @@ def create_game_midi(midi_file, options=None):
                     track_event_count[track_num] += 1
 
                     new_track_event = set_event(track_num, track_event_count[track_num], TrackEvent())
-                    new_track_event.delta_time = time_tag
+                    # The loop start took the time to here; the event itself is at the same
+                    # time. (The original repeated time_tag, which only a loop point other than
+                    # 0, a "loopStart" marker, reaches.)
+                    new_track_event.delta_time = 0
                     new_track_event.obsolete_event = False
                     new_track_event.contents = None
                     new_track_event.absolute_time = absolute_time
